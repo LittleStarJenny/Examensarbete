@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header, main {
+  width: 80%;
+  margin: auto;
+}
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.product-card {
+  width: 25%;
+  box-sizing: border-box;
+  display: block;
+  margin-right: 15px;
+  text-align: center;
+  width: 20%;
+}
+
+.product-card > .product-image {
+  width: 100%;
+}
+
+/* Font-styles */
+.product-card h2 {
+  font-size: 14px;
+}
