@@ -1,24 +1,26 @@
 <?php 
 include_once "header.php";
-// include_once "dbo.php";
-$pdo = connect();
-$limit = 20;
-$offset = 0;
-$stmt = get_all_products($pdo, $limit, $offset);
 
-$stmt->execute();
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$product = New Product;
+
 ?>
     
 <main>
-    <section class="product-container">
-        <?php foreach($rows as $row) { ?>
+    <section class="productdetails-wrap">
+    <?php
+    if(isset($_GET['product'])) {
+    $product->productId = $_GET['product'];
+    } else {
+    $product->productId = $_POST['productsId'];
+    }
+    $result = $product->get_product();
+    while ($row = $result->fetch()) {
+    ?>  
         <div class="product-card">
             <img class="product-image" src="<?php echo $row['Img'];?>" >
             <h2 class="title"><?php echo $row['ProductName']; ?></h2>
+            <p class="description"><?php echo $row['Description']; ?></p>
             <span class="price"><?php echo $row['Price'];?></span><span>:-</span>
-            <a href="product-detail.php?product=<?php echo $row['productsId']; ?>"><button class="readmore">Läs mer</button></a>
-
         </div>
         <?php } ?> 
     </section>

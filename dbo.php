@@ -34,5 +34,21 @@ function get_all_products($pdo, $limit, $offset) {
 	return $toGet;
 	
 }
+
+class Product {
+     public $productsId = 0;
+
+public function get_product($pdo) {
+
+     $sql = "SELECT * FROM products
+             WHERE productsId = '" . $this->{"productsId"} . "'"; // sql statementS
+
+     $toGet = $pdo->prepare($sql); // prepared statement
+     $toGet->execute(); // execute sql statment
+
+     return $toGet;
+
+ }
+}
 ?>
 
