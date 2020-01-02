@@ -11,14 +11,16 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
     
 <main>
+    <div class="sidebar">
+        <h3>Kategorier</h3>
+</div>
     <section class="product-container">
         <?php foreach($rows as $row) { ?>
         <div class="product-card">
+        <a href="product-detail.php?product=<?php echo $row['ProductsId']; ?>">
             <img class="product-image" src="<?php echo $row['Img'];?>" >
             <h2 class="title"><?php echo $row['ProductName']; ?></h2>
             <span class="price"><?php echo $row['Price'];?></span><span>:-</span>
-            <a href="product-detail.php?product=<?php echo $row['productsId']; ?>"><button class="readmore">Läs mer</button></a>
-
         </div>
         <?php } ?> 
     </section>
