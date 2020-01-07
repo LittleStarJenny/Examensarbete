@@ -50,6 +50,25 @@ public function get_product() {
      return $toGet;
 
  }
+
+// ProductVariations
+     public $ProductId = 0;
+     public $Size = '';
+
+public function get_productvariation() {
+     $pdo = connect();
+
+     $sql = "SELECT * FROM productvariations as PV
+     JOIN products AS P ON PV.ProductId = P.ProductsId
+     WHERE ProductId = '" . $this->{"ProductId"} . "'"; // sql statementS
+
+     $toGet = $pdo->prepare($sql); // prepared statement
+     $toGet->execute(); // execute sql statment
+
+     return $toGet;
+
+ }
 }
+
 ?>
 

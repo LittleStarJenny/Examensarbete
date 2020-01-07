@@ -5,6 +5,7 @@ include_once 'dbo.php';
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="js.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css?d=<?php echo time(); ?>">
         <meta charset="utf-8">
@@ -26,6 +27,6 @@ include_once 'dbo.php';
                 <li>About us</li>
                 <li>BH</li>
                 <li>Trosor</li>
-                <i class="fas fa-shopping-cart"></i>
+               <a href="cart.php"> <i class="fas fa-shopping-cart"></i></a>
             </ul>
     </nav>
