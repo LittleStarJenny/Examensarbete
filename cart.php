@@ -4,76 +4,99 @@ include_once "header.php";
 $cart = [];
 //$i = 0;
 $products = new Product;
-$sum = 0; 
+$total = 0;
+
 if(isset($_COOKIE["cart"])) {
-    // $cart = unserialize($_COOKIE["cart"])  ;
-    $total = 0;
-      $cookie_data = stripslashes($_COOKIE['cart']);
-      $cart_data = json_decode($cookie_data, true);
+  $cookie_data = stripslashes($_COOKIE['cart']);
+  $cart_data = json_decode($cookie_data, true);
+  var_dump($cart_data);
 }
 
-// Removes item from cookie
+// Remove item from cookie and cart
 if(isset($_GET["action"])) {
-  
-    if($_GET["action"] == "delete") {
-  
-      $cookie_data = stripslashes($_COOKIE['cart']);
-      $cart_data = json_decode($cookie_data, true);
-      
-      foreach($cart_data as $keys => $values) {
-      
-        if($cart_data[$keys]['ProductsId'] == $_GET["id"]) {
-          unset($cart_data[$keys]);
-          $item_data = json_encode($cart_data);
-          setcookie("cart", $item_data, time() + (3600));
-          header("location: cart.php");
-        }
+  if($_GET["action"] == "delete") {
+    $cookie_data = stripslashes($_COOKIE['cart']);
+    $cart_data = json_decode($cookie_data, true);
+    foreach($cart_data as $keys => $values) {
+      if($cart_data[$keys]['ProductsId'] == $_GET["id"]) {
+        unset($cart_data[$keys]);
+        $item_data = json_encode($cart_data);
+        setcookie("cart", $item_data, time() + (3600));
+        header("location: cart.php");
       }
     }
   }
+}
 
- ?>
+if(isset($_GET["action"])) {
+  if($_GET["action"] == "update") {
+    $cookie_data = stripslashes($_COOKIE['cart']);
+    $cart_data = json_decode($cookie_data, true);
+    $arrQuantity = $_POST['quantity'];
+    foreach($cart_data as $keys => $values) {
+      if($cart_data[$keys]["ProductsId"] == $_POST["ProductsId"] && $cart_data[$keys]["Size"] == $_POST["Size"]) {
+        $cart_data[$keys]["quantity"] =   $_POST["quantity"];
 
-  <main>
-<div class="cart">
-<h3>Varukorg</h3>
-<table>
-    <tr>
-        <th>Titel</th>
-        <th>Artnr</th>
-        <th>Pris</th>
-        <th>Antal</th>
-        <th>Summa</th>
-        <th>Ta bort</th>
-    </tr>
-<?php
-    // foreach($cart as $cart_item) 
-    foreach($cart_data as $keys => $values){
-        // $products->ProductsId = $cart_item["id"];
-        // $result = $products->get_product();
-        // while ($row = $result->fetch()){
-    
-            $rowsum = $values['Price'] * $values['quantity'];
-            $sum += $rowsum; 
+    }
+  }
+    $item_data = json_encode($cart_data);
+    setcookie("cart", $item_data, time() + (3600));
+    header("location: cart.php");
+  
+}}
+
 ?>
-    <tr class="cartitem">
-    <form action="" method="post">
-        <td><?php echo $values['ProductName']; ?></td>
-        <td><?php echo $values['ProductsId']; ?></td>
-        <td><?php echo $values['Price']; ?></td>
-        <td><input type="number" name="quantity" step="1" min="1" value="<?php echo $values["quantity"]?>"></td>
-        <td><?php echo $rowsum; ?></td>
-        <td><a href="?action=delete&id=<?php echo $values["ProductsId"]; ?>">Remove</a></td>
-<?php   }
-     ?>
-       </form>
-    <tr>
-        <td colspan="3">Summa:</td>
-        <td><?php echo $sum; ?></td>
-        <td>&nbsp;</td>
-    </tr>
-</table>
-<a href="checkout.php"><button class="tillkassan">Till kassan</button></a>
-</div>
+
+<main id="cart-content">
+  <div class="cart">
+    <h3>Varukorg</h3>
+<?php
+  foreach($cart_data as $keys => $values){
+    $rowtotal = $values['Price'] * $values['quantity'];
+      $total += $rowtotal; 
+?>
+    <!-- Each cart item -->
+    <div class="cartitem">
+      <div><a href="?action=delete&id=<?php echo $values["ProductsId"]; ?>">X</a>
+      </div>
+      <form action="cart.php?action=update" method="post">
+        <div class="cart-img-qty">
+          <img class="cart-img" src=<?php echo $values['Img'] ?>>
+          <span class="cart-qty">
+            <input type="number" name="quantity" step="1" min="1" value="<?php echo $values["quantity"]?>">
+            <input type="hidden" name="Size" step="1" min="1" value="<?php echo $values["Size"]?>">
+            <input type="hidden" name="ProductsId" step="1" min="1" value="<?php echo $values["ProductsId"]?>">
+
+          <input type="submit" value="uppdatera">
+          </span> 
+        </div>
+        <div class="cart-textdetails">
+          <span class="cart-prod-details"><?php echo $values['ProductName']; ?></span>
+          <span class="cart-prod-size"><?php echo $values['Size']; ?></span>
+          <span class="cart-prod-price"><?php echo $values['Price']; ?> SEK</span>
+        </div>
+        <hr>  
+        <div class="prod-total">
+            <span>Totalt</span>
+            <span><?php echo $rowtotal; ?> SEK</div><span>
+        </div>
+      </form>
+          <?php   
+        }
+      ?>
+    </div>
+
+
+  <!-- Total Sum -->
+    <div class="Total">
+      <h3>Summa</h3>
+        <span colspan="3">Totalt</span>
+        <span><?php echo $total; ?> SEK</span>
+      <div class="toCheckout">
+        <a href="checkout.php">Till kassan</a>
+      </div>
+    </div>
+  </div>
+</main>
+
 <?php include_once "footer.php" ?>
-</html>

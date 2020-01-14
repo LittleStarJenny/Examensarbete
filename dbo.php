@@ -63,10 +63,42 @@ public function get_productvariation() {
      WHERE ProductId = '" . $this->{"ProductId"} . "'"; // sql statementS
 
      $toGet = $pdo->prepare($sql); // prepared statement
-     $toGet->execute(); // execute sql statment
+     $toGet->execute(); // execute sql statement
 
      return $toGet;
 
+ }
+}
+
+class Customer {
+     public $CustomersId = 0;
+     public $Birthday = '';
+
+
+     public function get_customer() {
+          $pdo = connect();
+
+          $sql = "SELECT * FROM customers
+          WHERE Birthday  = '" . $this->{"Birthday"} . "'" ;
+             
+     
+          $toGet = $pdo->prepare($sql); // prepared statement
+          $toGet->execute(); // execute sql statement
+     
+          return $toGet;
+     
+      }
+
+public function create_customer() {
+     $pdo = connect();
+
+     $sql = "INSERT INTO customers (CustomersId, Firstname, Lastname, Birthday, Address, Zipcode, City, Mail, Phone)
+             VALUES ('" . $this->{"CustomersId"} . "', '" . $this->{"Firstname"} . "', '" . $this->{"Lastname"} . "', '" . $this->{"Birthday"} . "', '" . $this->{"Address"} . "', '" . $this->{"Zipcode"} . "', '" . $this->{"City"} . "', '" . $this->{"Mail"} . "', '" . $this->{"Phone"} . "')"; // sql statements
+
+     $toCreate = $pdo->prepare($sql); // prepared statement
+     $toCreate->execute(); // execute sql statement
+
+     return $return;
  }
 }
 
