@@ -5,6 +5,7 @@ $cart = [];
 //$i = 0;
 $products = new Product;
 $total = 0;
+$message = "";
 
 if(isset($_COOKIE["cart"])) {
   $cookie_data = stripslashes($_COOKIE['cart']);
@@ -18,7 +19,7 @@ if(isset($_GET["action"])) {
     $cookie_data = stripslashes($_COOKIE['cart']);
     $cart_data = json_decode($cookie_data, true);
     foreach($cart_data as $keys => $values) {
-      if($cart_data[$keys]['ProductsId'] == $_GET["id"]) {
+      if($cart_data[$keys]['ProductsId'] == $_GET["id"] && $cart_data[$keys]['Size'] == $_GET["Size"]) {
         unset($cart_data[$keys]);
         $item_data = json_encode($cart_data);
         setcookie("cart", $item_data, time() + (3600));
@@ -28,6 +29,7 @@ if(isset($_GET["action"])) {
   }
 }
 
+// Update product quantity
 if(isset($_GET["action"])) {
   if($_GET["action"] == "update") {
     $cookie_data = stripslashes($_COOKIE['cart']);
@@ -35,15 +37,14 @@ if(isset($_GET["action"])) {
     $arrQuantity = $_POST['quantity'];
     foreach($cart_data as $keys => $values) {
       if($cart_data[$keys]["ProductsId"] == $_POST["ProductsId"] && $cart_data[$keys]["Size"] == $_POST["Size"]) {
-        $cart_data[$keys]["quantity"] =   $_POST["quantity"];
-
+        $cart_data[$keys]["quantity"] = $_POST["quantity"];
     }
   }
     $item_data = json_encode($cart_data);
     setcookie("cart", $item_data, time() + (3600));
-    header("location: cart.php");
-  
-}}
+    header("location: cart.php"); 
+  }
+}
 
 ?>
 
@@ -51,13 +52,20 @@ if(isset($_GET["action"])) {
   <div class="cart">
     <h3>Varukorg</h3>
 <?php
+if(empty($cart_data)) {
+  echo $message = 'Cart is empty';
+} else {
+
   foreach($cart_data as $keys => $values){
     $rowtotal = $values['Price'] * $values['quantity'];
       $total += $rowtotal; 
+
+
 ?>
+
     <!-- Each cart item -->
     <div class="cartitem">
-      <div><a href="?action=delete&id=<?php echo $values["ProductsId"]; ?>">X</a>
+      <div><a href="?action=delete&id=<?php echo $values["ProductsId"]?>&Size=<?php echo $values['Size'];?>">X</a>
       </div>
       <form action="cart.php?action=update" method="post">
         <div class="cart-img-qty">
@@ -81,7 +89,7 @@ if(isset($_GET["action"])) {
             <span><?php echo $rowtotal; ?> SEK</div><span>
         </div>
       </form>
-          <?php   
+  <?php }  
         }
       ?>
     </div>
