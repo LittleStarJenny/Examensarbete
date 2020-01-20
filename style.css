@@ -8,15 +8,29 @@ body {
   background: #f8f8f8;
 }
 
+main {
+  margin: 200px auto auto auto;
+}
+
 header, main {
   width: 80%;
-  margin: auto;
   display: flex;
 }
 
 header {
+  width: 100%;
   justify-content: center;
   margin-top: 15px;
+  background: #f8f8f8;
+  z-index: 10;
+}
+
+.header-logo {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 999;
+  background: #f8f8f8;
 }
 
 header img {
@@ -26,11 +40,16 @@ header img {
 .main-nav {
   width: 100%;
   background: black;
+  display: block;
+  top: 90px;
+  position: absolute;
+  z-index: 999;
 }
+
 
 .main-nav ul {
   list-style: none;
-  padding: 10px;
+  /* padding: 10px; */
   width: 500px;
   margin-left: 150px;
 }
@@ -173,11 +192,28 @@ header img {
 }
 
 /* Checkout */
+#checkoutWrap {
+  background: #fff;
+}
+
 .checkout-wrap {
   display: flex;
   flex-flow: column;
 }
 
+.CustomerInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.Total div {
+  margin-left: 10px;
+}
+
+.Total div span:nth-child(2) {
+  float: right;
+  margin-right: 10px;
+}
 
 /* Font-styles */
 h1 {
@@ -197,4 +233,75 @@ a {
 
 .product-card .price {
   padding-left: 10px;
+}
+
+/* Cart dropbox in header */
+.cart-button {
+    width: 50px;
+    display: block;
+    position: absolute;
+    right: 325px;;
+    top: 20px;
+}
+
+.cart-content {
+  background: #fff;
+  width: 250px;
+  height: 300px;
+  right: 218px;
+  position: absolute;
+  top: -250px;
+  transition: 0.8s;
+}
+
+.cart-content .productsIncart {
+  overflow: auto;
+  height: 200px;
+}
+
+.cart-content h2 {
+  background: #eee;
+  margin: 0;
+  padding: 5px;
+}
+
+.cart-content .cart-img {
+  width: 40%;
+  float: left;
+}
+
+.cart-content .cart-text-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-content .cartSum {
+  width: 100%;
+  background: #f8f8f8;
+  padding: 10px;
+  clear: left;
+}
+
+.cart-content hr {
+  clear: left;
+}
+
+.cart-content .btn-wrap {
+  background: #eee;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+.cart-content .btn-wrap .shopping-btn {
+  width: 40%;
+  padding: 10px;
+  display: inline-block;
+  background: black;
+  color: white;
+}
+
+.cart-content.active {
+  top: 140px;
 }

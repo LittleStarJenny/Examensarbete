@@ -1,7 +1,5 @@
 <?php 
 include_once "header.php";
-// $cart = [];
-// $inCart = false;
 
 $message = '';
 $product = New Product;
@@ -10,6 +8,7 @@ $cart_data = [];
 // if the variables are set - run the following statement
 if(isset($_POST["addtocart"])) {
     if(isset($_COOKIE["cart"])) {
+      echo "Varan lades till i varukorgen";
      
       // Removes backlashes and dont replace previous item, gives every item a new row.
       $cookie_data = stripslashes($_COOKIE['cart']); 
@@ -46,11 +45,9 @@ if(isset($_POST["addtocart"])) {
       $cart_data[] = $item_array; 
     }
   
-   
     $item_data = json_encode($cart_data);
-    setcookie('cart', $item_data, time() + (3600));
+    setcookie('cart', $item_data, time() +(3600));
     //  header("location: product-detail.php");
-  
   }
 
 
@@ -99,7 +96,8 @@ if(isset($_POST["addtocart"])) {
                 </div>
             </div>
         <?php } ?> 
-                        </form>
+                        
+      </form>
     </section>
 </main>
 <?php

@@ -10,7 +10,7 @@ $message = "";
 if(isset($_COOKIE["cart"])) {
   $cookie_data = stripslashes($_COOKIE['cart']);
   $cart_data = json_decode($cookie_data, true);
-  var_dump($cart_data);
+
 }
 
 // Remove item from cookie and cart
@@ -22,7 +22,7 @@ if(isset($_GET["action"])) {
       if($cart_data[$keys]['ProductsId'] == $_GET["id"] && $cart_data[$keys]['Size'] == $_GET["Size"]) {
         unset($cart_data[$keys]);
         $item_data = json_encode($cart_data);
-        setcookie("cart", $item_data, time() + (3600));
+        setcookie("cart", $item_data, time() +(3600));
         header("location: cart.php");
       }
     }
@@ -41,7 +41,7 @@ if(isset($_GET["action"])) {
     }
   }
     $item_data = json_encode($cart_data);
-    setcookie("cart", $item_data, time() + (3600));
+    setcookie("cart", $item_data, time() +(3600));
     header("location: cart.php"); 
   }
 }

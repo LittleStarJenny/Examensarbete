@@ -1,5 +1,16 @@
 <?php 
 include_once 'dbo.php';
+$productCat = New Product;
+$total = 0;
+
+if(isset($_COOKIE["cart"])) {
+    $cookie_data = stripslashes($_COOKIE['cart']);
+    $cart_data = json_decode($cookie_data, true); 
+  }
+
+ $result = $productCat->get_category(); 
+$category = $result->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -19,14 +30,45 @@ include_once 'dbo.php';
 
 <body> 
     <header>
+        <div class="header-logo">
         <!-- <h1>Stellasina</h1> -->
         <a href="index.php"><img src="img/logo.png"></a>
-    </header>
+</div>
         <nav class="main-nav">
             <ul>
-                <li>About us</li>
-                <li>BH</li>
-                <li>Trosor</li>
-               <a href="cart.php"> <i class="fas fa-shopping-cart"></i></a>
+                <?php foreach($category as $row) { ?>
+                <li><a href="category-page.php?category=<?php echo $row['CategoryId']; ?>"><?php echo $row['CategoryName'] ?></a></li>
+                <?php } ?>
+               <div class="cart-button"> <i class="fas fa-shopping-cart"></i></div>
             </ul>
     </nav>
+    </header>
+    
+<div class='cart-content'>
+    <h2>Min varukorg</h2>
+<div class="productsIncart">
+<?php  foreach($cart_data as $keys => $values){ 
+    $rowtotal = $values['Price'] * $values['quantity'];
+      $total += $rowtotal; ?>
+    <img class="cart-img" src=<?php echo $values['Img'] ?>>
+    <div class="cart-text-content">
+        <span class='cart-prod-prize'><?php echo $values['Price']; ?> SEK </span>
+        <span class="title"><?php echo $values['ProductName']; ?></span>
+            <div class="cartRow">
+                <span class="cart-prod-size">Storlek <?php echo $values['Size']; ?></span>
+                <span class="cart-prod-qty">Antal <?php echo $values["quantity"]?></span>
+            </div>
+</div>
+
+    <hr>
+    <?php  
+} ?>  
+    </div>
+    <div class="cartSum">
+        <span class="total">Totalsumma <?php echo $total ?> SEK</span>
+    </div>
+    <div class='btn-wrap'>
+        <a href="cart.php"><div class='shopping-btn'>Till varukorgen</div></a>
+        <a href="checkout.php"><div class='shopping-btn'>Gå till kassan</div></a>
+    </div>
+</div>
