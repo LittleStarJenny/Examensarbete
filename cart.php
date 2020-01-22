@@ -89,7 +89,7 @@ if(empty($cart_data)) {
           <span class="cart-prod-details"><?php echo $values['ProductName']; ?></span>
           <span class="cart-prod-size"><?php echo $values['Size']; ?></span>
           <span class="cart-qty">
-            <input type="text" name="quantity" step="1" min="1" value="<?php echo $values["quantity"]?>">
+            <input type="number" name="quantity" step="1" min="1" value="<?php echo $values["quantity"]?>">
             <input type="hidden" name="Size" step="1" min="1" value="<?php echo $values["Size"]?>">
             <input type="hidden" name="ProductsId" step="1" min="1" value="<?php echo $values["ProductsId"]?>">
             <input type="submit" value="uppdatera">

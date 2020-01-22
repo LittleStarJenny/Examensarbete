@@ -47,7 +47,7 @@ if(isset($_POST["addtocart"])) {
   
     $item_data = json_encode($cart_data);
     setcookie('cart', $item_data, time() +(3600));
-    // header("location: product-detail.php?product=");
+   header("location: product-detail.php?product=".$_GET['product']);
 
   }
 

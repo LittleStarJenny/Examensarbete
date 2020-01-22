@@ -12,40 +12,34 @@ if(isset($_COOKIE["cart"])) {
     $cookie_data = stripslashes($_COOKIE['cart']);
     $cart_data = json_decode($cookie_data, true);
   }
-
- if(isset($_POST["buy"])) {
     
-    $Firstname = filter_input(INPUT_POST, 'Firstname', FILTER_SANITIZE_STRING);
-    $Lastname = filter_input(INPUT_POST, 'Lastname', FILTER_SANITIZE_STRING);
-    $Birthday = filter_input(INPUT_POST, 'Birthday', FILTER_SANITIZE_STRING);
-    $Address = filter_input(INPUT_POST, 'Address', FILTER_SANITIZE_STRING);
-    $Zipcode = filter_input(INPUT_POST, 'Zipcode', FILTER_SANITIZE_STRING);
-    $City = filter_input(INPUT_POST, 'City', FILTER_SANITIZE_STRING);
-    $Mail = filter_input(INPUT_POST, 'Mail', FILTER_SANITIZE_STRING);
-    $Phone = filter_input(INPUT_POST, 'Phone', FILTER_SANITIZE_STRING);
-
-    $customer->Firstname = $Firstname;
-    $customer->Lastname = $Lastname;
-    $customer->Birthday = $Birthday;
-    $customer->Address  = $Address;
-    $customer->Zipcode = $Zipcode;
-    $customer->City = $City;
-    $customer->Mail = $Mail;
-    $customer->Phone = $Phone;
-
-     $customer->create_customer();
-
-// Create orders
+     if(isset($_POST["buy"])) {
+// Create order
     $CustomersId = filter_input(INPUT_POST, 'CustomersId', FILTER_SANITIZE_STRING);
- }  
-    if($order->CustomersId = $CustomersId) {
-        $order->create_order();
+        if($order->CustomersId = $CustomersId) {
+            $order->create_order();
+            $lastOrder = $order->get_lastOrder();
+            $OrderId = $lastOrder->fetch();
+// Create orderitems   
+        foreach($cart_data as $keys => $values) {
+            $product->ProductId = $values['ProductsId'];
+            $result = $product->get_productvariation();
+            $showpID = $result->fetch();
+ 
+// $ProductvariationsId = $showpID["PVId"];
+// $Quantity =  $values['quantity'];
+$order->ProductvariationsId = $ProductvariationsId;
+$order->Quantity = $Quantity;
+$order->OrderId = $OrderId['OrderId'][0];
+       print_r($order->create_orderItem());
+    }
         //   header("location:orderconfirmation.php");
     } else {
         echo 'Ordern kunde inte skapas';
     }
+}
 
-
+print_r($order);
 ?>
 <main id="checkoutWrap">
 <section id="cart-content">
@@ -59,9 +53,16 @@ if(isset($_COOKIE["cart"])) {
         foreach($cart_data as $keys => $values){
             $ProductsId = $cart_data[$keys]['ProductsId'];
 
+  
+            // $product->ProductsId = $ProductsId;
+            $product->ProductId = $ProductsId;
+
             $rowtotal = $values['Price'] * $values['quantity'];
             $total += $rowtotal;
             $totalwithshipping = $total + 59; 
+
+            $result = $product->get_productvariation();
+            $showpID = $result->fetch();
         ?>
 
         <div class="cartitem">   
@@ -73,6 +74,8 @@ if(isset($_COOKIE["cart"])) {
                 <span class="cart-prod-details"><?php echo $values['ProductName']; ?></span>
                 <span class="cart-prod-size"><?php echo $values['Size']; ?></span>
                 <span class="cart-qty"><?php echo $values["quantity"]?></span>
+                <input type="text" name="ProductvariationsId" value="<?php echo $showpID["PVId"]?>">
+                <input type="text" name="quantity" step="1" min="1" value="<?php echo $values["quantity"]?>">
                 <input type ="hidden" name="ProductsId" value="<?php echo $values['ProductsId'] ?>">              
                 <span class="cart-prod-price"><?php echo $values['Price']; ?> SEK</span>
                     <div class="prod-total">
@@ -115,6 +118,38 @@ if(isset($_COOKIE["cart"])) {
         <input type="submit" name="submit" value="SÖK"/>
 </div>
 <?php 
+if(isset($_POST["save"])) {
+    
+    $Firstname = filter_input(INPUT_POST, 'Firstname', FILTER_SANITIZE_STRING);
+    $Lastname = filter_input(INPUT_POST, 'Lastname', FILTER_SANITIZE_STRING);
+    $Birthday = filter_input(INPUT_POST, 'Birthday', FILTER_SANITIZE_STRING);
+    $Address = filter_input(INPUT_POST, 'Address', FILTER_SANITIZE_STRING);
+    $Zipcode = filter_input(INPUT_POST, 'Zipcode', FILTER_SANITIZE_STRING);
+    $City = filter_input(INPUT_POST, 'City', FILTER_SANITIZE_STRING);
+    $Mail = filter_input(INPUT_POST, 'Mail', FILTER_SANITIZE_STRING);
+    $Phone = filter_input(INPUT_POST, 'Phone', FILTER_SANITIZE_STRING);
+
+    $customer->Firstname = $Firstname;
+    $customer->Lastname = $Lastname;
+    $customer->Birthday = $Birthday;
+    $customer->Address  = $Address;
+    $customer->Zipcode = $Zipcode;
+    $customer->City = $City;
+    $customer->Mail = $Mail;
+    $customer->Phone = $Phone;
+
+    $customer->create_customer();
+    $lastCustomerCreated = $customer->get_lastCreatedcustomer();
+    $row = $lastCustomerCreated->fetch(); } ?>
+    <div class="CustomerInfo">
+        <span><?php if( isset( $row['Firstname'] ) ) { echo $row["Firstname"]; } echo " "; if( isset( $row['Lastname'] ) ) { echo $row["Lastname"]; } ?></span>
+        <span><?php if( isset( $row['Address'] ) ) { echo $row["Address"]; } ?></span>
+        <span><?php  if( isset( $row['Zipcode'] ) ) { echo $row["Zipcode"]; }echo " "; if( isset( $row['City'] ) ) { echo $row["City"]; } ?></span>
+        <span><?php if( isset( $row['Mail'] ) ) { echo $row["Mail"]; } ?></span>
+        <span><?php if( isset( $row['Phone'] ) ) { echo $row["Phone"]; ?></span>
+        <input type ="hidden" name="CustomersId" value="<?php echo $row['CustomersId'] ?>">
+        </div>
+ <?php }
 // Check if Mail exist in database and fetch customer info
 if (isset($_POST["checkCustomer"])) {
     $Mail = $_POST["checkCustomer"];
@@ -130,31 +165,30 @@ if(isset($_POST["checkCustomer"])) {
         <span><?php if( isset( $row['Mail'] ) ) { echo $row["Mail"]; } ?></span>
         <span><?php if( isset( $row['Phone'] ) ) { echo $row["Phone"]; ?></span>
         <input type ="hidden" name="CustomersId" value="<?php echo $row['CustomersId'] ?>">
-        <!-- <input type="submit" name="buy" value="Bekräfta köp"> -->
+        <input type="submit" name="buy" value="Bekräfta köp">
         </div>
         <?php
 } else {
     echo "Kund hittades inte fyll i nedan!"; ?>
     <div class="CustomerInfo">
     <span>Förnamn</span>    
-    <input text name="Firstname" value="<?php if( isset( $row['Firstname'] ) ) { echo $row["Firstname"]; } ?>">
+    <input text name="Firstname" pattern="[a-zåäöA-ZÅÄÖ]+" required value="">
     <span>Efternamn</span>    
-    <input text name="Lastname" value="<?php if( isset( $row['Lastname'] ) ) { echo $row["Lastname"]; }?>">
+    <input text name="Lastname" pattern="[a-zåäöA-ZÅÄÖ]+" required value="">
     <span>Adress</span>    
-    <input text name="Address" value="<?php if( isset( $row['Address'] ) ) { echo $row["Address"]; } ?>">
+    <input text name="Address" pattern="[a-zåäöA-ZÅÄÖ0-9\s]+" required value="">
     <span>Postnr</span>    
-    <input text name="Zipcode" value="<?php if( isset( $row['Zipcode'] ) ) { echo $row["Zipcode"]; }?>">
+    <input tel name="Zipcode" required pattern="[0-9]{3} [0-9]{2}" required placeholder="555 55">
     <span>Postadress</span>    
-    <input text name="City" value="<?php if( isset( $row['City'] ) ) { echo $row["City"]; }?>">
+    <input text name="City" pattern="[a-zåäöA-ZÅÄÖ]+" required value="">
     <span>Mail</span>    
-    <input text name="Mail" value="<?php if( isset( $row['Mail'] ) ) { echo $row["Mail"]; }?>">
-    <span>Telefon</span>    
-    <input text name="Phone" value="<?php if( isset( $row['Phone'] ) ) { echo $row["Phone"]; }?>">
-    <input type="submit" name="buy" value="Skapa kund">
-</div>
+    <input mail name="Mail" required placeholder="your@email.com">
+    <span>Mobil</span>    
+    <input tel name="Phone" pattern="[0-9]{3}-[0-9]{3} [0-9]{2} [0-9]{2}" required placeholder="073-555 66 88">
+    <input type="submit" name="save" value="Spara">
+    </div>
 </form>
 <?php
-
     }
 } ?>
 </div>

@@ -2,6 +2,7 @@
 include_once 'dbo.php';
 $productCat = New Product;
 $total = 0;
+$message = '';
 
 if(isset($_COOKIE["cart"])) {
     $cookie_data = stripslashes($_COOKIE['cart']);
@@ -18,7 +19,7 @@ $category = $result->fetchAll();
     <head>
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="js.js"></script>
-        <link rel="stylesheet" type="text/css" href="style.css?d=<?php echo time(); ?>">
+        <link rel="stylesheet" type="text/css" href="css/style.css?d=<?php echo time(); ?>">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
@@ -48,7 +49,11 @@ $category = $result->fetchAll();
 <div class='cart-content'>
     <h2>Min varukorg</h2>
 <div class="productsIncart">
-<?php  foreach($cart_data as $keys => $values){ 
+<?php  
+if(empty($cart_data)) {
+    echo $message = 'Varukorgen är tom';
+  } else {
+foreach($cart_data as $keys => $values){ 
     $rowtotal = $values['Price'] * $values['quantity'];
       $total += $rowtotal; ?>
     <img class="cart-img" src=<?php echo $values['Img'] ?>>
@@ -63,7 +68,9 @@ $category = $result->fetchAll();
 
     <hr>
     <?php  
-} ?>  
+} 
+} 
+?>  
     </div>
     <div class="cartSum">
         <span class="total">Totalsumma <?php echo $total ?> SEK</span>

@@ -117,7 +117,6 @@ public $Image = '';
      $pdo = connect();
 
      $sql = "SELECT * FROM images
-
      WHERE ProductsId = '" . $this->{"ProductsId"} . "'"; // sql statementS
 
      $toGet = $pdo->prepare($sql); // prepared statement
@@ -155,13 +154,13 @@ class Customer {
       }
 
 
-     public function get_birthday() {
+     public function get_lastCreatedcustomer() {
           $pdo = connect();
 
           $sql = "SELECT * FROM customers
-          WHERE Mail  = '" . $this->{"Mail"} . "'" ;
+          ORDER BY CustomersId DESC
+          LIMIT 1" ;
              
-     
           $toGet = $pdo->prepare($sql); // prepared statement
           $toGet->execute(); // execute sql statement
      
@@ -198,10 +197,9 @@ public $Quantity = 0;
 public function create_orderItem() {
           $pdo = connect();
      
-          $sql = "INSERT INTO orderitem AS OI (OrderitemId, ProductvariationsId, Quantity, OrderId)
+          $sql = "INSERT INTO orderitem (OrderitemId, ProductvariationsId, Quantity, OrderId)
                   VALUES ('" . $this->{"OrderitemId"} . "', '" . $this->{"ProductvariationsId"} . "', '" . $this->{"Quantity"} . "', '" . $this->{"OrderId"} . "')
-                  JOIN productvariation as PV on OI.ProductvariationsId = PV.PVid
-                  JOIN order as O on OI.OrderId = O.OrderId"; // sql statements
+                    "; // sql statements
      
           $toCreate = $pdo->prepare($sql); // prepared statement
           $toCreate->execute(); // execute sql statement
@@ -225,7 +223,29 @@ public function create_order() {
 public function get_order() {
      $pdo = connect();
 
-     $sql = "SELECT * FROM orders
+     $sql = "SELECT O.OrderId, O.Date, 
+     P.ProductName, PV.Size, OI.Quantity, P.Price 
+     FROM orders AS O 
+     JOIN orderitem AS OI ON OI.OrderId = O.OrderId 
+     JOIN productvariations AS PV ON PV.PVId = OI.ProductvariationsId 
+     JOIN products AS P ON P.ProductsId = PV.ProductId 
+     WHERE OI.OrderId  = '" . $this->{"OrderId"} . "'" ;
+        
+
+     $toGet = $pdo->prepare($sql); // prepared statement
+     $toGet->execute(); // execute sql statement
+
+     return $toGet;
+
+ }
+
+ public function get_customerByorder() {
+     $pdo = connect();
+
+     $sql = "SELECT OrderId, Date, 
+     C.Firstname, C.Lastname, C.Address, C.Zipcode, C.City 
+     FROM orders AS O 
+     JOIN customers AS C ON C.CustomersId = O.CustomersId 
      WHERE OrderId  = '" . $this->{"OrderId"} . "'" ;
         
 

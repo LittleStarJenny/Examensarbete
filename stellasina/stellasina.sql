@@ -222,3 +222,19 @@ VALUES
 ( 1, 5, 'img/Full-bloom-back.jpg'),
 ( 1, 6, 'img/Rebecca-red-back.jpg')
 
+
+
+
+INSERT INTO Orderitem
+( -- columns to insert data into
+ OrderitemId, ProductvariationsId, Quantity, OrderId
+)
+VALUES
+( 1, 26, 2, 1),
+( 2, 5, 1, 1),
+( 3, 26, 1, 2),
+( 4, 6, 1, 3),
+( 5, 8, 3, 4),
+( 6, 5, 1, 4),
+( 7, 25, 3, 5),
+(8, 13, 4, 6);
