@@ -8,7 +8,7 @@ if(isset($_COOKIE["cart"])) {
     $cart_data = json_decode($cookie_data, true); 
   }
 
- $result = $productCat->get_category(); 
+ $result = $productCat->get_categoryForHeader(); 
 $category = $result->fetchAll();
 
 ?>
@@ -36,6 +36,7 @@ $category = $result->fetchAll();
 </div>
         <nav class="main-nav">
             <ul>
+                <li><a href="products.php">Butiken</a></li>
                 <?php foreach($category as $row) { ?>
                 <li><a href="category-page.php?category=<?php echo $row['CategoryId']; ?>"><?php echo $row['CategoryName'] ?></a></li>
                 <?php } ?>

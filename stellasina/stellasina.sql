@@ -207,3 +207,18 @@ VALUES
 GO
 
 
+
+INSERT INTO images
+( -- columns to insert data into
+ ImageId, ProductsId, Image
+)
+VALUES
+( 1, 1, 'img/Deco-vibe-black-back.jpg'),
+( 1, 1, 'img/Deco-vibe-black-back-closed.jpg'),
+( 1, 2, 'img/Deco-vibe-blush-back.jpg'),
+( 1, 2, 'img/Deco-vibe-blush-back-closed.jpg'),
+( 1, 3, 'img/ciaobella-back.jpg'),
+( 1, 4, 'img/Deco-rebel-back.jpg'),
+( 1, 5, 'img/Full-bloom-back.jpg'),
+( 1, 6, 'img/Rebecca-red-back.jpg')
+

@@ -36,6 +36,7 @@ function get_all_products($pdo, $limit, $offset) {
 
 class Product {
      public $ProductsId = 0;
+     public $Productname = '';
 
 public function get_product() {
      $pdo = connect();
@@ -72,9 +73,8 @@ public function get_productvariation() {
      $pdo = connect();
 
      $sql = "SELECT * FROM category as C
-     JOIN products AS P ON PV.ProductId = P.ProductsId
-     JOIN productvariations AS PV ON PV.CategoryId = C.CategoryId
-     WHERE CategoryId = '" . $this->{"CategoryId"} . "'"; // sql statementS
+     JOIN products AS P ON P.CategoryId = C.CategoryId
+     WHERE C.CategoryId = '" . $this->{"CategoryId"} . "'"; // sql statementS
 
      $toGet = $pdo->prepare($sql); // prepared statement
      $toGet->execute(); // execute sql statement
@@ -88,6 +88,19 @@ public $Categoryname = '';
  public function get_category() {
      $pdo = connect();
 
+     $sql = "SELECT * FROM category
+     WHERE CategoryId = '" . $this->{"CategoryId"} . "'"; // sql statementS
+
+     $toGet = $pdo->prepare($sql); // prepared statement
+     $toGet->execute(); // execute sql statement
+
+     return $toGet;
+
+ }
+
+ public function get_categoryForHeader() {
+     $pdo = connect();
+
      $sql = "SELECT * FROM category"; // sql statementS
 
      $toGet = $pdo->prepare($sql); // prepared statement
@@ -96,6 +109,23 @@ public $Categoryname = '';
      return $toGet;
 
  }
+
+public $ImageId = 0;
+public $Image = '';
+
+ public function get_images() {
+     $pdo = connect();
+
+     $sql = "SELECT * FROM images
+
+     WHERE ProductsId = '" . $this->{"ProductsId"} . "'"; // sql statementS
+
+     $toGet = $pdo->prepare($sql); // prepared statement
+     $toGet->execute(); // execute sql statement
+
+     return $toGet;
+
+ } 
 }
 
 class Customer {

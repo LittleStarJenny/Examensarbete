@@ -1,6 +1,6 @@
 <?php 
 include_once "header.php";
-
+// include_once "dbo.php";
 $pdo = connect();
 $limit = 20;
 $offset = 0;
@@ -11,12 +11,13 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
     
 <main>
-    <div class="sidebar">
+    <!-- <div class="sidebar">
         <h3>Kategorier</h3>
-</div>
+    </div> -->
     <section class="product-container">
         <?php foreach($rows as $row) { ?>
         <div class="product-card">
+        <a href="product-detail.php?product=<?php echo $row['ProductsId']; ?>">
             <img class="product-image" src="<?php echo $row['Img'];?>" >
             <h2 class="title"><?php echo $row['ProductName']; ?></h2>
             <span class="price"><?php echo $row['Price'];?></span><span>:-</span>
@@ -24,6 +25,5 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php } ?> 
     </section>
 </main>
-</body>
-<?php
-include_once "footer.php"?>
+
+<?php include_once "footer.php"?>

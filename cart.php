@@ -62,25 +62,38 @@ if(empty($cart_data)) {
 
 
 ?>
-
+<!-- Title row -->
+<div class="title-row">
+  <div class="col-1"></div>
+  <div class="col-2">
+    <label>Produkter</label>
+  </div>
+  <div class="col-3">
+    <label>Storlek</label>
+    <label>Antal</label>
+  </div>
+  <div class="col-4">
+    <label>Pris</label>
+  </div>
+  <div class="col-5"></div>
+  </div>
     <!-- Each cart item -->
     <div class="cartitem">
-      <div><a href="?action=delete&id=<?php echo $values["ProductsId"]?>&Size=<?php echo $values['Size'];?>">X</a>
+      <div><a href="?action=delete&id=<?php echo $values["ProductsId"]?>&Size=<?php echo $values['Size'];?>"><i class="fas fa-trash-alt"></i></a>
       </div>
       <form action="cart.php?action=update" method="post">
         <div class="cart-img-qty">
           <img class="cart-img" src=<?php echo $values['Img'] ?>>
-          <span class="cart-qty">
-            <input type="number" name="quantity" step="1" min="1" value="<?php echo $values["quantity"]?>">
-            <input type="hidden" name="Size" step="1" min="1" value="<?php echo $values["Size"]?>">
-            <input type="hidden" name="ProductsId" step="1" min="1" value="<?php echo $values["ProductsId"]?>">
-
-          <input type="submit" value="uppdatera">
-          </span> 
         </div>
         <div class="cart-textdetails">
           <span class="cart-prod-details"><?php echo $values['ProductName']; ?></span>
           <span class="cart-prod-size"><?php echo $values['Size']; ?></span>
+          <span class="cart-qty">
+            <input type="text" name="quantity" step="1" min="1" value="<?php echo $values["quantity"]?>">
+            <input type="hidden" name="Size" step="1" min="1" value="<?php echo $values["Size"]?>">
+            <input type="hidden" name="ProductsId" step="1" min="1" value="<?php echo $values["ProductsId"]?>">
+            <input type="submit" value="uppdatera">
+          </span> 
           <span class="cart-prod-price"><?php echo $values['Price']; ?> SEK</span>
         </div>
         <hr>  

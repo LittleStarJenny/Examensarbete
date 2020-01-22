@@ -8,7 +8,7 @@ $cart_data = [];
 // if the variables are set - run the following statement
 if(isset($_POST["addtocart"])) {
     if(isset($_COOKIE["cart"])) {
-      echo "Varan lades till i varukorgen";
+     $message = "Varan lades till i varukorgen";
      
       // Removes backlashes and dont replace previous item, gives every item a new row.
       $cookie_data = stripslashes($_COOKIE['cart']); 
@@ -47,7 +47,8 @@ if(isset($_POST["addtocart"])) {
   
     $item_data = json_encode($cart_data);
     setcookie('cart', $item_data, time() +(3600));
-    //  header("location: product-detail.php");
+    // header("location: product-detail.php?product=");
+
   }
 
 
@@ -61,6 +62,7 @@ if(isset($_POST["addtocart"])) {
             if(isset($_GET['product'])) {
                 $product->ProductsId = $_GET['product'];
                 $product->ProductId = $_GET['product'];
+                $product->ProductsId = $_GET['product'];
             } else {
                 $product->ProductsId = $_POST['ProductsId'];
                 // $product->ProductsId = $_POST['productid'];
@@ -71,16 +73,29 @@ if(isset($_POST["addtocart"])) {
         ?>    
             <div class="product-card-detail">
                 <img class="product-image" src="<?php echo $row['Img'];?>" >
-                  <input type ="hidden" name="Img" value="<?php echo $row['Img'] ?>">
+            <?php    
+         
+            $results = $product->get_images();
+                      $Images = $results->fetch();
+                    
+                  
+                      //  var_dump($Images);
 
+                  
+ 
+                  //  foreach($Images as $image) {
+                   ?>
+                   <img class="product-image" src="<?php echo $Images['Image'];?>">
+                  <input type ="hidden" name="Img" value="<?php echo $row['Img'] ?>">
+                   <!-- <?php ?> -->
                 <div class="product-details-text">
                   <h2 class="title"><?php echo $row['ProductName']; ?></h2>
                     <input type ="hidden" name="ProductName" value="<?php echo $row['ProductName'] ?>">
 
-                    <p class="description"><?php echo $row['Description']; ?></p>
-                    <span class="price"><?php echo $row['Price'];?>:-</span>
+                    <!-- <p class="description"><?php echo $row['Description']; ?></p> -->
+                    <span class="price"><?php echo $row['Price'];?> SEK</span>
                     <input type ="hidden" name="Price" value="<?php echo $row['Price'] ?>">
-
+                      <span class="select-title">Storlek</span>
                     <select class="size" name="selectedSize"> 
                         <?php 
                         while ($sizeRow = $test->fetch()) {
@@ -91,8 +106,11 @@ if(isset($_POST["addtocart"])) {
                         <?php } ?>
                     </select>
                     <input type="hidden" name="quantity" value="1"  />
-                    <input type="submit" name="addtocart" value="Add to Cart"/>
+                    <input type="submit" class="addtocart-btn"  name="addtocart" value="Lägg i varukorgen"/>
+                    <?php echo $message?>
                     <input type ="hidden" name="ProductsId" value="<?php echo $row['ProductsId'] ?>">
+                <span class="title-description">Beskrivning</span>
+                <p class="description"><?php echo $row['Description']; ?></p>
                 </div>
             </div>
         <?php } ?> 
