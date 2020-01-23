@@ -114,7 +114,7 @@ if(empty($cart_data)) {
         <span colspan="3">Totalt</span>
         <span><?php echo $total; ?> SEK</span>
       <div class="toCheckout">
-        <a href="checkout.php">Till kassan</a>
+        <a href="checkout">Till kassan</a>
       </div>
     </div>
   </div>

@@ -2,23 +2,21 @@
 include_once "header.php";
 $productCat = New Product;
 
+// Get category from url that was passed from category-page.php 
 if(isset($_GET['category'])) {
     $productCat->CategoryId = $_GET['category'];
 } else {
     $productCat->CategoryId = $_POST['CategoryId'];
-    // $productCat->ProductsId = $_POST['productsid'];
 }
+// Get all products by category
 $result = $productCat->get_productsBycategory();
 $rows = $result->fetchAll(PDO::FETCH_ASSOC);
-// var_dump($rows);
 ?>
     
 <main>
-    <!-- <div class="sidebar">
-    <h3>Kategorier</h3>
-    </div> -->
     <section class="product-container">
         <h3 class="category-title"><?php echo $row['CategoryName']; ?></h3>
+        <!-- Display productcards foreach product  -->
         <?php foreach($rows as $row) { ?>
         <div class="product-card">
             <a href="product-detail.php?product=<?php echo $row['ProductsId']; ?>">

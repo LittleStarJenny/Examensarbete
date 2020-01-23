@@ -72,7 +72,7 @@ public function get_productvariation() {
  public function get_productsBycategory() {
      $pdo = connect();
 
-     $sql = "SELECT * FROM category as C
+     $sql = "SELECT * FROM categorys as C
      JOIN products AS P ON P.CategoryId = C.CategoryId
      WHERE C.CategoryId = '" . $this->{"CategoryId"} . "'"; // sql statementS
 
@@ -88,7 +88,7 @@ public $Categoryname = '';
  public function get_category() {
      $pdo = connect();
 
-     $sql = "SELECT * FROM category
+     $sql = "SELECT * FROM categorys
      WHERE CategoryId = '" . $this->{"CategoryId"} . "'"; // sql statementS
 
      $toGet = $pdo->prepare($sql); // prepared statement
@@ -101,7 +101,7 @@ public $Categoryname = '';
  public function get_categoryForHeader() {
      $pdo = connect();
 
-     $sql = "SELECT * FROM category"; // sql statementS
+     $sql = "SELECT * FROM categorys"; // sql statementS
 
      $toGet = $pdo->prepare($sql); // prepared statement
      $toGet->execute(); // execute sql statement
@@ -154,7 +154,7 @@ class Customer {
       }
 
 
-     public function get_lastCreatedcustomer() {
+     public function get_lastcreatedcustomer() {
           $pdo = connect();
 
           $sql = "SELECT * FROM customers
@@ -179,6 +179,7 @@ public function create_customer() {
 
      return $toCreate;
  }
+
 }
 
 

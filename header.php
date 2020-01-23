@@ -33,11 +33,11 @@ $category = $result->fetchAll();
     <header>
         <div class="header-logo">
         <!-- <h1>Stellasina</h1> -->
-        <a href="index.php"><img src="img/logo.png"></a>
+        <a href="http://localhost/Examensarbete-Stellasina/"><img src="img/logo.png"></a>
 </div>
         <nav class="main-nav">
             <ul>
-                <li><a href="products.php">Butiken</a></li>
+                <li><a href="products">Butiken</a></li>
                 <?php foreach($category as $row) { ?>
                 <li><a href="category-page.php?category=<?php echo $row['CategoryId']; ?>"><?php echo $row['CategoryName'] ?></a></li>
                 <?php } ?>
@@ -76,7 +76,7 @@ foreach($cart_data as $keys => $values){
         <span class="total">Totalsumma <?php echo $total ?> SEK</span>
     </div>
     <div class='btn-wrap'>
-        <a href="cart.php"><div class='shopping-btn'>Till varukorgen</div></a>
-        <a href="checkout.php"><div class='shopping-btn'>Gå till kassan</div></a>
+        <a href="cart"><div class='shopping-btn'>Till varukorgen</div></a>
+        <a href="checkout"><div class='shopping-btn'>Gå till kassan</div></a>
     </div>
 </div>

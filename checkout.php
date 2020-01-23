@@ -26,14 +26,15 @@ if(isset($_COOKIE["cart"])) {
             $result = $product->get_productvariation();
             $showpID = $result->fetch();
  
-// $ProductvariationsId = $showpID["PVId"];
-// $Quantity =  $values['quantity'];
+ $ProductvariationsId = $showpID["PVId"];
+$Quantity =  $values['quantity'];
 $order->ProductvariationsId = $ProductvariationsId;
 $order->Quantity = $Quantity;
 $order->OrderId = $OrderId['OrderId'][0];
        print_r($order->create_orderItem());
     }
-        //   header("location:orderconfirmation.php");
+       header("location:orderconfirmation.php");
+       setcookie("cart", "", time() - 3600);
     } else {
         echo 'Ordern kunde inte skapas';
     }
@@ -117,7 +118,7 @@ print_r($order);
         <input text name="checkCustomer" placeholder=""> 
         <input type="submit" name="submit" value="SÖK"/>
 </div>
-<?php 
+<?php
 if(isset($_POST["save"])) {
     
     $Firstname = filter_input(INPUT_POST, 'Firstname', FILTER_SANITIZE_STRING);
@@ -140,16 +141,19 @@ if(isset($_POST["save"])) {
 
     $customer->create_customer();
     $lastCustomerCreated = $customer->get_lastCreatedcustomer();
-    $row = $lastCustomerCreated->fetch(); } ?>
+    $row = $lastCustomerCreated->fetch(); }  ?>
     <div class="CustomerInfo">
         <span><?php if( isset( $row['Firstname'] ) ) { echo $row["Firstname"]; } echo " "; if( isset( $row['Lastname'] ) ) { echo $row["Lastname"]; } ?></span>
         <span><?php if( isset( $row['Address'] ) ) { echo $row["Address"]; } ?></span>
         <span><?php  if( isset( $row['Zipcode'] ) ) { echo $row["Zipcode"]; }echo " "; if( isset( $row['City'] ) ) { echo $row["City"]; } ?></span>
         <span><?php if( isset( $row['Mail'] ) ) { echo $row["Mail"]; } ?></span>
-        <span><?php if( isset( $row['Phone'] ) ) { echo $row["Phone"]; ?></span>
+        <span><?php if( isset( $row['Phone'] ) ) { echo $row["Phone"];  ?></span>
         <input type ="hidden" name="CustomersId" value="<?php echo $row['CustomersId'] ?>">
+        <input type="submit" name="buy" value="Bekräfta köp">
         </div>
- <?php }
+ <?php } else {
+     echo 'Kunde inte skapa kund';
+ }
 // Check if Mail exist in database and fetch customer info
 if (isset($_POST["checkCustomer"])) {
     $Mail = $_POST["checkCustomer"];
@@ -157,14 +161,14 @@ if (isset($_POST["checkCustomer"])) {
 if(isset($_POST["checkCustomer"])) {
     $customer->Mail = $Mail;
     $result = $customer->get_customer();
-    $row = $result->fetch(); ?>
+    $row = $result->fetch();  ?>
     <div class="CustomerInfo">
         <span><?php if( isset( $row['Firstname'] ) ) { echo $row["Firstname"]; } echo " "; if( isset( $row['Lastname'] ) ) { echo $row["Lastname"]; } ?></span>
         <span><?php if( isset( $row['Address'] ) ) { echo $row["Address"]; } ?></span>
         <span><?php  if( isset( $row['Zipcode'] ) ) { echo $row["Zipcode"]; }echo " "; if( isset( $row['City'] ) ) { echo $row["City"]; } ?></span>
         <span><?php if( isset( $row['Mail'] ) ) { echo $row["Mail"]; } ?></span>
-        <span><?php if( isset( $row['Phone'] ) ) { echo $row["Phone"]; ?></span>
-        <input type ="hidden" name="CustomersId" value="<?php echo $row['CustomersId'] ?>">
+        <span><?php if( isset( $row['Phone'] ) ) { echo $row["Phone"];  ?></span>
+        <input type ="hidden" name="CustomersId" value="<?php echo $row['CustomersId']; ?>">
         <input type="submit" name="buy" value="Bekräfta köp">
         </div>
         <?php
@@ -187,10 +191,11 @@ if(isset($_POST["checkCustomer"])) {
     <input tel name="Phone" pattern="[0-9]{3}-[0-9]{3} [0-9]{2} [0-9]{2}" required placeholder="073-555 66 88">
     <input type="submit" name="save" value="Spara">
     </div>
-</form>
-<?php
-    }
-} ?>
+
+<?php }
+ }   
+ ?>
+ </form>
 </div>
 </section>
 </main>
