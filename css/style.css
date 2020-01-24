@@ -60,6 +60,10 @@ header img {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+.main-nav li:hover {
+  opacity: 0.8;
+}
+
 .main-nav .fas {
   color: white;
   float: right;
@@ -69,6 +73,8 @@ header img {
 }
 
 footer {
+  /* position: absolute; */
+  bottom: 0;
   width: 100%;
   background: #333;
 }
@@ -177,10 +183,6 @@ footer ul li {
   font-weight: bold;
 }
 
-/* .product-card-detail .product-details-text p {
-  width: 500px;
-} */
-
 .product-details-text .size {
   border: none;
     width: 200px;
@@ -201,7 +203,8 @@ footer ul li {
 }
 
 .addtocart-btn:hover {
-  opacity: 0.9;
+  opacity: 0.7;
+  cursor: pointer;
 }
 
 /* Cart page */
