@@ -11,11 +11,14 @@ if(isset($_GET['category'])) {
 // Get all products by category
 $result = $productCat->get_productsBycategory();
 $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+
+$try = $productCat->get_category();
+$categorylabel = $try->fetch();
 ?>
     
 <main>
     <section class="product-container">
-        <h3 class="category-title"><?php echo $row['CategoryName']; ?></h3>
+        <h3 class="category-title"><?php echo $categorylabel['CategoryName']; ?></h3>
         <!-- Display productcards foreach product  -->
         <?php foreach($rows as $row) { ?>
         <div class="product-card">
@@ -23,6 +26,7 @@ $rows = $result->fetchAll(PDO::FETCH_ASSOC);
             <img class="product-image" src="<?php echo $row['Img'];?>" >
             <h2 class="title"><?php echo $row['ProductName']; ?></h2>
             <span class="price"><?php echo $row['Price'];?></span><span>:-</span>
+            </a>
         </div>
         <?php } ?> 
     </section>

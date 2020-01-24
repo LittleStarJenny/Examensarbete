@@ -21,6 +21,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <img class="product-image" src="<?php echo $row['Img'];?>" >
             <h2 class="title"><?php echo $row['ProductName']; ?></h2>
             <span class="price"><?php echo $row['Price'];?></span><span>:-</span>
+        </a>
         </div>
         <?php } ?> 
     </section>

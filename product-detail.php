@@ -7,8 +7,9 @@ $cart_data = [];
 
 // if the variables are set - run the following statement
 if(isset($_POST["addtocart"])) {
+  $message = "Varan lades till i varukorgen";
     if(isset($_COOKIE["cart"])) {
-     $message = "Varan lades till i varukorgen";
+   
      
       // Removes backlashes and dont replace previous item, gives every item a new row.
       $cookie_data = stripslashes($_COOKIE['cart']); 
@@ -47,7 +48,8 @@ if(isset($_POST["addtocart"])) {
   
     $item_data = json_encode($cart_data);
     setcookie('cart', $item_data, time() +(3600));
-   header("location: product-detail.php?product=".$_GET['product']);
+    header("location: product-detail.php?product=".$_GET['product']);
+    $message = "Varan lades till i varukorgen";
 
   }
 
@@ -57,7 +59,9 @@ if(isset($_POST["addtocart"])) {
     
 <main>
     <section class="productdetails-wrap">
-    <form method="post" action="product-detail.php?product=<?php echo $_GET['product']; ?>"> 
+    <!-- <?php echo 'Jag finns'; ?> -->
+    <div><?php echo $message;?></div>
+    <form method="post" action=""> 
         <?php
             if(isset($_GET['product'])) {
                 $product->ProductsId = $_GET['product'];
@@ -74,20 +78,12 @@ if(isset($_POST["addtocart"])) {
             <div class="product-card-detail">
                 <img class="product-image" src="<?php echo $row['Img'];?>" >
             <?php    
-         
-            $results = $product->get_images();
-                      $Images = $results->fetch();
-                    
-                  
-                      //  var_dump($Images);
 
-                  
- 
-                  //  foreach($Images as $image) {
-                   ?>
+            $results = $product->get_images();
+                $Images = $results->fetch();
+                   if(isset($Images['Image'])) { ?>
                    <img class="product-image" src="<?php echo $Images['Image'];?>">
-                  <input type ="hidden" name="Img" value="<?php echo $row['Img'] ?>">
-                   <!-- <?php ?> -->
+                   <?php } ?>
                 <div class="product-details-text">
                   <h2 class="title"><?php echo $row['ProductName']; ?></h2>
                     <input type ="hidden" name="ProductName" value="<?php echo $row['ProductName'] ?>">
@@ -107,7 +103,7 @@ if(isset($_POST["addtocart"])) {
                     </select>
                     <input type="hidden" name="quantity" value="1"  />
                     <input type="submit" class="addtocart-btn"  name="addtocart" value="Lägg i varukorgen"/>
-                    <?php echo $message?>
+               
                     <input type ="hidden" name="ProductsId" value="<?php echo $row['ProductsId'] ?>">
                 <span class="title-description">Beskrivning</span>
                 <p class="description"><?php echo $row['Description']; ?></p>
