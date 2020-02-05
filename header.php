@@ -46,7 +46,7 @@ $category = $result->fetchAll();
     </nav>
     </header>
     
-<div class='cart-content'>
+<!-- <div class='cart-content'>
     <h2>Min varukorg</h2>
 <div class="productsIncart">
 <?php  
@@ -79,4 +79,4 @@ foreach($cart_data as $keys => $values){
         <a href="cart"><div class='shopping-btn'>Till varukorgen</div></a>
         <a href="checkout"><div class='shopping-btn'>Gå till kassan</div></a>
     </div>
-</div>
+</div> -->

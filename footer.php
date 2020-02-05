@@ -37,6 +37,7 @@ foreach($cart_data as $keys => $values){
 <ul>
     <li>Köpvillkor</li>
     <li>Kontakt</li>
+    <li><a href="tillverknings-policy.php">Tillverknings policy</a></li>
 </ul>
 </footer>
   

@@ -48,7 +48,7 @@ if(isset($_POST["addtocart"])) {
   
     $item_data = json_encode($cart_data);
     setcookie('cart', $item_data, time() +(3600));
-    header("location: product-detail.php?product=".$_GET['product']);
+    // header("location: product-detail.php?product=".$_GET['product']);
     $message = "Varan lades till i varukorgen";
 
   }
@@ -59,9 +59,7 @@ if(isset($_POST["addtocart"])) {
     
 <main>
     <section class="productdetails-wrap">
-    <!-- <?php echo 'Jag finns'; ?> -->
-    <div><?php echo $message;?></div>
-    <form method="post" action=""> 
+    <form method="post" action="product-detail.php?product=<?php echo $_GET['product']; ?>"> 
         <?php
             if(isset($_GET['product'])) {
                 $product->ProductsId = $_GET['product'];
@@ -77,6 +75,7 @@ if(isset($_POST["addtocart"])) {
         ?>    
             <div class="product-card-detail">
                 <img class="product-image" src="<?php echo $row['Img'];?>" >
+                <input type ="hidden" name="Img" value="<?php echo $row['Img'] ?>">
             <?php    
 
             $results = $product->get_images();
@@ -103,7 +102,7 @@ if(isset($_POST["addtocart"])) {
                     </select>
                     <input type="hidden" name="quantity" value="1"  />
                     <input type="submit" class="addtocart-btn"  name="addtocart" value="Lägg i varukorgen"/>
-               
+                    <div><?php echo $message;?></div>
                     <input type ="hidden" name="ProductsId" value="<?php echo $row['ProductsId'] ?>">
                 <span class="title-description">Beskrivning</span>
                 <p class="description"><?php echo $row['Description']; ?></p>

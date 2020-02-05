@@ -75,13 +75,16 @@ if(isset($_POST["buy"])) {
                                 <span>Totalt</span>
                                 <span><?php echo $rowtotal; ?> SEK</span>
                             </div>
+                          
                         </div>
-                    </form>
-                    <?php }  
-                        }
-                    ?>
+                   
+              
+                      </form>
                 </div>
                 <hr>
+                <?php }  
+                        }
+                    ?>
                 <!-- Total Sum -->
                 <div class="Total">
                     <h3>Summa</h3>        
