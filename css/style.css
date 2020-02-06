@@ -194,6 +194,9 @@ footer ul li {
   flex-flow: column;
   flex-wrap: wrap;
   padding-left: 15px;
+  width: 30%;
+  position: absolute;
+  right: 25px;
 }
 
 .product-details-text .title {

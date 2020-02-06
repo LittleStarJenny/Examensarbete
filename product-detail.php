@@ -74,6 +74,7 @@ if(isset($_POST["addtocart"])) {
                     while ($row = $result->fetch()) {
         ?>    
             <div class="product-card-detail">
+              <div class="product-image-wrapper">
                 <img class="product-image" src="<?php echo $row['Img'];?>" >
                 <input type ="hidden" name="Img" value="<?php echo $row['Img'] ?>">
             <?php    
@@ -83,6 +84,7 @@ if(isset($_POST["addtocart"])) {
                    if(isset($Images['Image'])) { ?>
                    <img class="product-image" src="<?php echo $Images['Image'];?>">
                    <?php } ?>
+                   </div>
                 <div class="product-details-text">
                   <h2 class="title"><?php echo $row['ProductName']; ?></h2>
                     <input type ="hidden" name="ProductName" value="<?php echo $row['ProductName'] ?>">
