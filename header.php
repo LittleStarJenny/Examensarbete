@@ -21,7 +21,8 @@ $category = $result->fetchAll();
         <script type="text/javascript" src="js.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css?d=<?php echo time(); ?>">
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Martel:300" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">

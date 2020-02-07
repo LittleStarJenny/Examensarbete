@@ -92,7 +92,7 @@ if(empty($cart_data)) {
             <input type="number" name="quantity" step="1" min="1" value="<?php echo $values["quantity"]?>">
             <input type="hidden" name="Size" step="1" min="1" value="<?php echo $values["Size"]?>">
             <input type="hidden" name="ProductsId" step="1" min="1" value="<?php echo $values["ProductsId"]?>">
-            <input type="submit" value="uppdatera">
+            <button><i class="fas fa-sync"></i></button>
           </span> 
           <span class="cart-prod-price"><?php echo $values['Price']; ?> SEK</span>
         </div>

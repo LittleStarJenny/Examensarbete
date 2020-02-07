@@ -57,7 +57,7 @@ if(isset($_POST["addtocart"])) {
 
 ?>
     
-<main>
+<main id="product-content">
     <section class="productdetails-wrap">
     <form method="post" action="product-detail.php?product=<?php echo $_GET['product']; ?>"> 
         <?php
