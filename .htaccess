@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /Examensarbete-Master
+RewriteBase /Examensarbete-Stellasina
 
 #Make sure it's not an actual file
 RewriteCond %{REQUEST_FILENAME} !-f

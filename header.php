@@ -42,7 +42,9 @@ $category = $result->fetchAll();
                 <?php foreach($category as $row) { ?>
                 <li><a href="category-page.php?category=<?php echo $row['CategoryId']; ?>"><?php echo $row['CategoryName'] ?></a></li>
                 <?php } ?>
-               <div class="cart-button"> <i class="fas fa-shopping-cart"></i></div>
+               <div class="cart-button"> 
+                   <div class="qty-in-cart"></div>
+                   <i class="fas fa-shopping-cart"></i></div>
             </ul>
     </nav>
     </header>

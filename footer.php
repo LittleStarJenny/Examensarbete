@@ -8,6 +8,7 @@ if(empty($cart_data)) {
 foreach($cart_data as $keys => $values){ 
     $rowtotal = $values['Price'] * $values['quantity'];
       $total += $rowtotal; ?>
+    <div class="each-row">
     <img class="cart-img" src=<?php echo $values['Img'] ?>>
     <div class="cart-text-content">
         <span class='cart-prod-prize'><?php echo $values['Price']; ?> SEK </span>
@@ -17,7 +18,7 @@ foreach($cart_data as $keys => $values){
                 <span class="cart-prod-qty">Antal <?php echo $values["quantity"]?></span>
             </div>
 </div>
-
+</div>
     <hr>
     <?php  
 } 
