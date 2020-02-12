@@ -137,6 +137,7 @@ class Customer {
      public $City = '';
      public $Mail = '';
      public $Phone = '';
+     public $Password = '';
      
 
      public function get_customer() {
@@ -171,8 +172,8 @@ class Customer {
 public function create_customer() {
      $pdo = connect();
 
-     $sql = "INSERT INTO customers (CustomersId, Firstname, Lastname, Birthday, Address, Zipcode, City, Mail, Phone)
-             VALUES ('" . $this->{"CustomersId"} . "', '" . $this->{"Firstname"} . "', '" . $this->{"Lastname"} . "', '" . $this->{"Birthday"} . "', '" . $this->{"Address"} . "', '" . $this->{"Zipcode"} . "', '" . $this->{"City"} . "', '" . $this->{"Mail"} . "', '" . $this->{"Phone"} . "')"; // sql statements
+     $sql = "INSERT INTO customers (CustomersId, Firstname, Lastname, Birthday, Address, Zipcode, City, Mail, Phone, Password)
+             VALUES ('" . $this->{"CustomersId"} . "', '" . $this->{"Firstname"} . "', '" . $this->{"Lastname"} . "', '" . $this->{"Birthday"} . "', '" . $this->{"Address"} . "', '" . $this->{"Zipcode"} . "', '" . $this->{"City"} . "', '" . $this->{"Mail"} . "', '" . $this->{"Phone"} . "', '" . $this->{"Password"} . "')"; // sql statements
 
      $toCreate = $pdo->prepare($sql); // prepared statement
      $toCreate->execute(); // execute sql statement

@@ -419,3 +419,15 @@ VALUES
 ( 6, 5, 1, 4),
 ( 7, 25, 3, 5),
 (8, 13, 4, 6);
+
+
+INSERT INTO images
+(
+  ImageId, ProductsId, Image
+)
+VALUES
+( 8, 7, 'img/Deco-rebel-hipster-front.jpg'),   
+( 9, 8, 'img/Deco-vibe-blush-short-front.jpg'),  
+( 10, 9, 'img/Lace-kiss-natural-front.jpg') 
+
+

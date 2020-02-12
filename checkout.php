@@ -133,6 +133,8 @@ if(isset($_POST["buy"])) {
             $City = filter_input(INPUT_POST, 'City', FILTER_SANITIZE_STRING);
             $Mail = filter_input(INPUT_POST, 'Mail', FILTER_SANITIZE_STRING);
             $Phone = filter_input(INPUT_POST, 'Phone', FILTER_SANITIZE_STRING);
+            $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_MAGIC_QUOTES);
+            $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
 
             $customer->Firstname = $Firstname;
             $customer->Lastname = $Lastname;
@@ -142,6 +144,7 @@ if(isset($_POST["buy"])) {
             $customer->City = $City;
             $customer->Mail = $Mail;
             $customer->Phone = $Phone;
+            $customer->Password = $passwordHashed;
 
             $customer->create_customer();
             $lastCustomerCreated = $customer->get_lastCreatedcustomer();
@@ -172,6 +175,8 @@ if(isset($_POST["buy"])) {
                     <input mail name="Mail" required placeholder="your@email.com">
                     <span>Mobil</span>    
                     <input tel name="Phone" pattern="[0-9]{3}-[0-9]{3} [0-9]{2} [0-9]{2}" required placeholder="073-555 66 88">
+                    <span>Lösenord</php>
+                    <input type="password" name="Password" required value="">
                     <input type="submit" name="save" value="Spara">
                 </div>
             </form>
