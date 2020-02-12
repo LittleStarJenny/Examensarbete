@@ -2,6 +2,11 @@
     <h2>Min varukorg</h2>
 <div class="productsIncart">
 <?php  
+if(isset($_COOKIE["cart"])) {
+    $cookie_data = stripslashes($_COOKIE['cart']);
+    $cart_data = json_decode($cookie_data, true); 
+  }
+
 if(empty($cart_data)) {
     echo $message = 'Varukorgen är tom';
   } else {

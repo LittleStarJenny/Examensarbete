@@ -4,10 +4,10 @@ $productCat = New Product;
 $total = 0;
 $message = '';
 
-if(isset($_COOKIE["cart"])) {
-    $cookie_data = stripslashes($_COOKIE['cart']);
-    $cart_data = json_decode($cookie_data, true); 
-  }
+// if(isset($_COOKIE["cart"])) {
+//     $cookie_data = stripslashes($_COOKIE['cart']);
+//     $cart_data = json_decode($cookie_data, true); 
+//   }
 
  $result = $productCat->get_categoryForHeader(); 
 $category = $result->fetchAll();

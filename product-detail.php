@@ -5,6 +5,7 @@ $message = '';
 $product = New Product;
 $cart_data = [];
 
+
 // if the variables are set - run the following statement
 if(isset($_POST["addtocart"])) {
   $message = "Varan lades till i varukorgen";
@@ -116,4 +117,4 @@ if(isset($_POST["addtocart"])) {
     </section>
 </main>
 <?php
-include_once "footer.php"?>
+include_once "footer.php";?>
