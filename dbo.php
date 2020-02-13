@@ -258,6 +258,20 @@ public function get_order() {
 
  }
 
+ public function get_customerOrder() {
+    $pdo = connect();
+
+    $sql = "SELECT * from orders
+    WHERE CustomersId  = '" . $this->{"CustomersId"} . "'" ;
+       
+
+    $toGet = $pdo->prepare($sql); // prepared statement
+    $toGet->execute(); // execute sql statement
+
+    return $toGet;
+
+}
+
  public function get_lastOrder() {
       $pdo = connect();
 

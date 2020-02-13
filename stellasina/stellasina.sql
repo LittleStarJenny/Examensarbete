@@ -131,11 +131,17 @@ INSERT INTO Customers
 ( -- columns to insert data into
  [CustomersId], [Firstname], [Lastname], [Birthday], [Address], [Zipcode], [City], [Mail], [Phone])
 VALUES
-( 1, 'Jenny', 'Norén', '1986-01-09', 'Harpsundsvägen 125', 12458, 'Bandhagen', 'littlestarjenny6@gmail.com', '073-525 34 83'),
-( 2, 'Britt-Karin', 'Göransson', '1956-04-05', 'Ottekilsvägen 13', 12430, 'Bandhagen', 'britt.karin@mail.com', '070-456 48 93'),
-( 3, 'Ida', 'Aspnor', '1987-05-06', 'Skarplöts Allé 56', 19856, 'Haninge', 'ida1987@hotmail.com', '073-569 78 23'),
-( 4, 'Ida', 'Holmström','1989-04-05', 'Fjärilsstigen 151', 14678, 'Salem', 'holmstrom.ida@live.com', '070-656 89 13'),
-( 5, 'Clara', 'Delding', '1991-10-26', 'Testvägen 154', 12369, 'Farsta', 'clara.D@live.se', '073-450 15 98');
+( 1, 'Jenny', 'Norén', '1986-01-09', 'Harpsundsvägen 125', 12458, 'Bandhagen', 'littlestarjenny6@gmail.com', '073-525 34 83', 'korsbar'),
+( 2, 'Britt-Karin', 'Göransson', '1956-04-05', 'Ottekilsvägen 13', 12430, 'Bandhagen', 'britt.karin@mail.com', '070-456 48 93', 'tjabo'),
+( 3, 'Ida', 'Aspnor', '1987-05-06', 'Skarplöts Allé 56', 19856, 'Haninge', 'ida1987@hotmail.com', '073-569 78 23', 'ellen'),
+( 4, 'Ida', 'Holmström','1989-04-05', 'Fjärilsstigen 151', 14678, 'Salem', 'holmstrom.ida@live.com', '070-656 89 13', 'micke'),
+( 5, 'Clara', 'Delding', '1991-10-26', 'Testvägen 154', 12369, 'Farsta', 'clara.D@live.se', '073-450 15 98', 'clarad');
+ 6 'madicken'
+ 7 'hedwig'
+ 8 'elden'
+ 9 'jempis'
+
+
 GO
 
 

@@ -164,7 +164,7 @@ if(isset($_POST["buy"])) {
                     <span>Förnamn</span>    
                     <input text name="Firstname" pattern="[a-zåäöA-ZÅÄÖ]+" required value="">
                     <span>Efternamn</span>    
-                    <input text name="Lastname" pattern="[a-zåäöA-ZÅÄÖ]+" required value="">
+                    <input text name="Lastname"  required value="">
                     <span>Adress</span>    
                     <input text name="Address" pattern="[a-zåäöA-ZÅÄÖ0-9\s]+" required value="">
                     <span>Postnr</span>    

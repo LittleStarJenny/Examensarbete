@@ -544,3 +544,19 @@ li > a {
 .cart-content.active {
   top: 165px;
 }
+
+/* Customer pages */
+
+#customer-pages {
+  display: block;
+  background: white;
+  box-shadow: 1px 1px 2px #868080;
+}
+
+#customer-pages h3 {
+  text-align: center;
+    text-transform: uppercase;
+    margin-top: 10px;
+    display: inline-block;
+    width: 100%;
+}

@@ -1,6 +1,6 @@
 <?php
 include_once "header.php";
-session_start(); 
+// session_start(); 
 $pdo = connect();
 
 if (isset($_POST['action'])) {
@@ -16,8 +16,9 @@ $stmt->execute([$Mail, $Password]);
 $userLoggedIn = ($rows > 0);
 
 if ($userLoggedIn) {
-    $_SESSION['login'] = $Mail;
+    $_SESSION['login'] = $Mail && $Password;
     echo "Welcome $Mail, you are now logged in!<br>";
+header("location:customerstart.php");
 } else {
     echo "There is no such user!<br>";
 }
