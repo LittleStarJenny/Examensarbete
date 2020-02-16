@@ -181,6 +181,35 @@ public function create_customer() {
      return $toCreate;
  }
 
+
+public function login($Mail, $Password) {
+ $pdo = connect();
+
+// var_dump($Password);
+$stmt = $pdo->prepare("SELECT * FROM customers WHERE Mail=:Mail ");
+$stmt->bindParam(':Mail', $Mail);
+$stmt->execute();
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+  var_dump($row);
+ if($stmt->rowCount() > 0) {
+
+    if(password_verify($Password, $row['Password'] )) {
+       
+        var_dump(password_verify($Password, $row['Password'] ));
+        session_regenerate_id();
+         $_SESSION['authorized'] = true;
+        $_SESSION['Mail'] = $row['Mail'];
+         $_SESSION['Firstname'] = $row['Firstname'];
+        session_write_close();
+        echo '<meta HTTP-EQUIV=REFRESH CONTENT="1; \'admin.php?page=start\'">';
+    }
+    else {
+        header('locaton:customerlogin.php');
+        $err_message = 'something went wrong';
+    }
+}
+}
+
 }
 
 

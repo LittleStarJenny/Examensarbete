@@ -4,7 +4,7 @@ include_once 'header.php';
 // var_dump($_SESSION);
 
 $customer = New Customer;
-$customer->Mail = $_SESSION['login'];
+$customer->Mail = $_SESSION['Mail'];
 $result = $customer->get_customer();
 $row = $result->fetch(); 
 // var_dump($row);
@@ -15,12 +15,13 @@ $results = $order->get_customerOrder();
 $orderResult = $results->fetchAll(PDO::FETCH_ASSOC);
 //  var_dump($orderResult);
 
-
-
 ?>
 
 <main id="customer-pages">
 <h3> Välkommen <?php echo $row['Firstname']; ?>!</h3>
+<!-- <form action="customerlogin.php" method="post">
+<button type="submit" name="logout" value="Logout">Logout</button>
+</form> -->
 <input type ="hidden" name="CustomersId" value="<?php echo $row['CustomersId'] ?>">  
 <?php foreach($orderResult as $rowResult) {
     $order->OrderId = $rowResult['OrderId'];

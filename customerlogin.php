@@ -2,46 +2,34 @@
 include_once "header.php";
 // session_start(); 
 $pdo = connect();
+$err_message = "";
+$customer = New Customer;
 
-if (isset($_POST['action'])) {
-    $Mail = filter_input(INPUT_POST, 'Mail', FILTER_SANITIZE_STRING);
-    $Password = filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_STRING);
-   
-$stmt = $pdo->prepare("SELECT * FROM customers WHERE Mail = ? AND Password = ? ;");
-// $stmt = $pdo->prepare("SELECT * FROM classicmodels.admin WHERE username = '" . $this->user . "' "); 
-$stmt->execute([$Mail, $Password]);
-// $rowcount = $stmt->rowCount(PDO::FETCH_ASSOC);
- $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+if(isset($_POST['login'])) {
+    $Mail = $_POST['Mail'];
+    // var_dump($Mail);
+    $Password = $_POST['Password'];
+    // var_dump($Password);
+ $customer->Mail = $Mail;
+ $customer->Password = $Password;
 
-$userLoggedIn = ($rows > 0);
-
-if ($userLoggedIn) {
-    $_SESSION['login'] = $Mail && $Password;
-    echo "Welcome $Mail, you are now logged in!<br>";
-header("location:customerstart.php");
-} else {
-    echo "There is no such user!<br>";
+$row = $customer->login($Mail, $Password);
 }
-print_r($_SESSION);
-echo "<br>";
-}
+
+ var_dump($_SESSION);
+
 
 ?>
 
 <div class="login-container">
-        <h1>Welcome to Classic Models!</h1>
+        <h1>Välommen</h1>
         <h3>Login in by using your username and e-mail!</h3>
-        <?php if (isset($_SESSION['logged_in'])): ?> Welcome <?php echo $_SESSION['name']; ?></strong>!<br>
-        <?php else: ?>
         <form method="POST">
             Username:<br>
             <input type="text" name="Mail"><br>
             Password:<br>
             <input type="password" name="Password"><br>
-            <button type="submit" name="action" value="Log in">Submit</button>
+            <button type="submit" name="login" value="Log in">Submit</button>
+            <span class="error"><?php echo $err_message ?></span>
         </form>
-        <?php endif; ?>
-    </div>
-        <!-- <?php if ($userLoggedIn): ?>
-        <p>Welcome to our admin<a href="orders.php">ordersite</a></p>
-        <?php endif; ?> -->
+        </div>

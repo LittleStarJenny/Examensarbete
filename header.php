@@ -1,18 +1,20 @@
 <?php 
 session_start();
+if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] != false){
+  } else {
+    $_SESSION['authorized'] = false;
+  }
+
+
+// var_dump($_SESSION);
 include_once 'dbo.php';
 $productCat = New Product;
 $total = 0;
 $message = '';
 
-// if(isset($_COOKIE["cart"])) {
-//     $cookie_data = stripslashes($_COOKIE['cart']);
-//     $cart_data = json_decode($cookie_data, true); 
-//   }
 
  $result = $productCat->get_categoryForHeader(); 
 $category = $result->fetchAll();
-
 ?>
 
 <!DOCTYPE html>
@@ -33,10 +35,18 @@ $category = $result->fetchAll();
 
 <body> 
     <header>
+
         <div class="header-logo">
         <!-- <h1>Stellasina</h1> -->
         <a href="http://localhost/Examensarbete-Stellasina/"><img src="img/logo.png"></a>
-</div>
+        </div>
+        <?php if($_SESSION['authorized'] != true){?> 
+     <a href="customerlogin.php" class="login-logout"><i class="far fa-user"></i> Logga in</a>
+    <?php } else if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] === true){ ?> 
+            <a href="customerstart.php" class="login-logout">Mitt konto</a> 
+            <a href="logout.php" class="login-logout"><i class="far fa-user"></i> Logga ut</a>                                  
+             <?php } ?>
+    
         <nav class="main-nav">
             <ul>
                 <li><a href="products">Butiken</a></li>
