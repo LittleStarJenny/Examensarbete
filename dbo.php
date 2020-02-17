@@ -69,6 +69,19 @@ public function get_productvariation() {
 
  }
 
+ public function get_productvariationForOrder() {
+    $pdo = connect();
+
+    $sql = "SELECT PVId FROM productvariations
+    WHERE Size = '" . $this->{"Size"} . "'"; // sql statementS
+
+    $toGet = $pdo->prepare($sql); // prepared statement
+    $toGet->execute(); // execute sql statement
+
+    return $toGet;
+
+}
+
  public function get_productsBycategory() {
      $pdo = connect();
 
@@ -201,7 +214,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $_SESSION['Mail'] = $row['Mail'];
          $_SESSION['Firstname'] = $row['Firstname'];
         session_write_close();
-        echo '<meta HTTP-EQUIV=REFRESH CONTENT="1; \'admin.php?page=start\'">';
+        echo '<meta HTTP-EQUIV=REFRESH CONTENT="1; \'customerstart.php?page=start\'">';
     }
     else {
         header('locaton:customerlogin.php');
