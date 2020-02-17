@@ -89,7 +89,7 @@ if(isset ($_SESSION['Mail']) && $_SESSION['Mail'] != ''){
 <section class="checkout">
     <div class="checkout-wrap">
         <div id="wrap">
-        <form method="POST" action="">
+        <form method="post" action="">
             <span>Mail</span>    
             <input mail id="mail" name="Mail" required placeholder="your@email.com" value="<?php if(isset($_POST['Mail'])) { echo $_POST['Mail']; } ?>">
             <input type="submit" name="check" value="Check">
@@ -167,13 +167,14 @@ if(isset($_POST['login'])) {
     $customer->Password = $Password;
 
     $row = $customer->login($Mail, $Password);
+    // header('location:cart.php');
 }
 
-if($_SESSION['Mail'] != '') {
+if($_SESSION['authorized'] = true) {
     $customer->Mail = $_SESSION['Mail'];
     $result = $customer->get_customer();
     $rows = $result->fetch(); ?>
-<form method="POST" action="">
+<form method="post" action="">
     <div class="CustomerInfo">
         <span><?php if( isset( $rows['Firstname'] ) ) { echo $rows["Firstname"]; } echo " "; if( isset( $rows['Lastname'] ) ) { echo $rows["Lastname"]; } ?></span>
         <span><?php if( isset( $rows['Address'] ) ) { echo $rows["Address"]; } ?></span>
@@ -208,7 +209,7 @@ if(isset($_POST["buy"])) {
                 $order->create_orderItem();
                
             } 
-            header('location:orderconfirmation.php');
+            exit(header("Location: /finished.html"));
             setcookie("cart", "", time() - 3600);
         } else {
             echo 'Ordern kunde inte skapas';
