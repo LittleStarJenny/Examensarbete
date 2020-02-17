@@ -58,7 +58,7 @@ $product = New Product;
     $customer = $order->get_customerByorder();
     $Ordercustomer = $customer->fetch();    
 //  var_dump($TestOrderId);
-//  var_dump($Ordercustomer);
+  var_dump($Ordercustomer);
 
 ?>
 
