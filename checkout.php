@@ -10,7 +10,6 @@ $totalwithshipping = 0;
 $row = [];
 $Date = date("Y-m-d");
 $err_message = '';
-var_dump($_SESSION);
 
 if(isset($_COOKIE["cart"])) {
     $cookie_data = stripslashes($_COOKIE['cart']);
@@ -22,22 +21,7 @@ if(isset ($_SESSION['Mail']) && $_SESSION['Mail'] != ''){
   $_SESSION['Mail'] = '';
 }
 
-if(empty($cart_data)) {
-    echo $message = 'Cart is empty';
-} else {
-    foreach($cart_data as $keys => $values) {
-    $ProductsId = $cart_data[$keys]['ProductsId'];
-    $product->ProductId = $ProductsId;
-    // Calculate all sum on page
-    $rowtotal = $values['Price'] * $values['quantity'];
-    $total += $rowtotal;
-    $totalwithshipping = $total + 59; 
-
-    $result = $product->get_productvariation();
-    $showpID = $result->fetch();
-    }
-}
-
+// Check if Mail is already registrered else create new customer
 if(isset($_POST['check'])) {
     $Mail = $_POST['Mail'];
     if (emailExists($pdo, $Mail)) {
@@ -63,17 +47,17 @@ if(isset($_POST['check'])) {
         <input text name="City" pattern="[a-zåäöA-ZÅÄÖ]+" value="">
         <span>Mobil</span>    
         <input tel name="Phone" pattern="[0-9]{3}-[0-9]{3} [0-9]{2} [0-9]{2}" placeholder="073-555 66 88">
-        <span>Mail</span>
-        <input mail id="mail" name="Mail" required placeholder="your@email.com" value="'.$Mail.'">
         <span>Lösenord</span> 
         <input type="password" name="Password">
+        <span><strong>Stämmer Mailadressen?</strong></span>
+        <input mail id="mail" name="Mail" required placeholder="your@email.com" value="'.$Mail.'">
         <input type="submit" name="save" value="Spara">
         </div> 
         </form>'; ?> 
 <?php  
     } 
 } 
-
+// Save and fetch login-session for customer
 if(isset($_POST['save'])) {
     $Firstname = filter_input(INPUT_POST, 'Firstname', FILTER_SANITIZE_STRING);
     $Lastname = filter_input(INPUT_POST, 'Lastname', FILTER_SANITIZE_STRING);
@@ -95,14 +79,11 @@ if(isset($_POST['save'])) {
     $customer->Phone = $Phone;
     $customer->Password = $passwordHashed;
     $customer->create_customer();
-    // $lastCustomerCreated = $customer->get_lastCreatedcustomer();
-    // $rows = $lastCustomerCreated->fetch(); 
     $Mail = $_POST['Mail'];
     $Password = $_POST['Password'];
     $customer->Mail = $Mail;
     $customer->Password = $Password;
-    $row = $customer->login($Mail, $Password);
-
+    $row = $customer->loginFromCheckout($Mail, $Password);
 }
     $customer->Mail = $_SESSION['Mail'];
     $result = $customer->get_customer();
@@ -137,20 +118,27 @@ if(isset($_POST["buy"])) {
         echo 'Ordern kunde inte skapas';
     }
 } 
-
-if(isset($_POST['login'])) {
-    $Mail = $_POST['Mail'];
-    $Password = $_POST['Password'];
-    $customer->Mail = $Mail;
-    $customer->Password = $Password;
-    $row = $customer->login($Mail, $Password);
-}
 ?>
 
 <main id="checkoutWrap">
     <section id="cart-content">
         <div class="cart">
             <h3>Varukorg</h3>
+                <?php if(empty($cart_data)) {
+                    echo $message = 'Cart is empty';
+                } else {
+                    foreach($cart_data as $keys => $values) {
+                    $ProductsId = $cart_data[$keys]['ProductsId'];
+                    $product->ProductId = $ProductsId;
+                    // Calculate all sum on page
+                    $rowtotal = $values['Price'] * $values['quantity'];
+                    $total += $rowtotal;
+                    $totalwithshipping = $total + 59; 
+
+                    $result = $product->get_productvariation();
+                    $showpID = $result->fetch();
+                        ?>
+
             <div class="cartitem">   
                 <div class="cart-img-qty">
                 <img class="cart-img" src=<?php echo $values['Img']; ?>>
@@ -168,7 +156,8 @@ if(isset($_POST['login'])) {
             </div>
         </div> 
         <hr>
-       
+        <?php  } 
+              } ?>
         <!-- Total Sum -->
         <div class="Total">
             <h3>Summa</h3>        
@@ -210,7 +199,7 @@ if(isset($_POST['login'])) {
                     <input type="submit" name="buy" value="Bekräfta köp">
                 </div> 
             </form>
-            <input type ="text" name="CustomersId" value="<?php echo $rows['CustomersId']; ?>">
+            <input type ="hidden" name="CustomersId" value="<?php echo $rows['CustomersId']; ?>">
             <?php } ?>
         </div>
     </section>

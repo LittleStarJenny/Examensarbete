@@ -21,8 +21,8 @@ $category = $result->fetchAll();
 <html>
     <head>
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script type="text/javascript" src="js.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/style.css?d=<?php echo time(); ?>">
+        <script type="text/javascript" src="../js.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/style.css?d=<?php echo time(); ?>">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -38,13 +38,13 @@ $category = $result->fetchAll();
 
         <div class="header-logo">
         <!-- <h1>Stellasina</h1> -->
-        <a href="http://localhost/Examensarbete-Stellasina/"><img src="img/logo.png"></a>
+        <a href="http://localhost/Examensarbete-Stellasina/"><img src="../img/logo.png"></a>
         </div>
         <?php if($_SESSION['authorized'] != true){?> 
      <a href="customerlogin.php" class="login-logout"><i class="far fa-user"></i> Logga in</a>
     <?php } else if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] === true){ ?> 
             <a href="customerstart.php" class="login-logout">Mitt konto</a> 
-            <a href="logout.php" class="login-logout"><i class="far fa-user"></i> Logga ut</a>                                  
+            <a href="../logout.php" class="login-logout"><i class="far fa-user"></i> Logga ut</a>                                  
              <?php } ?>
     
         <nav class="main-nav">

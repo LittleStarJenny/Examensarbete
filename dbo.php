@@ -167,6 +167,22 @@ class Customer {
      
       }
 
+      public function update_customer() {
+          $pdo = connect();
+
+          $sql = "UPDATE customers
+            SET Firstname = '" . $this->{"Firstname"} . "', Lastname = '" . $this->{"Lastname"} . "', 
+            Birthday = '" . $this->{"Birthday"} . "' , Address = '" . $this->{"Address"} . "', 
+            Zipcode = '" . $this->{"Zipcode"} . "', City = '" . $this->{"City"} . "', 
+            Mail = '" . $this->{"Mail"} . "', Phone = '" . $this->{"Phone"} . "', Password = '" . $this->{"Password"} . "'
+            WHERE CustomersId = '" . $this->{"CustomersId"} . "'"; // sql statements
+                
+            $toSave = $pdo->prepare($sql); // prepared statement
+            $return = $toSave->execute(); // execute sql statment
+
+            return $return;
+      }
+
 
      public function get_lastcreatedcustomer() {
           $pdo = connect();
@@ -203,18 +219,16 @@ $stmt = $pdo->prepare("SELECT * FROM customers WHERE Mail=:Mail ");
 $stmt->bindParam(':Mail', $Mail);
 $stmt->execute();
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-  var_dump($row);
  if($stmt->rowCount() > 0) {
 
     if(password_verify($Password, $row['Password'] )) {
        
-        var_dump(password_verify($Password, $row['Password'] ));
         session_regenerate_id();
          $_SESSION['authorized'] = true;
         $_SESSION['Mail'] = $row['Mail'];
          $_SESSION['Firstname'] = $row['Firstname'];
         session_write_close();
-        echo '<meta HTTP-EQUIV=REFRESH CONTENT="1; \'customerstart.php?page=start\'">';
+        header('location:../customerstart.php');
     }
     else {
         header('locaton:customerlogin.php');
@@ -222,6 +236,32 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
 }
+public function loginFromCheckout($Mail, $Password) {
+    $pdo = connect();
+   
+   // var_dump($Password);
+   $stmt = $pdo->prepare("SELECT * FROM customers WHERE Mail=:Mail ");
+   $stmt->bindParam(':Mail', $Mail);
+   $stmt->execute();
+   $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if($stmt->rowCount() > 0) {
+   
+       if(password_verify($Password, $row['Password'] )) {
+          
+           session_regenerate_id();
+            $_SESSION['authorized'] = true;
+           $_SESSION['Mail'] = $row['Mail'];
+            $_SESSION['Firstname'] = $row['Firstname'];
+           session_write_close();
+           header('location:checkout.php');
+            $err_message = 'Konto skapat, nu är det bara att bekräfta ditt köp';
+       }
+       else {
+        //    header('locaton:customerlogin.php');
+           $err_message = 'Fel lösenord';
+       }
+   } else $err_message = 'Fel mail';
+   }
 
 }
 

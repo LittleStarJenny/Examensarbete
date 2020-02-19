@@ -48,7 +48,6 @@ $product = New Product;
 // Get last inserted OrderId
   $lastOrder = $order->get_lastOrder();
   $LastOrderID = $lastOrder->fetch();
-  var_dump($LastOrderID['OrderId']);
 
 // Get Products for last Order
     $order->OrderId = $LastOrderID['OrderId'];
@@ -57,12 +56,9 @@ $product = New Product;
 // Get Customer for last Order
     $customer = $order->get_customerByorder();
     $Ordercustomer = $customer->fetch();    
-//  var_dump($TestOrderId);
-  var_dump($Ordercustomer);
 
 ?>
 
-<!-- <form action="orderconfirmation.php?order=<?php echo $OrderId; ?>" method="post"> -->
 <main id="orderform">
     <div>
 <h1>Tack för din beställning</h1>

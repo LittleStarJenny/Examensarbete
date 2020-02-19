@@ -400,6 +400,10 @@ footer ul li {
   flex-flow: column;
 }
 
+#checkoutWrap .cart-img {
+  width: 58%;
+}
+
 .CustomerInfo {
   display: flex;
   flex-direction: column;
