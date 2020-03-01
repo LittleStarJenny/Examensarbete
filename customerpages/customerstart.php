@@ -1,5 +1,5 @@
 <?php 
-include_once '../header.php';
+
 // session_start();
 // var_dump($_SESSION);
 $message = '';
@@ -40,11 +40,12 @@ if(isset($_POST['save'])) {
     $customer->CustomersId = $CustomersId;
     $return = $customer->update_customer();
 
-}
+
  if($return){
-      header('location:customerstart.php');
+      header('location:customerstart');
         $message = 'Dina uppgifter är sparade';
         }
+    }
 ?>
 
 <main id="customer-pages">
@@ -54,7 +55,7 @@ if(isset($_POST['save'])) {
 <span><?php echo $message; ?></span>
 <!-- Update Customer -->
 <div class="updateCustomer">
-<form method="post" action="customerstart.php">
+<form method="post" action="">
 <h4>Uppdatera uppgifter</h4>
 <div class="CustomerInfo"> 
 <input type ="hidden" name="CustomersId" value="<?php echo $row['CustomersId'] ?>">
@@ -99,4 +100,3 @@ if(isset($_POST['save'])) {
 
 
 </main>
-<?php include_once '../footer.php'; ?>

@@ -23,7 +23,7 @@ if(isset($_GET["action"])) {
         unset($cart_data[$keys]);
         $item_data = json_encode($cart_data);
         setcookie("cart", $item_data, time() +(3600));
-        header("location: cart");
+        header("location: cart.php");
       }
     }
   }
@@ -42,7 +42,7 @@ if(isset($_GET["action"])) {
   }
     $item_data = json_encode($cart_data);
     setcookie("cart", $item_data, time() +(3600));
-    header("location: cart"); 
+    header("location: cart.php"); 
   }
 }
 

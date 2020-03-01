@@ -1,9 +1,14 @@
-RewriteEngine On
-RewriteBase /Examensarbete-Stellasina
+
+#RewriteBase /Examensarbete-Stellasina/
+RewriteEngine on
 
 #Make sure it's not an actual file
 RewriteCond %{REQUEST_FILENAME} !-f
 #Make sure its not a directory
 RewriteCond %{REQUEST_FILENAME} !-d 
-#Rewrite the request to remove .php
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
+#Rewrite the request to remove .
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
+#ewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+RewriteRule ^category/([a-zA-Z]+) category-pages.php?categoryname=$1 [NC,L]
+#RewriteRule ^product/([0-9]+)/([a-zA-Z]+) product-detail.php?product=$1%?productname=$2% [NC,L]

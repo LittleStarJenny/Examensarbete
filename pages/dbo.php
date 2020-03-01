@@ -34,67 +34,6 @@ function get_all_products($pdo, $limit, $offset) {
 	
 }
 
-class Admin {
-
-public $adminId = 0;
-private $username = '';
-private $Firstname = '';
-private $Password = '';
-
-
-    public function create_admin() {
-        $pdo = connect();
-
-        $sql = "INSERT INTO admins (username, Firstname, Password)
-                VALUES ('" . $this->{"username"} . "', '" . $this->{"Firstname"} . "', '" . $this->{"Password"} . "')"; // sql statements
-    
-        $toCreate = $pdo->prepare($sql); // prepared statement
-        $toCreate->execute(); // execute sql statement
-    
-        return $toCreate;
-    }
-
-    public function __construct()
-	{
-		/* Initialize the $id and $name variables to NULL */
-		$this->username = NULL;
-		$this->Firstname = NULL;
-		$this->Password = NULL;
-	}
-
-    public function admin_login($username, $Password) {
-        $pdo = connect();
-       
-       // var_dump($Password);
-       $stmt = $pdo->prepare("SELECT * FROM admins WHERE username=:username ");
-       $stmt->bindParam(':username', $username);
-       $stmt->execute();
-       $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if($stmt->rowCount() > 0) {
-       
-           if(password_verify($Password, $row['Password'] )) {
-
-
-			$this->username = $username;
-			$this->Password = $Password;
-              
-               session_regenerate_id();
-                $_SESSION['authorized'] = true;
-               $_SESSION['Admin'] = $row['username'];
-                $_SESSION['Firstname'] = $row['Firstname'];
-               session_write_close();
-               header('location:adminpanel.php');
-                $err_message = 'Konto skapat, nu är det bara att bekräfta ditt köp';
-           }
-           else {
-            //    header('locaton:customerlogin.php');
-               $err_message = 'Fel lösenord';
-           }
-       } else $err_message = 'Fel mail';
-       }
-
-}
-
 class Product {
      public $ProductsId = 0;
      public $Productname = '';
@@ -111,30 +50,6 @@ public function get_product() {
      return $toGet;
 
  }
-
- public function get_products_for_admin() {
-    $pdo = connect();
-
-    $sql = "SELECT * FROM products"; // sql statementS
-
-    $toGet = $pdo->prepare($sql); // prepared statement
-    $toGet->execute(); // execute sql statment
-
-    return $toGet;
-
-}
-
- public function create_product() {
-    $pdo = connect();
-
-    $sql = "INSERT INTO products (ProductName, Description, Price, Color, Img, CategoryId)
-            VALUES ('" . $this->{"ProductName"} . "', '" . $this->{"Description"} . "', '" . $this->{"Price"} . "', '" . $this->{"Color"} . "', '" . $this->{"Img"} . "', '" . $this->{"CategoryId"} . "')"; // sql statements
-
-    $toCreate = $pdo->prepare($sql); // prepared statement
-    $toCreate->execute(); // execute sql statement
-
-    return $toCreate;
-}
 
 // ProductVariations
      public $ProductId = 0;
@@ -154,18 +69,6 @@ public function get_productvariation() {
 
  }
 
- public function create_productvariation() {
-    $pdo = connect();
-
-    $sql = "INSERT INTO productvariations (Size, ProductId)
-            VALUES ('" . $this->{"Size"} . "', '" . $this->{"ProductId"} . "')"; // sql statements
-
-    $toCreate = $pdo->prepare($sql); // prepared statement
-    $toCreate->execute(); // execute sql statement
-
-    return $toCreate;
-}
-
  public function get_productvariationForOrder() {
     $pdo = connect();
 
@@ -184,7 +87,7 @@ public function get_productvariation() {
 
      $sql = "SELECT * FROM categorys as C
      JOIN products AS P ON P.CategoryId = C.CategoryId
-     WHERE C.CategoryName = '" . $this->{"CategoryName"} . "'"; // sql statementS
+     WHERE C.CategoryId = '" . $this->{"CategoryId"} . "'"; // sql statementS
 
      $toGet = $pdo->prepare($sql); // prepared statement
      $toGet->execute(); // execute sql statement
@@ -199,7 +102,7 @@ public $Categoryname = '';
      $pdo = connect();
 
      $sql = "SELECT * FROM categorys
-     WHERE CategoryName = '" . $this->{"CategoryName"} . "'"; // sql statementS
+     WHERE CategoryId = '" . $this->{"CategoryId"} . "'"; // sql statementS
 
      $toGet = $pdo->prepare($sql); // prepared statement
      $toGet->execute(); // execute sql statement
@@ -235,20 +138,6 @@ public $Image = '';
      return $toGet;
 
  } 
-
-public $SizeId = 0;
-
- public function get_sizechart() {
-    $pdo = connect();
-
-    $sql = "SELECT * FROM sizechart"; // sql statementS
-
-    $toGet = $pdo->prepare($sql); // prepared statement
-    $toGet->execute(); // execute sql statement
-
-    return $toGet;
-} 
-
 }
 
 class Customer {
@@ -339,10 +228,10 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $_SESSION['Mail'] = $row['Mail'];
          $_SESSION['Firstname'] = $row['Firstname'];
         session_write_close();
-        header('location:customerstart');
+        header('location:../customerstart.php');
     }
     else {
-        header('locaton:customerlogin');
+        header('locaton:customerlogin.php');
         $err_message = 'something went wrong';
     }
 }
@@ -364,7 +253,7 @@ public function loginFromCheckout($Mail, $Password) {
            $_SESSION['Mail'] = $row['Mail'];
             $_SESSION['Firstname'] = $row['Firstname'];
            session_write_close();
-           header('location:checkout');
+           header('location:checkout.php');
             $err_message = 'Konto skapat, nu är det bara att bekräfta ditt köp';
        }
        else {

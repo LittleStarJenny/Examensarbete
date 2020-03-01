@@ -4,7 +4,7 @@ if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] != false){
   } else {
     $_SESSION['authorized'] = false;
   }
-var_dump($_SESSION);
+
 
 // var_dump($_SESSION);
 include_once 'dbo.php';
@@ -22,7 +22,7 @@ $category = $result->fetchAll();
     <head>
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="js.js"></script>
-        <link rel="stylesheet" type="text/css" href="http://localhost/Examensarbete-Stellasina/css/style.css?d=<?php echo time(); ?>">
+        <link rel="stylesheet" type="text/css" href="css/style.css?d=<?php echo time(); ?>">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -38,20 +38,20 @@ $category = $result->fetchAll();
 
         <div class="header-logo">
         <!-- <h1>Stellasina</h1> -->
-        <a href="http://localhost/Examensarbete-Stellasina/"><img src="http://localhost/Examensarbete-Stellasina/img/logo.png"></a>
+        <a href="http://localhost/Examensarbete-Stellasina/"><img src="img/logo.png"></a>
         </div>
         <?php if($_SESSION['authorized'] != true){?> 
-     <a href="http://localhost/Examensarbete-Stellasina/login" class="login-logout"><i class="far fa-user"></i> Logga in</a>
+     <a href="customerlogin.php" class="login-logout"><i class="far fa-user"></i> Logga in</a>
     <?php } else if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] === true){ ?> 
-            <a href="http://localhost/Examensarbete-Stellasina/customerstart" class="login-logout">Mitt konto</a> 
-            <a href="http://localhost/Examensarbete-Stellasina/logout" class="login-logout"><i class="far fa-user"></i> Logga ut</a>                                  
+            <a href="customerstart.php" class="login-logout">Mitt konto</a> 
+            <a href="../logout.php" class="login-logout"><i class="far fa-user"></i> Logga ut</a>                                  
              <?php } ?>
     
         <nav class="main-nav">
             <ul>
-                <li><a href="http://localhost/Examensarbete-Stellasina/products">Butiken</a></li>
+                <li><a href="products">Butiken</a></li>
                 <?php foreach($category as $row) { ?>
-                <li><a href="http://localhost/Examensarbete-Stellasina/category/<?php echo $row['CategoryName']; ?>"><?php echo $row['CategoryName'] ?></a></li>
+                <li><a href="category-page.php?category=<?php echo $row['CategoryId']; ?>"><?php echo $row['CategoryName'] ?></a></li>
                 <?php } ?>
                <div class="cart-button"> 
                    <div class="qty-in-cart"></div>

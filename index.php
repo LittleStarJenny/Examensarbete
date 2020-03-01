@@ -1,17 +1,35 @@
-<?php 
-include_once 'header.php'; ?>
-
-
-<main id="index-wrapper">
-<section class="big-front-image">
-    <div>
-    <img src="img/index-cut-image.jpg"> 
-    <div class="text-for-image">From basic to glam</div>
-    <a href="products.php"><div class="btn-index">Börja shoppa</div></a>
-</div>
-</main>
-
-</section>
-
 <?php
-include_once 'footer.php'; ?>
+ include_once 'header.php';
+include 'router.php';
+
+$request = $_SERVER['REQUEST_URI'];
+
+$route = new Router($request);
+
+var_dump($route);
+
+$route->get('', '/start');
+
+$route->get('products', '/products');
+
+$route->get('cart', '/cart');
+
+$route->get('checkout', '/checkout');
+
+$route->get('orderconfirmation', '/orderconfirmation');
+
+$route->get('category' , '/category-page');
+
+// $route->get('product/', '/product-detail');
+
+$route->get('login', '/customerlogin');
+
+$route->get('logout', '/logout');
+
+$route->get('customerstart', '/customerpages/customerstart');
+
+
+include_once 'footer.php';
+ ini_set('display_errors', 1); error_reporting(E_ALL); 
+
+ ?>

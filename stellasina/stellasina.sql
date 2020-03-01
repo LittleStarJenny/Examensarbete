@@ -284,18 +284,18 @@ CREATE TABLE Products
 -- Insert rows into table 'Products'
 INSERT INTO Products
 ( -- columns to insert data into
- ProductsId, ProductName, Description, Price, Color, Img
+ ProductsId, ProductName, Description, Price, Color, Img, CategoryId
 )
 VALUES
-( 1, 'Deco Vibe', 'Deco Vibe erbjuder ett fullständigt stöd och är dessutom en snygg bh. Med plunge-effekten får du ett diskret lyft och en perfekt rundning.', 599, 'Black', 'img/Deco-Vibe-black-front.jpg'),
-( 2, 'Deco Vibe', 'Deco Vibe erbjuder ett fullständigt stöd och är dessutom en snygg bh. Med plunge-effekten får du ett diskret lyft och en perfekt rundning.', 599, 'Blush', 'img/Deco-vibe-blush-front.jpg' ),
-( 3, 'Ciao Bella', 'En drömmig balkonett bh med en bas i rosa täckt av svart spets.', 349, 'Black', 'img/Ciaobella-front.jpg' ),
-( 4, 'Deco Rebel', 'En gepardmönstrad bh med vaddering och den skönaste plunge-effekten på marknaden. Brösten får ett skönt stöd och en vacker rundning.', 559, 'Gepard', 'img/Deco-rebel-front.jpg'),
-( 5, 'Full Bloom', 'En lätt drömmig bh från märket B´temptd med öppen detalj mellan brösten.', 239, 'Beige', 'img/Full-bloom-front.jpg'),
-( 6, 'Rebecca', 'En fullsupport bh i ett superskönt material som är speciellt anpassad för att andas.', 659, 'White', 'img/Rebecca-white-front.jpg'),
-( 7, 'Deco Rebel Hipster', 'En snygg hipster trosa från serien Deco från Freya. I härligt mjuk trikå som låter huden andas. Matcha gärna med bh:n från samma kollektion.', 129, 'Gepard', 'img/Deco-rebel-hipster.jpg'),
-( 8, 'Deco Vibe Hipster', 'En snygg hipster trosa från serien Deco från Freya. Fronten i mjuk trikå som följs upp av spets i bak. Matchas gärna med bh från samma linje.', 139, 'Blush', 'img/Deco-vibe-blush-short-back.jpg'),
-( 9, 'Lace Kiss Thong', 'En romantisk string i spets.', 99, 'Beige', 'img/Lace-kiss-natural-thong-back.jpg');
+( 1, 'Deco Vibe', 'Deco Vibe erbjuder ett fullständigt stöd och är dessutom en snygg bh. Med plunge-effekten får du ett diskret lyft och en perfekt rundning.', 599, 'Black', 'img/Deco-Vibe-black-front.jpg', 1),
+( 2, 'Deco Vibe', 'Deco Vibe erbjuder ett fullständigt stöd och är dessutom en snygg bh. Med plunge-effekten får du ett diskret lyft och en perfekt rundning.', 599, 'Blush', 'img/Deco-vibe-blush-front.jpg', 1),
+( 3, 'Ciao Bella', 'En drömmig balkonett bh med en bas i rosa täckt av svart spets.', 349, 'Black', 'img/Ciaobella-front.jpg', 1),
+( 4, 'Deco Rebel', 'En gepardmönstrad bh med vaddering och den skönaste plunge-effekten på marknaden. Brösten får ett skönt stöd och en vacker rundning.', 559, 'Gepard', 'img/Deco-rebel-front.jpg', 1),
+( 5, 'Full Bloom', 'En lätt drömmig bh från märket B´temptd med öppen detalj mellan brösten.', 239, 'Beige', 'img/Full-bloom-front.jpg', 1),
+( 6, 'Rebecca', 'En fullsupport bh i ett superskönt material som är speciellt anpassad för att andas.', 659, 'White', 'img/Rebecca-white-front.jpg', 1),
+( 7, 'Deco Rebel Hipster', 'En snygg hipster trosa från serien Deco från Freya. I härligt mjuk trikå som låter huden andas. Matcha gärna med bh:n från samma kollektion.', 129, 'Gepard', 'img/Deco-rebel-hipster.jpg', 2),
+( 8, 'Deco Vibe Hipster', 'En snygg hipster trosa från serien Deco från Freya. Fronten i mjuk trikå som följs upp av spets i bak. Matchas gärna med bh från samma linje.', 139, 'Blush', 'img/Deco-vibe-blush-short-back.jpg', 2),
+( 9, 'Lace Kiss Thong', 'En romantisk string i spets.', 99, 'Beige', 'img/Lace-kiss-natural-thong-back.jpg', 2);
 
 
 
@@ -438,3 +438,68 @@ VALUES
 ( 10, 9, 'img/Lace-kiss-natural-front.jpg') 
 
 
+INSERT INTO sizechart
+( 
+    SizeId, Size
+)
+VALUES
+(1, '60A'),
+(2, '65A'),
+(3, '70A'),
+(4, '75A'),
+(5, '80A'),
+(6, '85A'),
+(7, '60B'),
+(8, '65B'),
+(9, '70B'),
+(10, '75B'),
+(11, '80B'),
+(12, '85B'),
+(13, '60C'),
+(14, '65C'),
+(15, '70C'),
+(16, '75C'),
+(17, '80C'),
+(18, '85C'),
+(19, '60D'),
+(20, '65D'),
+(21, '70D'),
+(22, '75D'),
+(23, '80D'),
+(24, '85D'),
+(25, '60E'),
+(26, '65E'),
+(27, '70E'),
+(28, '75E'),
+(29, '80E'),
+(30, '85E'),
+(31, '60F'),
+(32, '65F'),
+(33, '70F'),
+(34, '75F'),
+(35, '80F'),
+(36, '85F'),
+(37, '60G'),
+(38, '65G'),
+(39, '70G'),
+(40, '75G'),
+(41, '80G'),
+(42, '85G'),
+(43, '60H'),
+(44, '65H'),
+(45, '70H'),
+(46, '75H'),
+(47, '80H'),
+(48, '85H'),
+(49, '60I'),
+(50, '65I'),
+(51, '70I'),
+(52, '75I'),
+(53, '80I'),
+(54, '85I'),
+(55, '60J'),
+(56, '65J'),
+(57, '70J'),
+(58, '75J'),
+(59, '80J'),
+(60, '85J')
