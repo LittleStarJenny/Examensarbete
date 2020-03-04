@@ -1,14 +1,17 @@
 <?php 
-include_once "header.php";
-$productCat = New Product;
+// include_once "header.php";
 
-// Get category from url that was passed from category-page.php 
-if(isset($_GET['category'])) {
-    $productCat->CategoryId = $_GET['category'];
-} else {
-    $productCat->CategoryId = $_POST['CategoryId'];
-}
-// Get all products by category
+$productCat = New Product;
+// Get products from Clean Url
+$request = $_SERVER['REQUEST_URI'];
+$url = $request;
+$url = trim($url, "/");
+$url = explode("/", $url);
+$id = $url[2];
+$urls = explode("?", $id);
+
+
+$productCat->CategoryName = $urls[0];
 $result = $productCat->get_productsBycategory();
 $rows = $result->fetchAll(PDO::FETCH_ASSOC);
 
@@ -16,14 +19,14 @@ $try = $productCat->get_category();
 $categorylabel = $try->fetch();
 ?>
     
-<main>
+<main id="product-content">
     <section class="product-container">
         <h3 class="category-title"><?php echo $categorylabel['CategoryName']; ?></h3>
         <!-- Display productcards foreach product  -->
         <?php foreach($rows as $row) { ?>
         <div class="product-card">
-            <a href="product-detail.php?product=<?php echo $row['ProductsId']; ?>">
-            <img class="product-image" src="<?php echo $row['Img'];?>" >
+            <a href="http://localhost/Stellasina/shop/product-detail.php?product=<?php echo $row['ProductsId']; ?>">
+            <img class="product-image" src="../<?php echo $row['Img'];?>" >
             <h2 class="title"><?php echo $row['ProductName']; ?></h2>
             <span class="price"><?php echo $row['Price'];?></span><span>:-</span>
             </a>
@@ -31,6 +34,6 @@ $categorylabel = $try->fetch();
         <?php } ?> 
     </section>
 </main>
-
+<!-- 
 <?php
-include_once "footer.php"?>
+include_once "footer.php"?> -->

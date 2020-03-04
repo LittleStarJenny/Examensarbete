@@ -1,0 +1,71 @@
+/* Admin */
+
+.login-container {
+    width: 100%;
+  }
+  
+  .login-container h1 {
+    text-align: center;
+    margin: 0;
+  }
+  
+  .login-container .box-wrapper {
+    width: auto;
+    left: 25%;
+    right: 25%;
+    padding: 5px 10px 5px 10px;
+    /* position: absolute; */
+    background: white;
+  }
+  
+  .login-container form {
+    left: 25%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-container input {
+    width: 50%;
+    height: 40px;
+    border: 2px solid #7052c0;
+    font-size: 25px;
+    color: #766b6b;
+  }
+  
+  .login-container .submit-btn {
+    color: white;
+    background: black;
+    border: 0;
+    margin-top: 5px;
+  }
+  
+  #main-admin {
+    display: flex;
+    width: 95%;
+  }
+  
+  #main-admin aside {
+    width: 15%;
+  }
+  
+  #main-admin aside nav {
+    display: flex;
+    flex-direction: column;
+    margin-top: 70px;
+  }
+  
+  #main-admin section {
+    width: 85%;
+  }
+  
+  #main-admin section .admin-wrapper div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+  }
+  
+  #main-admin section .admin-wrapper div input {
+    width: 50%;
+    height: 150px;
+  }

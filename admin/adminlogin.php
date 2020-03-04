@@ -1,7 +1,7 @@
 <?php
-include_once "../header.php";
+include_once 'adminheader.php';
 // session_start(); 
-$pdo = connect();
+// $pdo = connect();
 $err_message = "";
 $message = "";
 $admin = New Admin;
@@ -31,12 +31,12 @@ if(isset($_POST['login'])) {
 $row = $admin->admin_login($username, $Password);
 }
 
- var_dump($_SESSION);
+//  var_dump($_SESSION);
 
 ?>
 <main>
 <div class="login-container">
-<form method="post" action="adminlogin.php?success">
+<!-- <form method="post" action="adminlogin.php?success">
 <span>username</span>
 <input type="text" name="username">
 <span>Firstname</span>
@@ -45,18 +45,19 @@ $row = $admin->admin_login($username, $Password);
 <input type="password" name="Password">
 <input type="submit" value="Spara" name="saveAdmin">
 <span class="error"><?php echo $message ?></span>
-</form>
+</form> -->
 
 
-        <h1>Välommen</h1>
-        <h3>Login in by using your username and e-mail!</h3>
+        <h1>Admin</h1>
+        <div class="box-wrapper">
         <form method="post" action="">
-            Username:<br>
-            <input type="text" name="user"><br>
-            Password:<br>
-            <input type="password" name="Pass"><br>
-            <input type="submit" name="login" value="Log in">
+            <span class="form-label">Användarnamn</span>
+            <input type="text" name="user">
+            <span class="form-label">Lösenord</span>
+            <input type="password" name="Pass">
+            <input class="submit-btn" type="submit" name="login" value="Logga in">
             <span class="error"><?php echo $err_message ?></span>
         </form>
+        </div>
         </div>
         </main>

@@ -1,28 +1,29 @@
 <?php
- include_once 'header.php';
-include 'router.php';
+$title = '';
+// include 'router.php';
 
 $request = $_SERVER['REQUEST_URI'];
+include_once 'header.php';
 
 $route = new Router($request);
 
-var_dump($route);
+// var_dump($route);
 
 $route->get('', '/start');
 
-$route->get('products', '/products');
+$route->get('products', '/shop/products');
 
-$route->get('cart', '/cart');
+// $route->get('cart', '/cart');
 
 $route->get('checkout', '/checkout');
 
-$route->get('orderconfirmation', '/orderconfirmation');
+$route->get('orderconfirmation', '/shop/orderconfirmation');
 
-$route->get('category' , '/category-page');
+$route->get('category' , '/shop/category-page');
 
 // $route->get('product/', '/product-detail');
 
-$route->get('login', '/customerlogin');
+$route->get('login', '/customerpages/customerlogin');
 
 $route->get('logout', '/logout');
 

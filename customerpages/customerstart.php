@@ -9,12 +9,14 @@ $result = $customer->get_customer();
 $row = $result->fetch(); 
 // var_dump($row);
 
+if($_SESSION['Mail'] != "") { 
+
+
 $order = New Order;
 $order->CustomersId = $row['CustomersId'];
 $results = $order->get_customerOrder();
 $orderResult = $results->fetchAll(PDO::FETCH_ASSOC);
 //  var_dump($orderResult);
-
 if(isset($_POST['save'])) {
     $CustomersId = filter_input(INPUT_POST, 'CustomersId', FILTER_SANITIZE_MAGIC_QUOTES);
     $Firstname = filter_input(INPUT_POST, 'Firstname', FILTER_SANITIZE_STRING);
@@ -49,8 +51,8 @@ if(isset($_POST['save'])) {
 ?>
 
 <main id="customer-pages">
+<span><?php echo $message;?></span>
 <h3> Välkommen <?php echo $row['Firstname']; echo " "; echo $row['Lastname']; ?>!</h3>
-
 <input type ="hidden" name="CustomersId" value="<?php echo $row['CustomersId'] ?>">
 <span><?php echo $message; ?></span>
 <!-- Update Customer -->
@@ -97,6 +99,10 @@ if(isset($_POST['save'])) {
             <?php } ?>
             </div>
             <?php } ?> -->
-
-
 </main>
+            <?php } else { ?>
+            <main>
+            <span>Du har ingen behörighet att se det här. Logga in först?!</span>
+            </main>
+<?php 
+            } ?>

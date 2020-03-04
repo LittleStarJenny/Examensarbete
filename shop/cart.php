@@ -1,5 +1,5 @@
 <?php 
-include_once "header.php";
+include_once "../header.php";
 
 $cart = [];
 //$i = 0;
@@ -22,7 +22,7 @@ if(isset($_GET["action"])) {
       if($cart_data[$keys]['ProductsId'] == $_GET["id"] && $cart_data[$keys]['Size'] == $_GET["Size"]) {
         unset($cart_data[$keys]);
         $item_data = json_encode($cart_data);
-        setcookie("cart", $item_data, time() +(3600));
+        setcookie("cart", $item_data, time() +(3600), '/');
         header("location: cart.php");
       }
     }
@@ -41,7 +41,7 @@ if(isset($_GET["action"])) {
     }
   }
     $item_data = json_encode($cart_data);
-    setcookie("cart", $item_data, time() +(3600));
+    setcookie("cart", $item_data, time() +(3600), '/');
     header("location: cart.php"); 
   }
 }
@@ -83,7 +83,7 @@ if(empty($cart_data)) {
       </div>
       <form action="cart.php?action=update" method="post">
         <div class="cart-img-qty">
-          <img class="cart-img" src=<?php echo $values['Img'] ?>>
+          <img class="cart-img" src="<?php echo $values['Img'] ?>">
         </div>
         <div class="cart-textdetails">
           <span class="cart-prod-details"><?php echo $values['ProductName']; ?></span>
@@ -114,10 +114,10 @@ if(empty($cart_data)) {
         <span colspan="3">Totalt</span>
         <span><?php echo $total; ?> SEK</span>
       <div class="toCheckout">
-        <a href="checkout">Till kassan</a>
+        <a href="checkout.php">Till kassan</a>
       </div>
     </div>
   </div>
 </main>
 
-<?php include_once "footer.php" ?>
+<?php include_once "../footer.php" ?>

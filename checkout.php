@@ -1,6 +1,8 @@
 <?php 
-include_once "header.php";
-include_once "emailExists.php";
+// include_once "header.php";
+include_once "resources/functions/emailExists.php";
+include_once "resources/include.php";
+ $title = 'Kassan';
 $pdo = connect();
 $customer = New Customer;
 $order = New Order;
@@ -51,7 +53,7 @@ if(isset($_POST['check'])) {
         <input type="password" name="Password">
         <span><strong>Stämmer Mailadressen?</strong></span>
         <input mail id="mail" name="Mail" required placeholder="your@email.com" value="'.$Mail.'">
-        <input type="submit" name="save" value="Spara">
+        <input class="standard-btn" type="submit" name="save" value="Spara">
         </div> 
         </form>'; ?> 
 <?php  
@@ -141,7 +143,7 @@ if(isset($_POST["buy"])) {
 
             <div class="cartitem">   
                 <div class="cart-img-qty">
-                <img class="cart-img" src=<?php echo $values['Img']; ?>>
+                <img class="cart-img" src="<?php echo $values['Img']; ?>">
             </div>
             <div class="cart-textdetails">
                 <span class="cart-prod-details"><?php echo $values['ProductName']; ?></span>
@@ -180,10 +182,10 @@ if(isset($_POST["buy"])) {
     <section class="checkout">
         <div class="checkout-wrap">
             <div id="wrap">
-                <form method="POST" action="checkout.php">
+                <form method="POST" action="checkout">
                     <span>Mail</span>    
                     <input mail id="mail" name="Mail" required placeholder="your@email.com" value="<?php if(isset($_POST['Mail'])) { echo $_POST['Mail']; } ?>">
-                    <input type="submit" name="check" value="Check">
+                    <input class="standard-btn" type="submit" name="check" value="Check">
                 </form>
             </div>
             <p><?php  echo $err_message; ?></p>
@@ -196,7 +198,7 @@ if(isset($_POST["buy"])) {
                     <span><?php if(isset($rows['Zipcode'])) {echo $rows["Zipcode"]; } echo " "; if(isset($rows['City'])) {echo $rows["City"]; } ?></span>
                     <span ><?php if(isset($rows['Mail'])) {echo $rows['Mail']; } ?></span>
                     <span><?php if(isset($rows['Phone'])) {echo $rows['Phone']; } ?></span>
-                    <input type="submit" name="buy" value="Bekräfta köp">
+                    <input class="standard-btn" type="submit" name="buy" value="Bekräfta köp">
                 </div> 
             </form>
             <input type ="hidden" name="CustomersId" value="<?php echo $rows['CustomersId']; ?>">
@@ -204,4 +206,4 @@ if(isset($_POST["buy"])) {
         </div>
     </section>
 </main>
-<?php include_once 'footer.php' ?>
+<!-- <?php include_once 'footer.php' ?> -->

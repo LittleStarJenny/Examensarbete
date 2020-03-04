@@ -1,5 +1,5 @@
 <?php
-include_once '../header.php';
+include_once 'adminheader.php';
 $product = New Product;
 
 if(isset($_POST['saveVariation'])) {
@@ -7,19 +7,28 @@ if(isset($_POST['saveVariation'])) {
     $Title = filter_input(INPUT_POST, 'Title', FILTER_SANITIZE_MAGIC_QUOTES);
 
     $checkboxes = isset($_POST['sizeChart']) ? $_POST['sizeChart'] : array();
-    foreach ($checkboxes as $select)
-{ 
+    foreach ($checkboxes as $select) { 
     $product->Size = $select;
     $product->ProductId = $Title;
     echo 'you have selected:' .$select .$Title;
     $product->create_productvariation();
+    }
 }
- }
 
 ?>
 
-<main>
+
+<main id="main-admin">
+<aside class="sidemenu">
+    <nav class="admin-nav">
+        <a href="createproduct.php">Skapa Produkt</a>
+        <a href="orders.php">Kundorder</a>
+    </nav>
+</aside>
+<section>
 <div class="admin-wrapper">
+    <h3>Skapa produkt</h3>
+    <hr>
 <form method="post" action="createproduct.php?success" enctype="multipart/form-data">
 <span class="createproduct">Kategori</span>
 <select class="Category" name="selectCat"> 
@@ -27,40 +36,38 @@ if(isset($_POST['saveVariation'])) {
 $catName = $product->get_categoryForHeader();
 $category = $catName->fetchAll();
 foreach ($category as $cat) {
-
 ?>
 <option value="<?php echo $cat['CategoryId'];?>">
 <?php echo $cat['CategoryName']; ?>
 </option>
 <?php }  ?>
 </select>
-    <!-- <input text="hidden" name="CategoryId" value="<?php echo $cat['CategoryId']; ?>"> -->
     <span class="createproduct">Produktnamn</span>
     <input type="text" name="ProductName">
-    <span class="createproduct">Artikelnr</span>
-    <input type="text" name="ArticleNr">
+    <div>
     <span class="createproduct">Beskrivning</span>
     <input type="text" name="Description">
+</div>
     <span class="createproduct">Pris</span>
     <input type="text" name="Price">
-    <span class="createproduct">Storlek</span>
-    <input type="text" name="Size">
     <span class="createproduct">Färg</span>
     <input type="text" name="Color">
     <span class="createproduct">Huvudbild</span>
     <input type="file" name="image" id="image">
     <!-- <span class="createproduct">Produktbild</span>
     <input type="file" name="image" id="image"> -->
-    <input type="submit" name="saveproduct" value="Spara">
+    <input type="submit" class="standard-btn" name="saveproduct" value="Spara">
 </form>
 </div>
 
 <div class="variationWrap">
+<h3>Skapa produktvariation</h3>
+    <hr>
 <form method="post" action="createproduct.php?createproductvariationSuccess">
 <span class="createproduct">Välj Produkt</span>
 <select class="ProductName" name="Title"> 
 <?php 
-$result = $product->get_products_for_admin();
+$result = $product->get_all_products();
 $title = $result->fetchAll();
 foreach ($title as $row) {
 ?>
@@ -77,9 +84,10 @@ foreach ($Sizes as $Size) { ?>
 <?php echo $Size['Size']; ?>
 </option>
 <?php }  ?>
-<input type="submit" name="saveVariation" value="Spara">
+<input type="submit" class="standard-btn" name="saveVariation" value="Spara">
 </form>
 </div>
+</section>
 </main>
 
 
@@ -88,8 +96,8 @@ foreach ($Sizes as $Size) { ?>
 
 if(isset($_POST['saveproduct'])) {
     $target_dir = "../img/";
-$name = $_FILES['image']['name'];
-$temp_name = $_FILES['image']['tmp_name'];
+    $name = $_FILES['image']['name'];
+    $temp_name = $_FILES['image']['tmp_name'];
 
     $ProductName = filter_input(INPUT_POST, 'ProductName', FILTER_SANITIZE_STRING);
     $Description = filter_input(INPUT_POST, 'Description', FILTER_SANITIZE_STRING);
@@ -105,14 +113,13 @@ $temp_name = $_FILES['image']['tmp_name'];
     $product->CategoryId = $selcat;
     $product->create_product();
 
-
-    // $product->create_images();
-if(isset($name) and !empty($name)) {
-    if(move_uploaded_file($temp_name, $target_dir.$name)){
+// $product->create_images();
+    if(isset($name) and !empty($name)) {
+        if(move_uploaded_file($temp_name, $target_dir.$name)){
         echo 'File uploaded successfully';
+        }
+    } else {
+        echo 'You should select a file to upload !!';
     }
-} else {
-    echo 'You should select a file to upload !!';
-}
 }
  ?>

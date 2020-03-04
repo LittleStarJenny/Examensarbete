@@ -1,5 +1,5 @@
 
-#RewriteBase /Examensarbete-Stellasina/
+#RewriteBase /Stellasina/
 RewriteEngine on
 
 #Make sure it's not an actual file
