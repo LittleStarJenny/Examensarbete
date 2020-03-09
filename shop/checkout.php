@@ -143,7 +143,7 @@ if(isset($_POST["buy"])) {
 
             <div class="cartitem">   
                 <div class="cart-img-qty">
-                <img class="cart-img" src="<?php echo $values['Img']; ?>">
+                <img class="cart-img" src=<?php echo $values['Img']; ?>>
             </div>
             <div class="cart-textdetails">
                 <span class="cart-prod-details"><?php echo $values['ProductName']; ?></span>

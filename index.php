@@ -15,19 +15,21 @@ $route->get('products', '/shop/products');
 
 // $route->get('cart', '/cart');
 
-$route->get('checkout', '/checkout');
+$route->get('checkout', '/shop/checkout');
 
 $route->get('orderconfirmation', '/shop/orderconfirmation');
 
 $route->get('category' , '/shop/category-page');
 
-// $route->get('product/', '/product-detail');
+ $route->get('update/', '/customerpages/customerupdate');
 
 $route->get('login', '/customerpages/customerlogin');
 
 $route->get('logout', '/logout');
 
 $route->get('customerstart', '/customerpages/customerstart');
+
+$route->get('yourorders', '/customerpages/customerorders');
 
 
 include_once 'footer.php';

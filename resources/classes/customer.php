@@ -78,68 +78,62 @@ public function create_customer() {
  
  }
 
- public function login($Mail, $Password) {
-     $pdo = connect();
-    
+public function login($Mail, $Password) {
+    $pdo = connect();
+
     // var_dump($Password);
     $stmt = $pdo->prepare("SELECT * FROM customers WHERE Mail=:Mail ");
     $stmt->bindParam(':Mail', $Mail);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-     if($stmt->rowCount() > 0) {
-    
+    if($stmt->rowCount() > 0) {
+
         if(password_verify($Password, $row['Password'] )) {
+            $this->Mail = $Mail;
+            $this->Password = $Password;
 
-
-         $this->Mail = $Mail;
-         $this->Password = $Password;
-           
             session_regenerate_id();
             $_SESSION['authorized'] = true;
-           $_SESSION['Mail'] = $row['Mail'];
+            $_SESSION['Mail'] = $row['Mail'];
             $_SESSION['Firstname'] = $row['Firstname'];
             session_write_close();
             header('location:customerstart');
-             $err_message = 'Konto skapat, nu är det bara att bekräfta ditt köp';
-        }
-        else {
-         //    header('locaton:customerlogin.php');
+            $err_message = 'Konto skapat, nu är det bara att bekräfta ditt köp';
+        } else {
+            //    header('locaton:customerlogin.php');
             echo $err_message = 'Fel lösenord';
         }
     } 
     else echo $err_message = 'Fel mail';
-    }
+}
 
 
 public function loginFromCheckout($Mail, $Password) {
     $pdo = connect();
-    
+
     // var_dump($Password);
     $stmt = $pdo->prepare("SELECT * FROM customers WHERE Mail=:Mail ");
     $stmt->bindParam(':Mail', $Mail);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-     if($stmt->rowCount() > 0) {
-    
+    if($stmt->rowCount() > 0) {
+
         if(password_verify($Password, $row['Password'] )) {
+            $this->Mail = $Mail;
+            $this->Password = $Password;
 
-
-         $this->Mail = $Mail;
-         $this->Password = $Password;
-           
             session_regenerate_id();
             $_SESSION['authorized'] = true;
-           $_SESSION['Mail'] = $row['Mail'];
+            $_SESSION['Mail'] = $row['Mail'];
             $_SESSION['Firstname'] = $row['Firstname'];
             session_write_close();
             header('location:checkout');
-             $err_message = 'Konto skapat, nu är det bara att bekräfta ditt köp';
-        }
-        else {
-         //    header('locaton:customerlogin.php');
+            $err_message = 'Konto skapat, nu är det bara att bekräfta ditt köp';
+        } else {
+            //    header('locaton:customerlogin.php');
             $err_message = 'Fel lösenord';
         }
-    } else $err_message = 'Fel mail';
-    
+    } 
+    else $err_message = 'Fel mail';
 }
 } ?>

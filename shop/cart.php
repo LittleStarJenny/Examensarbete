@@ -83,7 +83,7 @@ if(empty($cart_data)) {
       </div>
       <form action="cart.php?action=update" method="post">
         <div class="cart-img-qty">
-          <img class="cart-img" src="<?php echo $values['Img'] ?>">
+          <img class="cart-img" src="../<?php echo $values['Img'] ?>">
         </div>
         <div class="cart-textdetails">
           <span class="cart-prod-details"><?php echo $values['ProductName']; ?></span>
@@ -114,7 +114,7 @@ if(empty($cart_data)) {
         <span colspan="3">Totalt</span>
         <span><?php echo $total; ?> SEK</span>
       <div class="toCheckout">
-        <a href="checkout.php">Till kassan</a>
+        <a href="checkout">Till kassan</a>
       </div>
     </div>
   </div>

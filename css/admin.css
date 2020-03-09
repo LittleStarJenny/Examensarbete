@@ -69,3 +69,10 @@
     width: 50%;
     height: 150px;
   }
+
+  #main-admin .admin-input {
+    border: 1px solid lightgray;
+    width: unset;
+    height: unset;
+    
+  }

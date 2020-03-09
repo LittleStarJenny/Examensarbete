@@ -29,7 +29,7 @@ $('.cart-content').toggleClass('active');
 }
 
 var qty = [];
-var sum_total;
+var sum_total = 0;
 // var totalrows = 0;
 // qty = Number($('.productsIncart .cart-prod-qty').text().replace(/[^0-9]/gi, ''));
 //    console.log(qty);
@@ -56,7 +56,9 @@ var sum_total;
 
 
 
-
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
 
 });
 

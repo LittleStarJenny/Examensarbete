@@ -21,6 +21,7 @@ if(isset($_POST['saveVariation'])) {
 <main id="main-admin">
 <aside class="sidemenu">
     <nav class="admin-nav">
+        <a href="adminpanel.php">Start</a>
         <a href="createproduct.php">Skapa Produkt</a>
         <a href="orders.php">Kundorder</a>
     </nav>
@@ -43,17 +44,17 @@ foreach ($category as $cat) {
 <?php }  ?>
 </select>
     <span class="createproduct">Produktnamn</span>
-    <input type="text" name="ProductName">
+    <input type="text" class="admin-input" name="ProductName">
     <div>
     <span class="createproduct">Beskrivning</span>
-    <input type="text" name="Description">
+    <input type="text" class="admin-input" name="Description">
 </div>
     <span class="createproduct">Pris</span>
-    <input type="text" name="Price">
+    <input type="text" class="admin-input" name="Price">
     <span class="createproduct">Färg</span>
-    <input type="text" name="Color">
+    <input type="text" class="admin-input" name="Color">
     <span class="createproduct">Huvudbild</span>
-    <input type="file" name="image" id="image">
+    <input type="file" class="admin-input" name="image" id="image">
     <!-- <span class="createproduct">Produktbild</span>
     <input type="file" name="image" id="image"> -->
     <input type="submit" class="standard-btn" name="saveproduct" value="Spara">
@@ -80,7 +81,7 @@ foreach ($title as $row) {
 $getSize = $product->get_sizechart();
 $Sizes = $getSize->fetchAll();
 foreach ($Sizes as $Size) { ?>
-<input type="checkbox" name="sizeChart[]" multiple value="<?php echo $Size['Size']; ?>">
+<input type="checkbox" class="admin-input" name="sizeChart[]" multiple value="<?php echo $Size['Size']; ?>">
 <?php echo $Size['Size']; ?>
 </option>
 <?php }  ?>

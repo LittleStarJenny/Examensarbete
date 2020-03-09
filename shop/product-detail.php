@@ -51,11 +51,12 @@ if(isset($_POST["addtocart"])) {
 
   }
 
+  
 ?>
     
 <main id="product-content">
   <section>
-    <form method="post" action="product-detail.php?product=<?php echo $_GET['product']; ?>"> 
+    <form method="post" name="cartCount" action="product-detail.php?product=<?php echo $_GET['product']; ?>"> 
       <?php if(isset($_GET['product'])) {
         $product->ProductsId = $_GET['product'];
         $product->ProductId = $_GET['product'];
@@ -70,7 +71,7 @@ if(isset($_POST["addtocart"])) {
       <div class="product-card-detail">
         <div class="product-image-wrapper">
           <img class="product-image" src="../<?php echo $row['Img'];?>" >
-          <input type ="hidden" name="Img" value="../<?php echo $row['Img'] ?>">
+          <input type ="hidden" name="Img" value="<?php echo $row['Img'] ?>">
           <?php $results = $product->get_images();
           $Images = $results->fetch();
           if(isset($Images['Image'])) { ?>

@@ -6,6 +6,11 @@ if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] != false){
     $_SESSION['authorized'] = false;
   }
 
+  if(isset ($_SESSION['Mail']) && $_SESSION['Mail'] != ""){
+  } else {
+    $_SESSION['Mail'] = "";
+  }
+
 include_once 'resources/include.php';
 
 $productCat = New Product;
@@ -49,8 +54,9 @@ $category = $result->fetchAll();
         </div>
         <?php if($_SESSION['authorized'] != true){?> 
      <a href="http://localhost/Stellasina/login" class="login-logout"><i class="far fa-user"></i> Logga in</a>
-    <?php } else if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] === true){ ?> 
-            <a href="http://localhost/Stellasina/customerstart" class="login-logout">Mitt konto</a> 
+
+    <?php } else if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] === true) { ?> 
+            <a href="http://localhost/Stellasina/customerstart" class="my-account login-logout">Mitt konto</a> 
             <a href="http://localhost/Stellasina/logout" class="login-logout"><i class="far fa-user"></i> Logga ut</a>                                  
              <?php } ?>
     

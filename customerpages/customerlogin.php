@@ -7,7 +7,12 @@ $err_message = "";
 // $Password = '';
 $customer = New Customer;
 
+if(isset($_POST['login'])) {
+    $Mail = $_POST['Mail'];
+    $Password = $_POST['Password'];
 
+    $row = $customer->login($Mail, $Password);
+}
 
 ?>
 <main>  
@@ -20,12 +25,7 @@ $customer = New Customer;
             <span class="form-label">Lösenord</span>
             <input type="password" name="Password">
             <input class="submit-btn" type="submit" name="login" value="Logga in">
-          <?php  if(isset($_POST['login'])) {
-    $Mail = $_POST['Mail'];
-    $Password = $_POST['Password'];
-
-    $row = $customer->login($Mail, $Password);
-} ?>
+          <?php   ?>
         </form>
         </div>
     </div>

@@ -14,7 +14,7 @@ foreach($cart_data as $keys => $values){
     $rowtotal = $values['Price'] * $values['quantity'];
       $total += $rowtotal; ?>
     <div class="each-row">
-    <img class="cart-img" src="<?php echo $values['Img'] ?>">
+    <img class="cart-img" src="http://localhost/Stellasina/<?php echo $values['Img'] ?>">
     <div class="cart-text-content">
         <span class='cart-prod-prize'><?php echo $values['Price']; ?> SEK </span>
         <span class="title"><?php echo $values['ProductName']; ?></span>
@@ -34,7 +34,7 @@ foreach($cart_data as $keys => $values){
         <span class="total">Totalsumma <?php echo $total ?> SEK</span>
     </div>
     <div class='btn-wrap'>
-        <a href="shop/cart.php"><div class='shopping-btn'>Till varukorgen</div></a>
+        <a href="http://localhost/Stellasina/shop/cart.php"><div class='shopping-btn'>Till varukorgen</div></a>
         <a href="http://localhost/Stellasina/checkout"><div class='shopping-btn'>Gå till kassan</div></a>
     </div>
 </div>
