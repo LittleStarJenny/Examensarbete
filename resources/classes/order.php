@@ -60,7 +60,7 @@ class Order {
          $pdo = connect();
     
          $sql = "SELECT OrderId, Date, 
-         C.Firstname, C.Lastname, C.Address, C.Zipcode, C.City 
+         C.Firstname, C.Lastname, C.Address, C.Zipcode, C.City, C.Mail
          FROM orders AS O 
          JOIN customers AS C ON C.CustomersId = O.CustomersId 
          WHERE OrderId  = '" . $this->{"OrderId"} . "'" ;
