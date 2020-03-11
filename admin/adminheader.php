@@ -5,8 +5,7 @@ include_once '../resources/include.php';
 $productCat = New Product;
 $message = '';
 
-
- $result = $productCat->get_categoryForHeader(); 
+$result = $productCat->get_categoryForHeader(); 
 $category = $result->fetchAll();
 ?>
 
@@ -17,6 +16,8 @@ $category = $result->fetchAll();
         <script type="text/javascript" src="js.js"></script>
         <link rel="stylesheet" type="text/css" href="http://localhost/Stellasina/css/style.css?d=<?php echo time(); ?>">
         <link rel="stylesheet" type="text/css" href="http://localhost/Stellasina/css/admin.css?d=<?php echo time(); ?>">
+        <link rel="stylesheet" type="text/css" href="http://localhost/Stellasina/css/customer.css?d=<?php echo time(); ?>">
+        <link rel="stylesheet" type="text/css" href="http://localhost/Stellasina/css/shop.css?d=<?php echo time(); ?>">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -25,18 +26,17 @@ $category = $result->fetchAll();
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
-            </head>
+    </head>
 
 <body> 
     <header>
-
         <div class="admin-header">
-
-        <a href="http://localhost/Stellasina/"><img src="http://localhost/Stellasina/img/logo.png"></a>
+            <a href="http://localhost/Stellasina/"><img src="http://localhost/Stellasina/img/logo.png"></a>
         </div>
-    <?php if(isset ($_SESSION['Admin']) && $_SESSION['Admin'] != ""){ ?> 
+        <!-- If Session admin not is empty show Link Logga ut -->
+        <?php if(isset ($_SESSION['Admin']) && $_SESSION['Admin'] != "") { ?> 
             <a href="http://localhost/Stellasina/admin/adminlogout.php" class="login-logout"><i class="far fa-user"></i> Logga ut</a>                                  
-             <?php } ?>
+        <?php } ?>
     
         <nav class="main-nav">
             <ul>
@@ -45,7 +45,7 @@ $category = $result->fetchAll();
                 <li><a href="http://localhost/Stellasina/category/<?php echo $row['CategoryName']; ?>"><?php echo $row['CategoryName'] ?></a></li>
                 <?php } ?>
             </ul>
-    </nav>
+        </nav>
     </header>
     
 

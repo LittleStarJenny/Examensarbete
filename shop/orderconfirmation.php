@@ -2,6 +2,7 @@
 include_once 'header.php';
 $order = New Order;
 $product = New Product;
+$total = 0;
 
 
 // Get last inserted OrderId
@@ -15,19 +16,46 @@ $product = New Product;
 // Get Customer for last Order
     $customer = $order->get_customerByorder();
     $Ordercustomer = $customer->fetch(); 
-    
-    //the subject
+
+        //the subject
 $sub = "Test";
 //the message
-$msg = "<h1>Orderbekräftelse</h1>";
-$msg = $Ordercustomer['Mail'];
+$msg = 
+"<html>
+  <body> 
+    <h1>Orderbekräftelse</h1>
+      <hr>
+        <h4>Orderdetaljer</h4>
+        <div>
+          <label>Produkter</label>
+          <label>Storlek</label>
+          <label>Antal</label>
+          <label>Pris</label>
+          </div>";
+
+          foreach($TestOrderId as $row) {
+            $msg .= "<div>
+              <span>" . $row['ProductName'] . "</span>
+              <span>" . $row['Size'] . "</span>
+              <span>" . $row['Quantity'] . "</span>
+              <span>" . $row['Price'] . "</span>
+            </div>";
+            $rowtotal = $row['Price'] * $row['Quantity'];
+            $total += $rowtotal;
+            $totalwithshipping = $total + 59; };
+  $msg .= "<span>Totalt " . $total . " SEK</span>
+  </body>
+</html>";
+
 //recipient email here
 $rec = "littlestarjenny6@gmail.com";
 // $Ordercustomer['Mail'];
-$headers .= "MIME-Version: 1.0\r\n";
+$headers = "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 //send email
-mail($rec,$sub,$msg, $headers);
+//  mail($rec,$sub,$msg, $headers);
+
+  setcookie("cart", "", time() -3600, '/');
 
 ?>
 
@@ -64,8 +92,14 @@ mail($rec,$sub,$msg, $headers);
             <span><?php echo $row['Quantity'];?></span>
             <span><?php echo $row['Price'];?> SEK</span>
         </div>
-        <?php } ?>
+        <?php 
+                            $rowtotal = $row['Price'] * $row['Quantity'];
+                            $total += $rowtotal;
+                            $totalwithshipping = $total + 59;
+            }?>
+                            <span>Totalt <?php echo $total;?> SEK</span>
     </div>
+
 
 </main>
 

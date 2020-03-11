@@ -25,40 +25,58 @@ if(isset ($_SESSION['Mail']) && $_SESSION['Mail'] != ''){
 
 // Check if Mail is already registrered else create new customer
 if(isset($_POST['check'])) {
-    $Mail = $_POST['Mail'];
-    if (emailExists($pdo, $Mail)) {
-        $customer->Mail = $Mail;
-        $result = $customer->get_customer();
-        $row = $result->fetch(); 
-        $err_message = 'Mailen finns redan registrerad, logga in istället?! <a href="customerlogin.php">Logga in</a>'; ?>
-<?php 
-    } else { 
-        $err_message = 'Email hittades inte, registrera dig nedan!
-        <form method="post" action="">
-        <h4>Registrera dig</h4> 
-        <div class="CustomerInfo"> 
-        <br><span>Förnamn</span> 
-        <input text name="Firstname" pattern="[a-zåäöA-ZÅÄÖ]+"  value="">
-        <span>Efternamn</span>     
-        <input text name="Lastname" value="">
-        <span>Adress</span>    
-        <input text name="Address" pattern="[a-zåäöA-ZÅÄÖ0-9\s]+"  value="">
-        <span>Postnr</span>    
-        <input tel name="Zipcode" pattern="[0-9]{3} [0-9]{2}" placeholder="555 55">
-        <span>Postadress</span>    
-        <input text name="City" pattern="[a-zåäöA-ZÅÄÖ]+" value="">
-        <span>Mobil</span>    
-        <input tel name="Phone" pattern="[0-9]{3}-[0-9]{3} [0-9]{2} [0-9]{2}" placeholder="073-555 66 88">
-        <span>Lösenord</span> 
-        <input type="password" name="Password">
-        <span><strong>Stämmer Mailadressen?</strong></span>
-        <input mail id="mail" name="Mail" required placeholder="your@email.com" value="'.$Mail.'">
-        <input class="standard-btn" type="submit" name="save" value="Spara">
-        </div> 
-        </form>'; ?> 
-<?php  
-    } 
+//     $Mail = $_POST['Mail'];
+//     if (emailExists($pdo, $Mail)) {
+//         $customer->Mail = $Mail;
+//         $result = $customer->get_customer();
+//         $row = $result->fetch(); 
+//         $err_message = 'Mailen finns redan registrerad, logga in istället?!
+//         <form method="post" action="">
+//         <span>Lösenord</span> 
+//         <input type="password" name="Password">
+//         <input hidden name="Mail" value="'.$_POST['Mail'].'">
+//         <input class="standard-btn" type="submit" name="login" value="Spara"> 
+//         </form>'; 
+//     } else { 
+//         $err_message = 'Email hittades inte, registrera dig nedan!
+//         <form method="post" action="">
+//         <h4>Registrera dig</h4> 
+//         <div class="CustomerInfo"> 
+//         <br><span>Förnamn</span> 
+//         <input text name="Firstname" pattern="[a-zåäöA-ZÅÄÖ]+"  value="">
+//         <span>Efternamn</span>     
+//         <input text name="Lastname" value="">
+//         <span>Adress</span>    
+//         <input text name="Address" pattern="[a-zåäöA-ZÅÄÖ0-9\s]+"  value="">
+//         <span>Postnr</span>    
+//         <input tel name="Zipcode" pattern="[0-9]{3} [0-9]{2}" placeholder="555 55">
+//         <span>Postadress</span>    
+//         <input text name="City" pattern="[a-zåäöA-ZÅÄÖ]+" value="">
+//         <span>Mobil</span>    
+//         <input tel name="Phone" pattern="[0-9]{3}-[0-9]{3} [0-9]{2} [0-9]{2}" placeholder="073-555 66 88">
+//         <span>Lösenord</span> 
+//         <input type="password" name="Password">
+//         <span><strong>Stämmer Mailadressen?</strong></span>
+//         <input mail id="mail" name="Mail" required placeholder="your@email.com" value="'.$Mail.'">
+//         <input class="standard-btn" type="submit" name="save" value="Spara">
+//         </div> 
+//         </form>'; ?> 
+// <?php  
+//     } 
 } 
+
+if(isset($_POST['login'])) {
+    $Mail = $_POST['Mail'];
+    $Password = $_POST['Password'];
+    var_dump($Password);
+    $customer->Mail = $Mail;
+    $customer->Password = $Password;
+    $row = $customer->loginFromCheckout($Mail, $Password);
+    }
+    $customer->Mail = $_SESSION['Mail'];
+    $result = $customer->get_customer();
+    $rows = $result->fetch(); 
+
 // Save and fetch login-session for customer
 if(isset($_POST['save'])) {
     $Firstname = filter_input(INPUT_POST, 'Firstname', FILTER_SANITIZE_STRING);
@@ -113,8 +131,8 @@ if(isset($_POST["buy"])) {
             $order->OrderId = $OrderId['OrderId'];
             $order->create_orderItem();
         } 
-        header('location:orderconfirmation.php');
-        setcookie("cart", "", time() - 3600);
+        header('location:orderconfirmation');
+        // setcookie("cart", "", time() - 3600);
         session_destroy();
     } else {
         echo 'Ordern kunde inte skapas';
@@ -182,14 +200,56 @@ if(isset($_POST["buy"])) {
     <section class="checkout">
         <div class="checkout-wrap">
             <div id="wrap">
-                <form method="POST" action="checkout">
+
+            <?php
+            if (isset($_POST['check'])) {
+                $Mail = $_POST['Mail'];
+                if (emailExists($pdo, $Mail)) {
+                    $customer->Mail = $Mail;
+                    $result = $customer->get_customer();
+                    $row = $result->fetch(); 
+                    $err_message = 'Mailen finns redan registrerad, logga in istället?!
+                    <form method="post" action="">
+                    <span>Lösenord</span> 
+                    <input type="password" name="Password">
+                    <input hidden name="Mail" value="'.$_POST['Mail'].'">
+                    <input class="standard-btn" type="submit" name="login" value="Spara"> 
+                    </form>'; 
+                } else { 
+                    $err_message = 'Email hittades inte, registrera dig nedan!
+                    <form method="post" action="">
+                    <h4>Registrera dig</h4> 
+                    <div class="CustomerInfo"> 
+                    <br><span>Förnamn</span> 
+                    <input text name="Firstname" pattern="[a-zåäöA-ZÅÄÖ]+"  value="">
+                    <span>Efternamn</span>     
+                    <input text name="Lastname" value="">
+                    <span>Adress</span>    
+                    <input text name="Address" pattern="[a-zåäöA-ZÅÄÖ0-9\s]+"  value="">
+                    <span>Postnr</span>    
+                    <input tel name="Zipcode" pattern="[0-9]{3} [0-9]{2}" placeholder="555 55">
+                    <span>Postadress</span>    
+                    <input text name="City" pattern="[a-zåäöA-ZÅÄÖ]+" value="">
+                    <span>Mobil</span>    
+                    <input tel name="Phone" pattern="[0-9]{3}-[0-9]{3} [0-9]{2} [0-9]{2}" placeholder="073-555 66 88">
+                    <span>Lösenord</span> 
+                    <input type="password" name="Password">
+                    <span><strong>Stämmer Mailadressen?</strong></span>
+                    <input mail id="mail" name="Mail" required placeholder="your@email.com" value="'.$Mail.'">
+                    <input class="standard-btn" type="submit" name="save" value="Spara">
+                    </div> 
+                    </form>'; ?> 
+            <?php  }    
+            } else { ?>
+                <form method="POST" action="checkout" id="loginform">
                     <span>Mail</span>    
                     <input mail id="mail" name="Mail" required placeholder="your@email.com" value="<?php if(isset($_POST['Mail'])) { echo $_POST['Mail']; } ?>">
-                    <input class="standard-btn" type="submit" name="check" value="Check">
+                    <input class="standard-btn" type="submit" id="submit" name="check" value="Check">
                 </form>
+            <?php } ?>
             </div>
             <p><?php  echo $err_message; ?></p>
-            <?php
+<?php 
             if($rows != '') { ?> 
             <form method="post" action="">
                 <div class="CustomerInfo">

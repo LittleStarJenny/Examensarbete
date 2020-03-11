@@ -274,15 +274,7 @@
     width: 60%;
   }
   
-  /* Cart dropbox in header */
-  .cart-button {
-      width: 50px;
-      display: block;
-      /* position: absolute; */
-      right: 325px;;
-      top: 20px;
-  }
-  
+  /* Cart dropbox in header */  
   .cart-content {
     background: #fff;
     width: 250px;
@@ -291,6 +283,8 @@
     position: fixed;
     top: -300px;
     transition: 0.8s;
+    z-index: 5;
+    cursor: pointer;
   }
   
   .cart-content .productsIncart {

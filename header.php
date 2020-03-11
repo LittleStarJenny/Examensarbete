@@ -61,14 +61,15 @@ $category = $result->fetchAll();
              <?php } ?>
     
         <nav class="main-nav">
+                <div class="cart-button"> 
+                   <div class="qty-in-cart"></div>
+                   <i class="fas fa-shopping-cart"></i>
+                </div>
             <ul>
                 <li><a href="http://localhost/Stellasina/products">Butiken</a></li>
                 <?php foreach($category as $row) { ?>
                 <li><a href="http://localhost/Stellasina/category/<?php echo $row['CategoryName']; ?>"><?php echo $row['CategoryName'] ?></a></li>
                 <?php } ?>
-               <div class="cart-button"> 
-                   <div class="qty-in-cart"></div>
-                   <i class="fas fa-shopping-cart"></i></div>
             </ul>
     </nav>
     </header>

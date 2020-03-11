@@ -19,13 +19,7 @@ if(isset($_POST['saveVariation'])) {
 
 
 <main id="main-admin">
-<aside class="sidemenu">
-    <nav class="admin-nav">
-        <a href="adminpanel.php">Start</a>
-        <a href="createproduct.php">Skapa Produkt</a>
-        <a href="orders.php">Kundorder</a>
-    </nav>
-</aside>
+<?php include_once 'adminsidebar.php'; ?>
 <section>
 <div class="admin-wrapper">
     <h3>Skapa produkt</h3>

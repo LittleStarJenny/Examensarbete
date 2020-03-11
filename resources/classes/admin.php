@@ -2,10 +2,17 @@
 class Admin {
 
 public $adminId = 0;
-private $username = '';
-private $Firstname = '';
-private $Password = '';
+public $username = '';
+public $Firstname = '';
+public $Password = '';
 
+// public function __construct()
+// {
+//     /* Initialize the variables to NULL */
+//     $this->username = NULL;
+//     $this->Firstname = NULL;
+//     $this->Password = NULL;
+// }
 
     public function create_admin() {
         $pdo = connect();
@@ -19,13 +26,13 @@ private $Password = '';
         return $toCreate;
     }
 
-    public function __construct()
-	{
-		/* Initialize the $id and $name variables to NULL */
-		$this->username = NULL;
-		$this->Firstname = NULL;
-		$this->Password = NULL;
-	}
+    // public function __construct()
+	// {
+	// 	/* Initialize the $id and $name variables to NULL */
+	// 	$this->username = NULL;
+	// 	$this->Firstname = NULL;
+	// 	$this->Password = NULL;
+	// }
 
     public function admin_login($username, $Password) {
         $pdo = connect();

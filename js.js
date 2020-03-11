@@ -22,7 +22,7 @@ var totsum = Number($('.cartSum .total').text().replace(/[^0-9]/gi, ''));
 // console.log(totsum);
 
 if(totsum > 0) {
-$('nav ul .cart-button').on('click', function() {
+$('.main-nav .cart-button').on('click', function() {
     console.log('Jag funkar');
 $('.cart-content').toggleClass('active');
 });
@@ -53,12 +53,16 @@ var sum_total = 0;
 
            $('.qty-in-cart').text(sum_total);
 
+//            $(document).ready(function($) {
+// $('#loginform').on('submit', function() {
+//     console.log('Jeeeeeennnnny');
+//     $('#submit').css('display', 'none');
+// });
+//            });
 
-
-
-if ( window.history.replaceState ) {
-  window.history.replaceState( null, null, window.location.href );
-}
+// if ( window.history.replaceState ) {
+//   window.history.replaceState( null, null, window.location.href );
+// }
 
 });
 
