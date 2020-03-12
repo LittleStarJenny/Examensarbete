@@ -1,7 +1,6 @@
 <?php
 class Customer {
      public $CustomersId = 0;
-     public $Birthday = '';
      public $Firstname = '';
      public $Lastname = '';
      public $Address = '';
@@ -31,7 +30,7 @@ class Customer {
 
           $sql = "UPDATE customers
             SET Firstname = '" . $this->{"Firstname"} . "', Lastname = '" . $this->{"Lastname"} . "', 
-            Birthday = '" . $this->{"Birthday"} . "' , Address = '" . $this->{"Address"} . "', 
+            Address = '" . $this->{"Address"} . "', 
             Zipcode = '" . $this->{"Zipcode"} . "', City = '" . $this->{"City"} . "', 
             Mail = '" . $this->{"Mail"} . "', Phone = '" . $this->{"Phone"} . "', Password = '" . $this->{"Password"} . "'
             WHERE CustomersId = '" . $this->{"CustomersId"} . "'"; // sql statements
@@ -60,8 +59,8 @@ class Customer {
 public function create_customer() {
      $pdo = connect();
 
-     $sql = "INSERT INTO customers (CustomersId, Firstname, Lastname, Birthday, Address, Zipcode, City, Mail, Phone, Password)
-             VALUES ('" . $this->{"CustomersId"} . "', '" . $this->{"Firstname"} . "', '" . $this->{"Lastname"} . "', '" . $this->{"Birthday"} . "', '" . $this->{"Address"} . "', '" . $this->{"Zipcode"} . "', '" . $this->{"City"} . "', '" . $this->{"Mail"} . "', '" . $this->{"Phone"} . "', '" . $this->{"Password"} . "')"; // sql statements
+     $sql = "INSERT INTO customers (CustomersId, Firstname, Lastname, Address, Zipcode, City, Mail, Phone, Password)
+             VALUES ('" . $this->{"CustomersId"} . "', '" . $this->{"Firstname"} . "', '" . $this->{"Lastname"} . "', '" . $this->{"Address"} . "', '" . $this->{"Zipcode"} . "', '" . $this->{"City"} . "', '" . $this->{"Mail"} . "', '" . $this->{"Phone"} . "', '" . $this->{"Password"} . "')"; // sql statements
 
      $toCreate = $pdo->prepare($sql); // prepared statement
      $toCreate->execute(); // execute sql statement
@@ -119,6 +118,7 @@ public function loginFromCheckout($Mail, $Password) {
     if($stmt->rowCount() > 0) {
 
         if(password_verify($Password, $row['Password'] )) {
+            var_dump($row['Password']);
             $this->Mail = $Mail;
             $this->Password = $Password;
 

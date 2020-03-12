@@ -81,7 +81,7 @@ if(isset($_POST['login'])) {
 if(isset($_POST['save'])) {
     $Firstname = filter_input(INPUT_POST, 'Firstname', FILTER_SANITIZE_STRING);
     $Lastname = filter_input(INPUT_POST, 'Lastname', FILTER_SANITIZE_STRING);
-    $Birthday = filter_input(INPUT_POST, 'Birthday', FILTER_SANITIZE_STRING);
+    // $Birthday = filter_input(INPUT_POST, 'Birthday', FILTER_SANITIZE_STRING);
     $Address = filter_input(INPUT_POST, 'Address', FILTER_SANITIZE_STRING);
     $Zipcode = filter_input(INPUT_POST, 'Zipcode', FILTER_SANITIZE_STRING);
     $City = filter_input(INPUT_POST, 'City', FILTER_SANITIZE_STRING);
@@ -91,7 +91,7 @@ if(isset($_POST['save'])) {
     $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
     $customer->Firstname = $Firstname;
     $customer->Lastname = $Lastname;
-    $customer->Birthday = $Birthday;
+    // $customer->Birthday = $Birthday;
     $customer->Address  = $Address;
     $customer->Zipcode = $Zipcode;
     $customer->City = $City;
