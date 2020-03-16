@@ -21,7 +21,7 @@ $route->get('orderconfirmation', '/shop/orderconfirmation');
 
 $route->get('category' , '/shop/category-page');
 
- $route->get('update/', '/customerpages/customerupdate');
+$route->get('update/', '/customerpages/customerupdate');
 
 $route->get('login', '/customerpages/customerlogin');
 
@@ -31,8 +31,9 @@ $route->get('customerstart', '/customerpages/customerstart');
 
 $route->get('yourorders', '/customerpages/customerorders');
 
+$route->get('tillverknings-policy', 'tillverknings-policy.php');
+
 
 include_once 'footer.php';
- ini_set('display_errors', 1); error_reporting(E_ALL); 
 
- ?>
+?>

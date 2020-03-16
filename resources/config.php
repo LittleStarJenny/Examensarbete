@@ -20,14 +20,6 @@ function connect() {
 }
 
 define('ROOT_PATH', dirname(__DIR__) . '/');
-// $config = array(
-//     "paths" => array(
-//         "images" => array(
-//             "img" => $_SERVER["DOCUMENT_ROOT"] . "img/"
-//         )
-//     )
-// );
-// return $config;
 
 
 ?>

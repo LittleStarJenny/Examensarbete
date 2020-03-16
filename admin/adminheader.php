@@ -33,7 +33,7 @@ $category = $result->fetchAll();
         <div class="admin-header">
             <a href="http://localhost/Stellasina/"><img src="http://localhost/Stellasina/img/logo.png"></a>
         </div>
-        <!-- If Session admin not is empty show Link Logga ut -->
+        <!-- If Session admin not is empty show link Logga ut -->
         <?php if(isset ($_SESSION['Admin']) && $_SESSION['Admin'] != "") { ?> 
             <a href="http://localhost/Stellasina/admin/adminlogout.php" class="login-logout"><i class="far fa-user"></i> Logga ut</a>                                  
         <?php } ?>

@@ -1,8 +1,8 @@
 <?php 
-         session_start();
-         unset($_SESSION['Admin']);
-         unset($_SESSION['Name']);
-         session_destroy();
-         header("Location:http://localhost/Stellasina/"); 
-         exit;
-         ?>
+    session_start();
+    unset($_SESSION['Admin']);
+    unset($_SESSION['Name']);
+    session_destroy();
+    header("Location:http://localhost/Stellasina/"); 
+    exit;
+?>

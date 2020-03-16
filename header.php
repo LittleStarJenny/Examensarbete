@@ -1,16 +1,5 @@
 <?php 
 session_start();
-
-if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] != false){
-  } else {
-    $_SESSION['authorized'] = false;
-  }
-
-  if(isset ($_SESSION['Mail']) && $_SESSION['Mail'] != ""){
-  } else {
-    $_SESSION['Mail'] = "";
-  }
-
 include_once 'resources/include.php';
 
 $productCat = New Product;
@@ -18,6 +7,16 @@ $total = 0;
 $message = '';
 $result = $productCat->get_categoryForHeader(); 
 $category = $result->fetchAll();
+
+if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] != false) {
+  } else {
+    $_SESSION['authorized'] = false;
+  }
+
+  if(isset ($_SESSION['Mail']) && $_SESSION['Mail'] != "") {
+  } else {
+    $_SESSION['Mail'] = "";
+  }
 ?>
 
 <!DOCTYPE html>
@@ -43,36 +42,34 @@ $category = $result->fetchAll();
         <link rel="stylesheet" type="text/css" href="http://localhost/Stellasina/css/admin.css?d=<?php echo time(); ?>">
         <link rel="stylesheet" type="text/css" href="http://localhost/Stellasina/css/customer.css?d=<?php echo time(); ?>">
         <link rel="stylesheet" type="text/css" href="http://localhost/Stellasina/css/shop.css?d=<?php echo time(); ?>">
-      </head>
+    </head>
 
 <body> 
     <header>
-
-        <div class="header-logo">
-        <!-- <h1>Stellasina</h1> -->
+      <div class="header-logo">
         <a href="http://localhost/Stellasina/"><img src="http://localhost/Stellasina/img/logo.png"></a>
-        </div>
-        <?php if($_SESSION['authorized'] != true){?> 
-     <a href="http://localhost/Stellasina/login" class="login-logout"><i class="far fa-user"></i> Logga in</a>
-
-    <?php } else if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] === true) { ?> 
-            <a href="http://localhost/Stellasina/customerstart" class="my-account login-logout">Mitt konto</a> 
-            <a href="http://localhost/Stellasina/logout" class="login-logout"><i class="far fa-user"></i> Logga ut</a>                                  
-             <?php } ?>
+      </div>
+      <?php if($_SESSION['authorized'] != true) { ?> 
+        <a href="http://localhost/Stellasina/login" class="login-logout"><i class="far fa-user"></i> Logga in</a>
+      <?php } else if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] === true) { ?> 
+        <a href="http://localhost/Stellasina/customerstart" class="my-account login-logout">Mitt konto</a> 
+        <a href="http://localhost/Stellasina/logout" class="login-logout"><i class="far fa-user"></i> Logga ut</a>                                  
+      <?php } ?>
     
-        <nav class="main-nav">
-                <div class="cart-button"> 
-                   <div class="qty-in-cart"></div>
-                   <i class="fas fa-shopping-cart"></i>
-                </div>
-            <ul>
-                <li><a href="http://localhost/Stellasina/products">Butiken</a></li>
-                <?php foreach($category as $row) { ?>
-                <li><a href="http://localhost/Stellasina/category/<?php echo $row['CategoryName']; ?>"><?php echo $row['CategoryName'] ?></a></li>
-                <?php } ?>
-            </ul>
-    </nav>
+      <nav class="main-nav">
+        <div class="cart-button"> 
+            <div class="qty-in-cart"></div>
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+        <ul>
+            <li><a href="http://localhost/Stellasina/products">Butiken</a></li>
+            <?php foreach($category as $row) { ?>
+            <li><a href="http://localhost/Stellasina/category/<?php echo $row['CategoryName']; ?>"><?php echo $row['CategoryName'] ?></a></li>
+            <?php } ?>
+        </ul>
+      </nav>
     </header>
+    
     <?php   include_once 'headercart.php'; ?>
     
 

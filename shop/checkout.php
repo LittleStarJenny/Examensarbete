@@ -1,8 +1,8 @@
 <?php 
-// include_once "header.php";
 include_once "resources/functions/emailExists.php";
 include_once "resources/include.php";
- $title = 'Kassan';
+
+$title = 'Kassan';
 $pdo = connect();
 $customer = New Customer;
 $order = New Order;
@@ -21,48 +21,6 @@ if(isset($_COOKIE["cart"])) {
 if(isset ($_SESSION['Mail']) && $_SESSION['Mail'] != ''){
 } else {
   $_SESSION['Mail'] = '';
-}
-
-// Check if Mail is already registrered else create new customer
-if(isset($_POST['check'])) {
-//     $Mail = $_POST['Mail'];
-//     if (emailExists($pdo, $Mail)) {
-//         $customer->Mail = $Mail;
-//         $result = $customer->get_customer();
-//         $row = $result->fetch(); 
-//         $err_message = 'Mailen finns redan registrerad, logga in istället?!
-//         <form method="post" action="">
-//         <span>Lösenord</span> 
-//         <input type="password" name="Password">
-//         <input hidden name="Mail" value="'.$_POST['Mail'].'">
-//         <input class="standard-btn" type="submit" name="login" value="Spara"> 
-//         </form>'; 
-//     } else { 
-//         $err_message = 'Email hittades inte, registrera dig nedan!
-//         <form method="post" action="">
-//         <h4>Registrera dig</h4> 
-//         <div class="CustomerInfo"> 
-//         <br><span>Förnamn</span> 
-//         <input text name="Firstname" pattern="[a-zåäöA-ZÅÄÖ]+"  value="">
-//         <span>Efternamn</span>     
-//         <input text name="Lastname" value="">
-//         <span>Adress</span>    
-//         <input text name="Address" pattern="[a-zåäöA-ZÅÄÖ0-9\s]+"  value="">
-//         <span>Postnr</span>    
-//         <input tel name="Zipcode" pattern="[0-9]{3} [0-9]{2}" placeholder="555 55">
-//         <span>Postadress</span>    
-//         <input text name="City" pattern="[a-zåäöA-ZÅÄÖ]+" value="">
-//         <span>Mobil</span>    
-//         <input tel name="Phone" pattern="[0-9]{3}-[0-9]{3} [0-9]{2} [0-9]{2}" placeholder="073-555 66 88">
-//         <span>Lösenord</span> 
-//         <input type="password" name="Password">
-//         <span><strong>Stämmer Mailadressen?</strong></span>
-//         <input mail id="mail" name="Mail" required placeholder="your@email.com" value="'.$Mail.'">
-//         <input class="standard-btn" type="submit" name="save" value="Spara">
-//         </div> 
-//         </form>'; ?> 
-// <?php  
-//     } 
 } 
 
 if(isset($_POST['login'])) {
@@ -72,7 +30,7 @@ if(isset($_POST['login'])) {
     $customer->Mail = $Mail;
     $customer->Password = $Password;
     $row = $customer->loginFromCheckout($Mail, $Password);
-    }
+}
     $customer->Mail = $_SESSION['Mail'];
     $result = $customer->get_customer();
     $rows = $result->fetch(); 
@@ -176,8 +134,8 @@ if(isset($_POST["buy"])) {
             </div>
         </div> 
         <hr>
-        <?php  } 
-              } ?>
+        <?php       } 
+                } ?>
         <!-- Total Sum -->
         <div class="Total">
             <h3>Summa</h3>        
@@ -201,8 +159,7 @@ if(isset($_POST["buy"])) {
         <div class="checkout-wrap">
             <div id="wrap">
 
-            <?php
-            if (isset($_POST['check'])) {
+            <?php if (isset($_POST['check'])) {
                 $Mail = $_POST['Mail'];
                 if (emailExists($pdo, $Mail)) {
                     $customer->Mail = $Mail;
@@ -239,7 +196,7 @@ if(isset($_POST["buy"])) {
                     <input class="standard-btn" type="submit" name="save" value="Spara">
                     </div> 
                     </form>'; ?> 
-            <?php  }    
+                <?php  }    
             } else { ?>
                 <form method="POST" action="checkout" id="loginform">
                     <span>Mail</span>    
@@ -249,8 +206,8 @@ if(isset($_POST["buy"])) {
             <?php } ?>
             </div>
             <p><?php  echo $err_message; ?></p>
-<?php 
-            if($rows != '') { ?> 
+            <?php if($rows != '') { ?> 
+
             <form method="post" action="">
                 <div class="CustomerInfo">
                     <span><?php if(isset($rows['Firstname'])) {echo $rows["Firstname"]; } echo " "; if(isset($rows['Lastname'])) {echo $rows["Lastname"]; } ?></span>
@@ -266,4 +223,3 @@ if(isset($_POST["buy"])) {
         </div>
     </section>
 </main>
-<!-- <?php include_once 'footer.php' ?> -->

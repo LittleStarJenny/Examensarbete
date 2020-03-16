@@ -34,42 +34,46 @@ if(isset($_POST['save'])) {
     $return = $customer->update_customer();
 
 
- if($return){
+    if($return) {
       header('location:customerstart');
         $message = 'Dina uppgifter är sparade';
-        }
     }
-?>
+}
 
-<main id="customer-pages">
-<span><?php echo $message;?></span>
-<h3> Välkommen <?php echo $row['Firstname']; echo " "; echo $row['Lastname']; ?>!</h3>
-<input type ="hidden" name="CustomersId" value="<?php echo $row['CustomersId'] ?>">
-<span><?php echo $message; ?></span>
-   
-
-<!-- Update Customer -->
-<div class="updateCustomer">
-<a class="back-btn" href="customerstart">Tillbaka</a>      
-<form method="post" action="">
-<h4>Uppdatera uppgifter</h4>
-<div class="CustomerInfo"> 
-<input type ="hidden" name="CustomersId" value="<?php echo $row['CustomersId'] ?>">
-<br><span>Förnamn</span> 
-<input text name="Firstname" pattern="[a-zåäöA-ZÅÄÖ]+"  value="<?php if(isset($row['Firstname'])) { echo $row['Firstname']; } ?>">
-<span>Efternamn</span>     
-<input text name="Lastname" value="<?php if(isset($row['Lastname'])) { echo $row['Lastname']; } ?>">
-<span>Adress</span>    
-<input text name="Address" pattern="[a-zåäöA-ZÅÄÖ0-9\s]+"  value="<?php if(isset($row['Address'])) { echo $row['Address']; } ?>">
-<span>Postnr</span>    
-<input tel name="Zipcode" pattern="[0-9]{3} [0-9]{2}" value="<?php if(isset($row['Zipcode'])) { echo $row['Zipcode']; } ?>">
-<span>Postadress</span>    
-<input text name="City" pattern="[a-zåäöA-ZÅÄÖ]+" value="<?php if(isset($row['City'])) { echo $row['City']; } ?>">
-<span>Mobil</span>    
-<input tel name="Phone" pattern="[0-9]{3}-[0-9]{3} [0-9]{2} [0-9]{2}" value="<?php if(isset($row['Phone'])) { echo $row['Phone']; } ?>">
-<span>Mail</span>
-<input mail name="Mail" required placeholder="your@email.com" value="<?php if(isset($row['Mail'])) { echo $row['Mail']; } ?>">
-<input class="standard-btn" type="submit" name="save" value="Spara">
-</div> 
-</form> 
-</div>
+if($_SESSION['Mail'] != "") { ?>
+    <main id="customer-pages">
+        <span><?php echo $message;?></span>
+        <h3> Välkommen <?php echo $row['Firstname']; echo " "; echo $row['Lastname']; ?>!</h3>
+        <input type ="hidden" name="CustomersId" value="<?php echo $row['CustomersId'] ?>">
+        <span><?php echo $message; ?></span>
+        <!-- Update Customer -->
+        <div class="updateCustomer">
+            <a class="back-btn" href="customerstart">Tillbaka</a>      
+            <form method="post" action="">
+                <h4>Uppdatera uppgifter</h4>
+                <div class="CustomerInfo"> 
+                    <input type ="hidden" name="CustomersId" value="<?php echo $row['CustomersId'] ?>">
+                    <br><span>Förnamn</span> 
+                    <input text name="Firstname" pattern="[a-zåäöA-ZÅÄÖ]+"  value="<?php if(isset($row['Firstname'])) { echo $row['Firstname']; } ?>">
+                    <span>Efternamn</span>     
+                    <input text name="Lastname" value="<?php if(isset($row['Lastname'])) { echo $row['Lastname']; } ?>">
+                    <span>Adress</span>    
+                    <input text name="Address" pattern="[a-zåäöA-ZÅÄÖ0-9\s]+"  value="<?php if(isset($row['Address'])) { echo $row['Address']; } ?>">
+                    <span>Postnr</span>    
+                    <input tel name="Zipcode" pattern="[0-9]{3} [0-9]{2}" value="<?php if(isset($row['Zipcode'])) { echo $row['Zipcode']; } ?>">
+                    <span>Postadress</span>    
+                    <input text name="City" pattern="[a-zåäöA-ZÅÄÖ]+" value="<?php if(isset($row['City'])) { echo $row['City']; } ?>">
+                    <span>Mobil</span>    
+                    <input tel name="Phone" pattern="[0-9]{3}-[0-9]{3} [0-9]{2} [0-9]{2}" value="<?php if(isset($row['Phone'])) { echo $row['Phone']; } ?>">
+                    <span>Mail</span>
+                    <input mail name="Mail" required placeholder="your@email.com" value="<?php if(isset($row['Mail'])) { echo $row['Mail']; } ?>">
+                    <input class="standard-btn" type="submit" name="save" value="Spara">
+                </div> 
+            </form> 
+        </div>
+    </main>
+    <?php } else { ?>
+    <main>
+        <span>Du har ingen behörighet att se det här. Logga in först?!</span>
+    </main>
+<?php } ?>

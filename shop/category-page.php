@@ -1,7 +1,6 @@
 <?php 
-// include_once "header.php";
-
 $productCat = New Product;
+
 // Get products from Clean Url
 $request = $_SERVER['REQUEST_URI'];
 $url = $request;
@@ -9,7 +8,6 @@ $url = trim($url, "/");
 $url = explode("/", $url);
 $id = $url[2];
 $urls = explode("?", $id);
-
 
 $productCat->CategoryName = $urls[0];
 $result = $productCat->get_productsBycategory();
@@ -34,6 +32,3 @@ $categorylabel = $try->fetch();
         <?php } ?> 
     </section>
 </main>
-<!-- 
-<?php
-include_once "footer.php"?> -->

@@ -1,15 +1,9 @@
 <?php
-// include_once "header.php";
-// session_start(); 
+$customer = New Customer; 
 $pdo = connect();
 $err_message = "";
-// $Mail = '';
-// $Password = '';
-$customer = New Customer;
-
-
-
 ?>
+
 <main>  
     <div class="login-container">
         <h1>Välkommen</h1>

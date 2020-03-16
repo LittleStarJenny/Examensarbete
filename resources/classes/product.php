@@ -1,157 +1,157 @@
 <?php 
 class Product {
-     public $ProductsId = 0;
-     public $Productname = '';
 
-public function get_product() {
-     $pdo = connect();
+    public $ProductsId = 0;
+    public $Productname = '';
 
-     $sql = "SELECT * FROM products
-             WHERE ProductsId = '" . $this->{"ProductsId"} . "'"; // sql statementS
+    public function get_product() {
+        $pdo = connect();
 
-     $toGet = $pdo->prepare($sql); // prepared statement
-     $toGet->execute(); // execute sql statment
+        $sql = "SELECT * FROM products
+            WHERE ProductsId = '" . $this->{"ProductsId"} . "'"; // sql statementS
 
-     return $toGet;
+        $toGet = $pdo->prepare($sql); // prepared statement
+        $toGet->execute(); // execute sql statment
 
- }
+        return $toGet;
+    }
 
- public function get_all_products() {
-    $pdo = connect();
+    public function get_all_products() {
+        $pdo = connect();
 
-    $sql = "SELECT * FROM products"; // sql statementS
+        $sql = "SELECT * FROM products"; // sql statementS
 
-    $toGet = $pdo->prepare($sql); // prepared statement
-    $toGet->execute(); // execute sql statment
+        $toGet = $pdo->prepare($sql); // prepared statement
+        $toGet->execute(); // execute sql statment
 
-    return $toGet;
+        return $toGet;
+    }
 
-}
+    public function create_product() {
+        $pdo = connect();
 
- public function create_product() {
-    $pdo = connect();
+        $sql = "INSERT INTO products (ProductName, Description, Price, Color, Img, CategoryId)
+        VALUES ('" . $this->{"ProductName"} . "', '" . $this->{"Description"} . "', '" . $this->{"Price"} . "', '" . $this->{"Color"} . "', '" . $this->{"Img"} . "', '" . $this->{"CategoryId"} . "')"; // sql statements
 
-    $sql = "INSERT INTO products (ProductName, Description, Price, Color, Img, CategoryId)
-            VALUES ('" . $this->{"ProductName"} . "', '" . $this->{"Description"} . "', '" . $this->{"Price"} . "', '" . $this->{"Color"} . "', '" . $this->{"Img"} . "', '" . $this->{"CategoryId"} . "')"; // sql statements
+        $toCreate = $pdo->prepare($sql); // prepared statement
+        $toCreate->execute(); // execute sql statement
 
-    $toCreate = $pdo->prepare($sql); // prepared statement
-    $toCreate->execute(); // execute sql statement
+        return $toCreate;
+    }
 
-    return $toCreate;
-}
 
-// ProductVariations
-     public $ProductId = 0;
-     public $Size = '';
+    // ProductVariations
+    public $ProductId = 0;
+    public $Size = '';
 
-public function get_productvariation() {
-     $pdo = connect();
+    public function get_productvariation() {
+        $pdo = connect();
 
-     $sql = "SELECT * FROM productvariations  as PV
-      JOIN products AS P ON PV.ProductId = P.ProductsId
-     WHERE ProductId = '" . $this->{"ProductId"} . "'"; // sql statementS
+        $sql = "SELECT * FROM productvariations  as PV
+        JOIN products AS P ON PV.ProductId = P.ProductsId
+        WHERE ProductId = '" . $this->{"ProductId"} . "'"; // sql statementS
 
-     $toGet = $pdo->prepare($sql); // prepared statement
-     $toGet->execute(); // execute sql statement
+        $toGet = $pdo->prepare($sql); // prepared statement
+        $toGet->execute(); // execute sql statement
 
-     return $toGet;
+        return $toGet;
+    }
 
- }
+    public function create_productvariation() {
+        $pdo = connect();
 
- public function create_productvariation() {
-    $pdo = connect();
+        $sql = "INSERT INTO productvariations (Size, ProductId)
+        VALUES ('" . $this->{"Size"} . "', '" . $this->{"ProductId"} . "')"; // sql statements
 
-    $sql = "INSERT INTO productvariations (Size, ProductId)
-            VALUES ('" . $this->{"Size"} . "', '" . $this->{"ProductId"} . "')"; // sql statements
+        $toCreate = $pdo->prepare($sql); // prepared statement
+        $toCreate->execute(); // execute sql statement
 
-    $toCreate = $pdo->prepare($sql); // prepared statement
-    $toCreate->execute(); // execute sql statement
+        return $toCreate;
+    }
 
-    return $toCreate;
-}
+    public function get_productvariationForOrder() {
+        $pdo = connect();
 
- public function get_productvariationForOrder() {
-    $pdo = connect();
+        $sql = "SELECT PVId FROM productvariations
+        WHERE Size = '" . $this->{"Size"} . "'"; // sql statementS
 
-    $sql = "SELECT PVId FROM productvariations
-    WHERE Size = '" . $this->{"Size"} . "'"; // sql statementS
+        $toGet = $pdo->prepare($sql); // prepared statement
+        $toGet->execute(); // execute sql statement
 
-    $toGet = $pdo->prepare($sql); // prepared statement
-    $toGet->execute(); // execute sql statement
+        return $toGet;
+    }
 
-    return $toGet;
+    public function get_productsBycategory() {
+        $pdo = connect();
 
-}
+        $sql = "SELECT * FROM categorys as C
+        JOIN products AS P ON P.CategoryId = C.CategoryId
+        WHERE C.CategoryName = '" . $this->{"CategoryName"} . "'"; // sql statementS
 
- public function get_productsBycategory() {
-     $pdo = connect();
+        $toGet = $pdo->prepare($sql); // prepared statement
+        $toGet->execute(); // execute sql statement
 
-     $sql = "SELECT * FROM categorys as C
-     JOIN products AS P ON P.CategoryId = C.CategoryId
-     WHERE C.CategoryName = '" . $this->{"CategoryName"} . "'"; // sql statementS
+        return $toGet;
+    } 
 
-     $toGet = $pdo->prepare($sql); // prepared statement
-     $toGet->execute(); // execute sql statement
+    // Category
+    public $CategoryId = 0;
+    public $Categoryname = '';
 
-     return $toGet;
+    public function get_category() {
+        $pdo = connect();
 
- } 
-public $CategoryId = 0;
-public $Categoryname = '';
+        $sql = "SELECT * FROM categorys
+        WHERE CategoryName = '" . $this->{"CategoryName"} . "'"; // sql statementS
 
- public function get_category() {
-     $pdo = connect();
+        $toGet = $pdo->prepare($sql); // prepared statement
+        $toGet->execute(); // execute sql statement
 
-     $sql = "SELECT * FROM categorys
-     WHERE CategoryName = '" . $this->{"CategoryName"} . "'"; // sql statementS
+        return $toGet;
+    }
 
-     $toGet = $pdo->prepare($sql); // prepared statement
-     $toGet->execute(); // execute sql statement
+    public function get_categoryForHeader() {
+        $pdo = connect();
 
-     return $toGet;
+        $sql = "SELECT * FROM categorys"; // sql statementS
 
- }
+        $toGet = $pdo->prepare($sql); // prepared statement
+        $toGet->execute(); // execute sql statement
 
- public function get_categoryForHeader() {
-     $pdo = connect();
+        return $toGet;
+    }
 
-     $sql = "SELECT * FROM categorys"; // sql statementS
 
-     $toGet = $pdo->prepare($sql); // prepared statement
-     $toGet->execute(); // execute sql statement
+    // Images
+    public $ImageId = 0;
+    public $Image = '';
 
-     return $toGet;
+    public function get_images() {
+        $pdo = connect();
 
- }
+        $sql = "SELECT * FROM images
+        WHERE ProductsId = '" . $this->{"ProductsId"} . "'"; // sql statementS
 
-public $ImageId = 0;
-public $Image = '';
+        $toGet = $pdo->prepare($sql); // prepared statement
+        $toGet->execute(); // execute sql statement
 
- public function get_images() {
-     $pdo = connect();
+        return $toGet;
+    } 
 
-     $sql = "SELECT * FROM images
-     WHERE ProductsId = '" . $this->{"ProductsId"} . "'"; // sql statementS
 
-     $toGet = $pdo->prepare($sql); // prepared statement
-     $toGet->execute(); // execute sql statement
+    // Sizechart
+    public $SizeId = 0;
 
-     return $toGet;
+    public function get_sizechart() {
+        $pdo = connect();
 
- } 
+        $sql = "SELECT * FROM sizechart"; // sql statementS
 
-public $SizeId = 0;
+        $toGet = $pdo->prepare($sql); // prepared statement
+        $toGet->execute(); // execute sql statement
 
- public function get_sizechart() {
-    $pdo = connect();
-
-    $sql = "SELECT * FROM sizechart"; // sql statementS
-
-    $toGet = $pdo->prepare($sql); // prepared statement
-    $toGet->execute(); // execute sql statement
-
-    return $toGet;
-} 
+        return $toGet;
+    } 
 
 }
 ?>

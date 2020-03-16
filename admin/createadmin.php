@@ -1,7 +1,9 @@
 <?php 
 include_once 'adminheader.php';
+
 $admin = New Admin;
 $message = "";
+
 // Call create admin function
 if(isset($_POST['saveAdmin'])) {
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
@@ -14,10 +16,10 @@ if(isset($_POST['saveAdmin'])) {
     $admin->Password = $passwordHashed;
 
     if($admin->create_admin()) {
-    $message ="Konto skapades";
-} else {
-    $message = "Något gick fel, försök igen";
-}
+        $message ="Konto skapades";
+    } else {
+        $message = "Något gick fel, försök igen";
+    }
 }
 ?>
 <main id="main-admin">

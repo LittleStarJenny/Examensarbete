@@ -1,5 +1,6 @@
 <?php
 
+// To easy include many files in one include
 include($_SERVER['DOCUMENT_ROOT'].'/Stellasina/router.php');
 include($_SERVER['DOCUMENT_ROOT'].'/Stellasina/resources/config.php');
 include($_SERVER['DOCUMENT_ROOT'].'/Stellasina/resources/classes/product.php');
