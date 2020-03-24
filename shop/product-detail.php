@@ -1,13 +1,12 @@
 <?php include_once '../header.php';
 
-$message = '';
+$message = "";
 $product = New Product;
 $cart_data = [];
 
 
 // if the variables are set - run the following statement
 if(isset($_POST["addtocart"])) {
-  $message = "Varan lades till i varukorgen";
     if(isset($_COOKIE["cart"])) {
   
       // Removes backlashes and dont replace previous item, gives every item a new row.
@@ -46,17 +45,20 @@ if(isset($_POST["addtocart"])) {
   
     $item_data = json_encode($cart_data);
     setcookie('cart', $item_data, time() +(3600),'/');
-    // header("location: product-detail.php?product=".$_GET['product']);
-    $message = "Varan lades till i varukorgen";
-
+    header("location: product-detail.php?product=".$_GET['product']."&success");
   }
 
-  
+  if(isset($_GET['success'])) {
+    $message = "Varan lades till i varukorgen";
+  };
+
+var_dump($message);
 ?>
     
 <main id="product-content">
   <section>
-    <form method="post" name="cartCount" action="product-detail.php?product=<?php echo $_GET['product']; ?>"> 
+  <form method="post" name="cartCount" action=""> 
+  <!-- product-detail.php?product=<?php echo $_GET['product']; ?> -->
       <?php if(isset($_GET['product'])) {
         $product->ProductsId = $_GET['product'];
         $product->ProductId = $_GET['product'];
@@ -95,8 +97,10 @@ if(isset($_POST["addtocart"])) {
           </select>
 
           <input type="hidden" name="quantity" value="1"  />
+
           <input type="submit" class="addtocart-btn"  name="addtocart" value="Lägg i varukorgen"/>
-          <div><?php echo $message;?></div>
+          <div class="successMessage"><?php echo $message ?></div>
+          
           <input type ="hidden" name="ProductsId" value="<?php echo $row['ProductsId'] ?>">
           <span class="title-description">Beskrivning</span>
           <p class="description"><?php echo $row['Description']; ?></p>

@@ -28,6 +28,8 @@ $('.cart-content').toggleClass('active');
 });
 }
 
+
+
 var qty = [];
 var sum_total = 0;
 // var totalrows = 0;
@@ -45,14 +47,24 @@ var sum_total = 0;
                 console.log('Total ' + sum_total);
 
            });
+
+
         //    $('.productsIncart').each(function() {
         //     var totalrows = Number($(this).find('.each-row').text().replace(/[^0-9]/gi, ''));
         //     console.log(totalrows);
         //     });
-      
+        //  $('.addtocart-btn').on('click', function() {
+        //     window.location.reload();
+        //  });
 
            $('.qty-in-cart').text(sum_total);
 
+if($('.successMessage').length > 0) {
+    setTimeout(function() {
+        $('.successMessage').fadeOut('fast');
+    }, 3000); // <-- time in milliseconds
+}
+   
 //            $(document).ready(function($) {
 // $('#loginform').on('submit', function() {
 //     console.log('Jeeeeeennnnny');
@@ -60,9 +72,9 @@ var sum_total = 0;
 // });
 //            });
 
-// if ( window.history.replaceState ) {
-//   window.history.replaceState( null, null, window.location.href );
-// }
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
 
 });
 

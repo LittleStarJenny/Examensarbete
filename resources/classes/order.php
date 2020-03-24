@@ -108,5 +108,24 @@ class Order {
         return $toGet;
     }
 
+    public function get_all_orders_fromNewest() {
+        $pdo = connect();
+
+        $sql = "SELECT O.OrderId, O.Date, O.CustomersId,
+        P.ProductName, PV.Size, OI.Quantity, P.Price 
+        FROM orders AS O 
+        JOIN orderitem AS OI ON OI.OrderId = O.OrderId 
+        JOIN productvariations AS PV ON PV.PVId = OI.ProductvariationsId 
+        JOIN products AS P ON P.ProductsId = PV.ProductId 
+        GROUP BY OrderId
+        ORDER BY Date DESC" ;
+
+
+        $toGet = $pdo->prepare($sql); // prepared statement
+        $toGet->execute(); // execute sql statement
+
+        return $toGet;
+    }  
+
 }
 ?>

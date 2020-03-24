@@ -70,6 +70,6 @@ if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] != false) {
       </nav>
     </header>
     
-    <?php   include_once 'headercart.php'; ?>
+
     
 

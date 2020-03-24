@@ -74,3 +74,14 @@
     height: unset;
     
   }
+
+  #main-admin .orderWrapper {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    width: 70%;
+  }
+
+  #main-admin .perOrder {
+    margin: 10px;
+  }
