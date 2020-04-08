@@ -1,4 +1,10 @@
 /* Admin */
+.admin-header a {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
 .login-container {
     width: 100%;
   }
@@ -37,6 +43,33 @@
     border: 0;
     margin-top: 5px;
   }
+
+  .adminpanel-title {
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .admin-nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .admin-nav a {
+    border: 1px solid lightgray;
+    width: 50%;
+    background: lightblue;
+    padding: 10px;
+    align-self: center;
+    text-align: center;
+    color: #eee;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 1px;
+  }
+
+  .sidemenu .admin-nav a {
+    width: 100%;
+  }
   
   #main-admin {
     display: flex;
@@ -55,6 +88,7 @@
   
   #main-admin section {
     width: 85%;
+    margin-left: 20px;
   }
   
   #main-admin section .admin-wrapper div {
@@ -65,7 +99,7 @@
   
   #main-admin section .admin-wrapper div input {
     width: 50%;
-    height: 150px;
+    /* height: 150px; */
   }
 
   #main-admin .admin-input {

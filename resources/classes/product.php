@@ -47,8 +47,10 @@ class Product {
     public function get_productvariation() {
         $pdo = connect();
 
-        $sql = "SELECT * FROM productvariations  as PV
+        $sql = "SELECT * 
+        FROM productvariations  as PV
         JOIN products AS P ON PV.ProductId = P.ProductsId
+        JOIN sizechart as S on PV.Size = S.SizeId
         WHERE ProductId = '" . $this->{"ProductId"} . "'"; // sql statementS
 
         $toGet = $pdo->prepare($sql); // prepared statement
@@ -69,11 +71,24 @@ class Product {
         return $toCreate;
     }
 
+    public function get_sizeIdforProductvariation() {
+        $pdo = connect();
+
+        $sql = "SELECT * FROM sizechart
+        WHERE Size = '" . $this->{"Size"} . "'"; // sql statementS
+
+        $toGet = $pdo->prepare($sql); // prepared statement
+        $toGet->execute(); // execute sql statement
+
+        return $toGet;
+    }
+
     public function get_productvariationForOrder() {
         $pdo = connect();
 
         $sql = "SELECT PVId FROM productvariations
-        WHERE Size = '" . $this->{"Size"} . "'"; // sql statementS
+        WHERE Size = '" . $this->{"Size"} . "'
+        AND ProductId = '" . $this->{"ProductId"} . "'"; // sql statementS
 
         $toGet = $pdo->prepare($sql); // prepared statement
         $toGet->execute(); // execute sql statement
@@ -146,6 +161,18 @@ class Product {
         $pdo = connect();
 
         $sql = "SELECT * FROM sizechart"; // sql statementS
+
+        $toGet = $pdo->prepare($sql); // prepared statement
+        $toGet->execute(); // execute sql statement
+
+        return $toGet;
+    } 
+
+    public function get_sizechartById() {
+        $pdo = connect();
+
+        $sql = "SELECT * FROM sizechart
+        WHERE SizeId = '" . $this->{"SizeId"} . "'"; // sql statementS
 
         $toGet = $pdo->prepare($sql); // prepared statement
         $toGet->execute(); // execute sql statement

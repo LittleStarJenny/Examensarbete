@@ -1,8 +1,9 @@
 <aside class="sidemenu">
     <nav class="admin-nav">
-        <a href="adminpanel.php">Start</a>
-        <a href="createadmin.php">Skapa Användare</a>
-        <a href="createproduct.php">Skapa Produkt</a>
-        <a href="orders.php">Kundorder</a>
+        <a href="http://localhost/Stellasina/start">Start</a>
+        <a href="http://localhost/Stellasina/skapa-admin">Skapa Användare</a>
+        <a href="http://localhost/Stellasina/skapa-produkt">Skapa Produkt</a>
+        <a href="http://localhost/Stellasina/kunder">Ändra kundinfo</a>
+        <a href="http://localhost/Stellasina/orders">Kundorder</a>
     </nav>
 </aside>

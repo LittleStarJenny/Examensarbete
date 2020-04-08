@@ -10,7 +10,7 @@ if(isset($_POST['saveAdmin'])) {
     $Firstname = filter_input(INPUT_POST, 'Firstname', FILTER_SANITIZE_STRING);
     $Passwords = filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_MAGIC_QUOTES);
     $passwordHashed = password_hash($Passwords, PASSWORD_DEFAULT);
-    var_dump($username);
+    // var_dump($username);
     $admin->username = $username;
     $admin->Firstname = $Firstname;
     $admin->Password = $passwordHashed;
@@ -25,7 +25,7 @@ if(isset($_POST['saveAdmin'])) {
 <main id="main-admin">
     <?php include_once 'adminsidebar.php'; ?>
     <div class="login-container">
-        <form method="post" action="createadmin.php?success">
+        <form method="post" action="skapa-admin/success">
         <span class="form-label">Användarnamn</span>
             <input type="text" name="username">
             <span class="form-label">Namn</span>

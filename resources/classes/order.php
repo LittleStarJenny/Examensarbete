@@ -95,6 +95,20 @@ class Order {
         return $toGet;
     }
 
+    public function get_lastOrderByCustomer() {
+        $pdo = connect();
+
+        $sql = "SELECT * FROM orders
+        WHERE CustomersId  = '" . $this->{"CustomersId"} . "' 
+        ORDER BY OrderId DESC
+        LIMIT 1";
+
+        $toGet = $pdo->prepare($sql); // prepared statement
+        $toGet->execute(); // execute sql statement
+
+        return $toGet;
+    }
+
     public function get_orderItem() {
         $pdo = connect();
 

@@ -19,7 +19,7 @@ $(document).scroll(function() {
 
     // Get totalsum if 0 or less do not activate click
 var totsum = Number($('.cartSum .total').text().replace(/[^0-9]/gi, ''));
-// console.log(totsum);
+
 
 if(totsum > 0) {
 $('.main-nav .cart-button').on('click', function() {
@@ -29,12 +29,14 @@ $('.cart-content').toggleClass('active');
 }
 
 
+$('.addtocart-btn').prop('disabled', true).addClass('active');
+setTimeout(function() {
+      $('.addtocart-btn').prop('disabled', false).removeClass('active');
+}, 3000);
+    
 
 var qty = [];
 var sum_total = 0;
-// var totalrows = 0;
-// qty = Number($('.productsIncart .cart-prod-qty').text().replace(/[^0-9]/gi, ''));
-//    console.log(qty);
 
            $('.each-row').each(function() {
            var qty_number = Number($(this).find('.cartRow .cart-prod-qty').text().replace(/[^0-9]/gi, ''));
@@ -48,15 +50,6 @@ var sum_total = 0;
 
            });
 
-
-        //    $('.productsIncart').each(function() {
-        //     var totalrows = Number($(this).find('.each-row').text().replace(/[^0-9]/gi, ''));
-        //     console.log(totalrows);
-        //     });
-        //  $('.addtocart-btn').on('click', function() {
-        //     window.location.reload();
-        //  });
-
            $('.qty-in-cart').text(sum_total);
 
 if($('.successMessage').length > 0) {
@@ -64,13 +57,7 @@ if($('.successMessage').length > 0) {
         $('.successMessage').fadeOut('fast');
     }, 3000); // <-- time in milliseconds
 }
-   
-//            $(document).ready(function($) {
-// $('#loginform').on('submit', function() {
-//     console.log('Jeeeeeennnnny');
-//     $('#submit').css('display', 'none');
-// });
-//            });
+
 
 if ( window.history.replaceState ) {
   window.history.replaceState( null, null, window.location.href );

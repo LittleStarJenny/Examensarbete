@@ -68,9 +68,11 @@ if(isset($_GET["action"])) {
         <label>Antal</label>
       </div>
       <div class="col-4">
-        <label>Pris</label>
+        <label>á Pris</label>
       </div>
-      <div class="col-5"></div>
+      <div class="col-5">
+        <label>Totalt</label>
+      </div>
     </div>
 
     <!-- Each cart item -->
@@ -92,12 +94,11 @@ if(isset($_GET["action"])) {
           <button><i class="fas fa-sync"></i></button>
         </span> 
         <span class="cart-prod-price"><?php echo $values['Price']; ?> SEK</span>
-      </div>
-      <hr>  
-      <div class="prod-total">
-        <span>Totalt</span>
+        <div class="prod-total">
         <span><?php echo $rowtotal; ?> SEK<span>
       </div>
+      </div>
+      <hr>  
     </form>
     <?php }  
     }?>
@@ -109,7 +110,7 @@ if(isset($_GET["action"])) {
     <span colspan="3">Totalt</span>
     <span><?php echo $total; ?> SEK</span>
     <div class="toCheckout">
-      <a href="checkout">Till kassan</a>
+      <a href="http://localhost/Stellasina/checkout">Till kassan</a>
     </div>
   </div>
 </main>

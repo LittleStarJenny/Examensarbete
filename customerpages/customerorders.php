@@ -23,18 +23,20 @@ if($_SESSION['Mail'] != "") { ?>
                     $order->OrderId = $rowResult['OrderId'];
                     $test = $order->get_order();
                     $customersOrders = $test->fetchAll(PDO::FETCH_ASSOC); ?>
-                    <?php foreach($customersOrders as $row) { ?>
                         <div class="orders">
                             <h4> Ordernr: <?php echo $rowResult['OrderId']; ?></h4>
-                            <span>Orderdatum: <?php echo $row['Date']; ?></span>
+                            <span>Orderdatum: <?php echo $rowResult['Date']; ?></span>
+                            <?php foreach($customersOrders as $row) { ?>
                             <span><?php echo $row['ProductName'];?></span>
                             <span>Storlek: <?php echo $row['Size'];?></span>
                             <span>Antal: <?php echo $row['Quantity'];?></span>
                             <span>Pris: <?php echo $row['Price'];?> SEK</span>
-                        </div>
+                  
                     <?php } ?>
+                    </div>
+                   
                 <?php } ?> 
-            </div>
+                </div>
         </div>
     </main>
 <?php } else { ?>

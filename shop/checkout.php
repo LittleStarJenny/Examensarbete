@@ -78,16 +78,23 @@ if(isset($_POST["buy"])) {
 
         // Create orderitems   
         foreach($cart_data as $keys => $values) {
-            $product->ProductId = $values['ProductsId'];
             $product->Size = $values['Size'];
+            $sizechart = $product->get_sizeIdforProductvariation();
+            $Sizes = $sizechart->fetch();
+            
+            // Get right ProductvariationId both ProductId and SizeId need to be set
+            $product->ProductId = $values['ProductsId'];
+            $product->Size = $Sizes['SizeId'];
             $result = $product->get_productvariationForOrder();
             $showpID = $result->fetch();
+            var_dump($showpID);
             $ProductvariationsId = $showpID["PVId"];
             $Quantity =  $values['quantity'];
             $order->ProductvariationsId = $ProductvariationsId;
             $order->Quantity = $Quantity;
             $order->OrderId = $OrderId['OrderId'];
             $order->create_orderItem();
+            
         } 
         header('location:orderconfirmation');
         // setcookie("cart", "", time() - 3600);

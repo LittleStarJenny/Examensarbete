@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-include_once '../resources/include.php';
+// include_once 'resources/include.php';
 $productCat = New Product;
 $message = '';
 
@@ -37,7 +37,7 @@ $category = $result->fetchAll();
         <?php if(isset ($_SESSION['Admin']) && $_SESSION['Admin'] != "") { ?> 
             <a href="http://localhost/Stellasina/admin/adminlogout.php" class="login-logout"><i class="far fa-user"></i> Logga ut</a>                                  
         <?php } ?>
-    
+<!--     
         <nav class="main-nav">
             <ul>
                 <li><a href="http://localhost/Stellasina/admin">Butiken</a></li>
@@ -45,7 +45,7 @@ $category = $result->fetchAll();
                 <li><a href="http://localhost/Stellasina/category/<?php echo $row['CategoryName']; ?>"><?php echo $row['CategoryName'] ?></a></li>
                 <?php } ?>
             </ul>
-        </nav>
+        </nav> -->
     </header>
     
 

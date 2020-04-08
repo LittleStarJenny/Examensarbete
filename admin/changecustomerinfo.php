@@ -1,12 +1,9 @@
 <?php 
 
-// session_start();
-// var_dump($_SESSION);
+include_once 'adminheader.php';
 $message = '';
 $customer = New Customer;
-$customer->Mail = $_SESSION['Mail'];
-$result = $customer->get_customer();
-$row = $result->fetch(); 
+
 
 if(isset($_POST['save'])) {
     $CustomersId = filter_input(INPUT_POST, 'CustomersId', FILTER_SANITIZE_MAGIC_QUOTES);
@@ -41,18 +38,34 @@ if(isset($_POST['save'])) {
     }
 }
 
-if($_SESSION['Mail'] != "") { ?>
+?>
     <main id="customer-pages">
-        <h3> Välkommen <?php echo $row['Firstname']; echo " "; echo $row['Lastname']; ?>!</h3>
+        <!-- <h3> Välkommen <?php echo $row['Firstname']; echo " "; echo $row['Lastname']; ?>!</h3>
         <input type ="hidden" name="CustomersId" value="<?php echo $row['CustomersId'] ?>">
         <!-- Update Customer -->
         <div class="updateCustomer">
-            <a class="back-btn" href="customerstart">Tillbaka</a>      
+            <a class="back-btn" href="customerstart">Tillbaka</a>       -->
             <form method="post" action="">
                 <h4>Uppdatera uppgifter</h4>
                 <span><?php echo $message; ?></span>
                 <div class="CustomerInfo"> 
-                    <input type ="hidden" name="CustomersId" value="<?php echo $row['CustomersId'] ?>">
+                <select class="CustomerId" name="selectCustomerId"> 
+
+                <?php 
+                $Id = $customer->get_customerById();
+                $customerId = $Id->fetchAll();
+                foreach ($customerId as $Idrow) {
+                ?>
+                    <option value="<?php echo $Idrow['CustomersId'];?>">
+                    <?php echo $Idrow['CustomersId']; ?>
+                    </option>
+                <?php } 
+                if($customer->CustomersId = $Idrow['CustomersId']) {
+                    $result = $customer->get_customer();
+$row = $result->fetch(); 
+                } ?>
+
+                    
                     <br><span>Förnamn</span> 
                     <input text name="Firstname" pattern="[a-zåäöA-ZÅÄÖ]+"  value="<?php if(isset($row['Firstname'])) { echo $row['Firstname']; } ?>">
                     <span>Efternamn</span>     
@@ -74,8 +87,3 @@ if($_SESSION['Mail'] != "") { ?>
             </form> 
         </div>
     </main>
-    <?php } else { ?>
-    <main>
-        <span>Du har ingen behörighet att se det här. Logga in först?!</span>
-    </main>
-<?php } ?>

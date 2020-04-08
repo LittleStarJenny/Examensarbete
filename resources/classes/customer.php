@@ -25,6 +25,18 @@ class Customer {
         return $toGet;
     }
 
+    public function get_customerById() {
+        $pdo = connect();
+
+        $sql = "SELECT * FROM customers" ;
+
+
+        $toGet = $pdo->prepare($sql); // prepared statement
+        $toGet->execute(); // execute sql statement
+
+        return $toGet;
+    }
+
     public function update_customer() {
         $pdo = connect();
 
@@ -86,13 +98,13 @@ class Customer {
                 $_SESSION['Firstname'] = $row['Firstname'];
                 session_write_close();
                 header('location:customerstart');
-                $err_message = 'Konto skapat, nu är det bara att bekräfta ditt köp';
+                $message = 'Konto skapat, nu är det bara att bekräfta ditt köp';
             } else {
-                //    header('locaton:customerlogin.php');
-                echo $err_message = 'Fel lösenord';
+           
+                echo $message = '<div class="Message"><div>Ditt lösenord är fel, försök igen</div></div>';
             }
         } 
-        else echo $err_message = 'Fel mail';
+        else echo $message = '<div class="Message"><div>Kolla om du angett rätt Mail</div></div>';
     }
 
 

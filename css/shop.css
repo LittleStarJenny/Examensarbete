@@ -92,6 +92,11 @@
     font-size: 16px;
     margin-top: 5px;
   }
+
+  .addtocart-btn.active {
+    opacity: 0.7;
+    cursor: pointer;
+  }
   
   .addtocart-btn:hover {
     opacity: 0.7;
@@ -161,6 +166,10 @@
   #cart-content .cart-qty {
     width: 16%;
   }
+
+  #cart-content .cart-prod-price {
+    width: 18%;
+  }
   
   #cart-content  hr {
     margin-top: 50px;
@@ -207,6 +216,11 @@
     background: none;
     border: none;
     cursor: pointer;
+  }
+
+  #cart-content .Total span {
+    display: block;
+    text-align: right;
   }
   
   /* Checkout */

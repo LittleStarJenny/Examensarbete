@@ -43,3 +43,13 @@
     margin: 10px;
     padding-bottom: 5px;
   }
+
+  .Message {
+    background: #f2e2e1;
+    width: 50%;
+    padding: 10px;
+  }
+
+  .Message div {
+    color: #ce3535;
+  }

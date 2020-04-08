@@ -52,11 +52,11 @@ VALUES
 CREATE TABLE Productvariations
 (
     PVId INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- primary key column
-    ArticleNr VARCHAR(50) NOT NULL,
     Size VARCHAR(50) NOT NULL,
     ProductId INT NOT NULL,
 
-    constraint FK_ProductID foreign key(ProductId) references Products(ProductsId)
+    constraint FK_ProductID foreign key(ProductId) references Products(ProductsId),
+    constraint FK_size_id foreign key(Size) references sizechart(SizeId)
 );
 
 -- Insert rows into table 'Productvariations'
@@ -65,33 +65,33 @@ INSERT INTO Productvariations
  PVId, Size, ProductId
 )
 VALUES
-( 1, '75G', 1),
-( 2, '80J', 1),
-( 3, '75E', 1),
-( 4, '75E', 2),
-( 5, '75F', 2),
-( 6, '75G', 2),
-( 7, '75C', 3),
-( 8, '75D', 3),
-( 9, '80D', 3),
-( 10, '70G', 4),
-( 11, '75H', 4),
-( 12, '70I', 4),
-( 13, '75C', 5),
-( 14, '70D', 5),
-( 15, '75E', 5),
-( 16, '80F', 6),
-( 17, '80H', 6),
-( 18, '75F', 6),
-( 19, 'S', 7),
-( 20, 'M', 7),
-( 21, 'L', 7),
-( 22, 'S', 8),
-( 23, 'M', 8),
-( 24, 'L', 8),
-( 25, 'S', 9),
-( 26, 'M', 9),
-( 27, 'L', 9);
+( 1, '40', 1),
+( 2, '59', 1),
+( 3, '28', 1),
+( 4, '28', 2),
+( 5, '34', 2),
+( 6, '40', 2),
+( 7, '16', 3),
+( 8, '22', 3),
+( 9, '23', 3),
+( 10, '39', 4),
+( 11, '46', 4),
+( 12, '51', 4),
+( 13, '16', 5),
+( 14, '21', 5),
+( 15, '28', 5),
+( 16, '35', 6),
+( 17, '47', 6),
+( 18, '34', 6),
+( 19, '61', 7),
+( 20, '62', 7),
+( 21, '63', 7),
+( 22, '61', 8),
+( 23, '62', 8),
+( 24, '63', 8),
+( 25, '61', 9),
+( 26, '62', 9),
+( 27, '63', 9);
 
 CREATE TABLE images
 (   ImageId INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- primary key column
@@ -186,7 +186,11 @@ VALUES
 (57, '70J'),
 (58, '75J'),
 (59, '80J'),
-(60, '85J');
+(60, '85J'),
+(61, 'S'),
+(62, 'M'),
+(63, 'L');
+
 
 -- Create a new table called 'Customers' in schema 'dbo'
 -- Drop the table if it already exists
@@ -198,7 +202,7 @@ CREATE TABLE Customers
     Firstname VARCHAR(50) NOT NULL,
     Lastname VARCHAR(50) NOT NULL,
     Address VARCHAR(50) NOT NULL,
-    Zipcode INT NOT NULL,
+    Zipcode VARCHAR(6) NOT NULL,
     City VARCHAR(50) NOT NULL,
     Mail VARCHAR(50) NOT NULL,
     Phone VARCHAR(50) NOT NULL,
@@ -211,7 +215,7 @@ INSERT INTO Customers
 ( -- columns to insert data into
  CustomersId, Firstname, Lastname, Address, Zipcode, City, Mail, Phone, Password)
 VALUES
-( 1, 'Jenny', 'Norén', 'Harpsundsvägen 125', 12458, 'Bandhagen', 'littlestarjenny6@gmail.com', '073-525 34 83', '$2y$10$hPoqvmjraRLxpOMALqAhle58SI9q6L.yJi57dgu21TKDpKkVMP4wS'),
+( 1, 'Jenny', 'Norén', 'Harpsundsvägen 125', 12458, 'Bandhagen', 'test@mail.com', '073-525 34 83', '$2y$10$qzQXEhQ4T375Nq8LzuyYP.rJvphi7gT6pjp8WP/kSdoazwD7XZQki'),
 ( 2, 'Britt-Karin', 'Göransson', 'Ottekilsvägen 13', 12430, 'Bandhagen', 'britt.karin@mail.com', '070-456 48 93', 'morris'),
 ( 3, 'Ida', 'Aspnor', 'Skarplöts Allé 56', 19856, 'Haninge', 'ida1987@hotmail.com', '073-569 78 23', 'ellen'),
 ( 4, 'Ida', 'Holmström', 'Fjärilsstigen 151', 14678, 'Salem', 'holmstrom.ida@live.com', '070-656 89 13', 'micke'),

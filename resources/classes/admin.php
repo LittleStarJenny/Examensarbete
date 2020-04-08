@@ -37,7 +37,7 @@ class Admin {
                 $_SESSION['Admin'] = $row['username'];
                 $_SESSION['Name'] = $row['Firstname'];
                 session_write_close();
-                header('location:adminpanel.php');
+                header('location:start');
                 $err_message = 'Konto skapat, nu är det bara att bekräfta ditt köp';
             } else {
             //    header('locaton:customerlogin.php');

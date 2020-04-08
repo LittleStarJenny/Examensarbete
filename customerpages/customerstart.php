@@ -7,7 +7,8 @@ $customer->Mail = $_SESSION['Mail'];
 $result = $customer->get_customer();
 $row = $result->fetch(); 
 
-$get = $order->get_lastOrder();
+$order->CustomersId = $row['CustomersId'];
+$get = $order->get_lastOrderByCustomer();
 $LastOrderID = $get->fetch();
 $order->OrderId = $LastOrderID['OrderId'];
 $lastOrder = $order->get_order();

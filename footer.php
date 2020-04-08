@@ -1,4 +1,4 @@
-<?php   include_once 'headercart.php'; ?>    
+<!-- <?php   include_once 'headercart.php'; ?>     -->
     <footer>
       <ul>
         <li>Köpvillkor</li>

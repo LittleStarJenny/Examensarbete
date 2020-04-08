@@ -13,6 +13,7 @@ if(isset($_POST['saveVariation'])) {
         $product->ProductId = $Title;
         echo 'you have selected:' .$select .$Title;
         $product->create_productvariation();
+        // header('location:skapa-produkt/hej');
     }
 }
 
@@ -25,7 +26,7 @@ if(isset($_POST['saveVariation'])) {
         <div class="admin-wrapper">
             <h3>Skapa produkt</h3>
             <hr>
-            <form method="post" action="createproduct.php?success" enctype="multipart/form-data">
+            <form method="post" action="skapa-produkt" enctype="multipart/form-data">
                 <span class="createproduct">Kategori</span>
                 <select class="Category" name="selectCat"> 
 
@@ -43,7 +44,7 @@ if(isset($_POST['saveVariation'])) {
                 <input type="text" class="admin-input" name="ProductName">
                 <div>
                     <span class="createproduct">Beskrivning</span>
-                    <input type="text" class="admin-input" name="Description">
+                    <textarea class="admin-input" rows="4" name="Description"></textarea>
                 </div>
                 <span class="createproduct">Pris</span>
                 <input type="text" class="admin-input" name="Price">
@@ -61,7 +62,7 @@ if(isset($_POST['saveVariation'])) {
         <div class="variationWrap">
             <h3>Skapa produktvariation</h3>
             <hr>
-            <form method="post" action="createproduct.php?createproductvariationSuccess">
+            <form method="post" action="skapa-produkt/sparat">
                 <span class="createproduct">Välj Produkt</span>
                 <select class="ProductName" name="Title"> 
                     <?php 
@@ -79,7 +80,7 @@ if(isset($_POST['saveVariation'])) {
                 $getSize = $product->get_sizechart();
                 $Sizes = $getSize->fetchAll();
                 foreach ($Sizes as $Size) { ?>
-                    <input type="checkbox" class="admin-input" name="sizeChart[]" multiple value="<?php echo $Size['Size']; ?>">
+                    <input type="checkbox" class="admin-input" name="sizeChart[]" multiple value="<?php echo $Size['SizeId']; ?>">
                     <?php echo $Size['Size']; ?>
                     </option>
                 <?php }  ?>

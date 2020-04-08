@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once 'resources/include.php';
+ include_once 'resources/include.php';
 
 $productCat = New Product;
 $total = 0;
@@ -70,6 +70,6 @@ if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] != false) {
       </nav>
     </header>
     
-
+    <?php   include_once 'headercart.php'; ?> 
     
 

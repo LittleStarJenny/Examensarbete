@@ -18,13 +18,19 @@ $customer = $order->get_customerByorder();
 $Ordercustomer = $customer->fetch(); 
 
 //the subject
-$sub = "Test";
+$sub = "Orderbekräftelse";
 //the message
 $msg = 
 "<html>
   <body> 
     <h1>Orderbekräftelse</h1>
     <hr>
+    <h4>Leveransadress</h4>
+    <div>
+    <div>" . $Ordercustomer['Firstname'] . " " . $Ordercustomer['Lastname'] . "</div>
+    <div>" . $Ordercustomer['Address'] . "</div>
+    <div>" . $Ordercustomer['Zipcode'] . " " . $Ordercustomer['City'] . "</div>
+</div>
     <h4>Orderdetaljer</h4>
     <div>
       <label>Produkter</label>
@@ -34,10 +40,14 @@ $msg =
     </div>";
 
     foreach($TestOrderId as $row) {
+      // Get Size for matching ID
+      $product->SizeId = $row['Size'];
+      $sizechart = $product->get_sizechartById();
+      $SizeName = $sizechart->fetch();
     $msg .= 
     "<div>
       <span>" . $row['ProductName'] . "</span>
-      <span>" . $row['Size'] . "</span>
+      <span>" . $SizeName['Size'] . "</span>
       <span>" . $row['Quantity'] . "</span>
       <span>" . $row['Price'] . "</span>
     </div>";
@@ -54,10 +64,10 @@ $msg .= "<span>Totalt " . $total . " SEK</span>
 $rec = "littlestarjenny6@gmail.com";
 
 $headers = "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+$headers .= "Content-Type: text/html; charset=utf-8\r\n";
 
 //send email
-//  mail($rec,$sub,$msg, $headers);
+mail($rec,$sub,$msg, $headers);
 
 // Delete cookie
 setcookie("cart", "", time() -3600, '/');
@@ -90,10 +100,15 @@ setcookie("cart", "", time() -3600, '/');
     </div>
 
   <div class="Order">
-    <?php foreach($TestOrderId as $row) { ?>
+    <?php foreach($TestOrderId as $row) { 
+        // Get Size for matching ID
+        $product->SizeId = $row['Size'];
+        $sizechart = $product->get_sizechartById();
+        $SizeName = $sizechart->fetch();?>
+        
       <div class="order-productdetails">
       <span><?php echo $row['ProductName'];?></span>
-      <span><?php echo $row['Size'];?></span>
+      <span><?php echo $SizeName['Size'];?></span>
       <span><?php echo $row['Quantity'];?></span>
       <span><?php echo $row['Price'];?> SEK</span>
       </div>
