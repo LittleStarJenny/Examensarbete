@@ -1,5 +1,4 @@
 <?php
-// include_once 'adminheader.php';
 
 $err_message = "";
 $message = "";

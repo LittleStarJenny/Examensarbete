@@ -2,6 +2,7 @@
 $message = '';
 $customer = New Customer;
 
+// Get selected customer by mail and fetch all orders related to that customersId
 $customer->Mail = $_SESSION['Mail'];
 $result = $customer->get_customer();
 $row = $result->fetch(); 
@@ -19,10 +20,12 @@ if($_SESSION['Mail'] != "") { ?>
         <div class="Order">  
             <a class="back-btn" href="customerstart">Tillbaka</a>         
             <div class="order-productdetails">
+
                 <?php foreach($orderResult as $rowResult) {
                     $order->OrderId = $rowResult['OrderId'];
                     $test = $order->get_order();
                     $customersOrders = $test->fetchAll(PDO::FETCH_ASSOC); ?>
+                    
                         <div class="orders">
                             <h4> Ordernr: <?php echo $rowResult['OrderId']; ?></h4>
                             <span>Orderdatum: <?php echo $rowResult['Date']; ?></span>

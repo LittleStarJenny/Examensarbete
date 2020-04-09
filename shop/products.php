@@ -1,5 +1,7 @@
 <?php 
 $product = New Product;
+
+// Get all products
 $result = $product->get_all_products();
 $rows = $result->fetchAll();
 ?>

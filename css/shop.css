@@ -293,12 +293,16 @@
     background: #fff;
     width: 250px;
     height: 300px;
-    right: 218px;
-    position: fixed;
+    right: 0;
+    position: absolute;
     top: -300px;
     transition: 0.8s;
     z-index: 5;
     cursor: pointer;
+  }
+
+  .fixed-nav .cart-content.active {
+    position: fixed;
   }
   
   .cart-content .productsIncart {

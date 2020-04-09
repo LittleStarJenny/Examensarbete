@@ -1,5 +1,4 @@
 <?php 
-include_once 'adminheader.php';
 
 $admin = New Admin;
 $message = "";
@@ -10,7 +9,7 @@ if(isset($_POST['saveAdmin'])) {
     $Firstname = filter_input(INPUT_POST, 'Firstname', FILTER_SANITIZE_STRING);
     $Passwords = filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_MAGIC_QUOTES);
     $passwordHashed = password_hash($Passwords, PASSWORD_DEFAULT);
-    // var_dump($username);
+
     $admin->username = $username;
     $admin->Firstname = $Firstname;
     $admin->Password = $passwordHashed;
@@ -22,6 +21,8 @@ if(isset($_POST['saveAdmin'])) {
     }
 }
 ?>
+
+<?php if($_SESSION['Admin'] != "") { ?>
 <main id="main-admin">
     <?php include_once 'adminsidebar.php'; ?>
     <div class="login-container">
@@ -37,3 +38,8 @@ if(isset($_POST['saveAdmin'])) {
         </form>
     </div>
 </main>
+<?php } else { ?>
+    <main>
+        <span>Du har ingen behörighet att se det här. Logga in först?!</span>
+    </main>
+<?php } ?>

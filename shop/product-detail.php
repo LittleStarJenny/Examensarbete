@@ -52,13 +52,12 @@ if(isset($_POST["addtocart"])) {
     $message = "Varan lades till i varukorgen";
   };
 
-var_dump($message);
 ?>
     
 <main id="product-content">
   <section>
   <form method="post" name="cartCount" action=""> 
-  <!-- product-detail.php?product=<?php echo $_GET['product']; ?> -->
+    <!-- Get product by url else get from set productsId -->
       <?php if(isset($_GET['product'])) {
         $product->ProductsId = $_GET['product'];
         $product->ProductId = $_GET['product'];

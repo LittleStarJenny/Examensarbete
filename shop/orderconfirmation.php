@@ -17,6 +17,11 @@ $TestOrderId = $lastOrder->fetchAll();
 $customer = $order->get_customerByorder();
 $Ordercustomer = $customer->fetch(); 
 
+$Mail = $Ordercustomer['Mail'];
+
+//recipient email here
+$rec = $Mail;
+
 //the subject
 $sub = "Orderbekräftelse";
 //the message
@@ -59,9 +64,6 @@ $msg =
 $msg .= "<span>Totalt " . $total . " SEK</span>
   </body>
 </html>";
-
-//recipient email here
-$rec = "littlestarjenny6@gmail.com";
 
 $headers = "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/html; charset=utf-8\r\n";

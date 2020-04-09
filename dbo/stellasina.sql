@@ -15,106 +15,6 @@ VALUES
 (1, 'BH'),
 (2, 'Trosor');
 
--- Create the table in the specified schema
-CREATE TABLE Products
-(
-    ProductsId INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- primary key column
-    ProductName VARCHAR(50) NOT NULL,
-    Description VARCHAR(500) NOT NULL,
-    Price  INT NOT NULL,
-    Color VARCHAR(50) NOT NULL,
-    Img  VARCHAR(500) NOT NULL,
-    CategoryId INT NOT NULL,
-
-    constraint FK_catID foreign key(CategoryId) references categorys(CategoryId)
-);
-
--- Insert rows into table 'Products'
-INSERT INTO Products
-( -- columns to insert data into
- ProductsId, ProductName, Description, Price, Color, Img, CategoryId
-)
-VALUES
-( 1, 'Deco Vibe', 'Deco Vibe erbjuder ett fullständigt stöd och är dessutom en snygg bh. Med plunge-effekten får du ett diskret lyft och en perfekt rundning.', 599, 'Black', 'img/Deco-Vibe-black-front.jpg', 1),
-( 2, 'Deco Vibe', 'Deco Vibe erbjuder ett fullständigt stöd och är dessutom en snygg bh. Med plunge-effekten får du ett diskret lyft och en perfekt rundning.', 599, 'Blush', 'img/Deco-vibe-blush-front.jpg',  1),
-( 3, 'Ciao Bella', 'En drömmig balkonett bh med en bas i rosa täckt av svart spets.', 349, 'Black', 'img/Ciaobella-front.jpg', 1 ),
-( 4, 'Deco Rebel', 'En gepardmönstrad bh med vaddering och den skönaste plunge-effekten på marknaden. Brösten får ett skönt stöd och en vacker rundning.', 559, 'Gepard', 'img/Deco-rebel-front.jpg', 1),
-( 5, 'Full Bloom', 'En lätt drömmig bh från märket B´temptd med öppen detalj mellan brösten.', 239, 'Beige', 'img/Full-bloom-front.jpg', 1),
-( 6, 'Rebecca', 'En fullsupport bh i ett superskönt material som är speciellt anpassad för att andas.', 659, 'White', 'img/Rebecca-white-front.jpg', 1),
-( 7, 'Deco Rebel Hipster', 'En snygg hipster trosa från serien Deco från Freya. I härligt mjuk trikå som låter huden andas. Matcha gärna med bh:n från samma kollektion.', 129, 'Gepard', 'img/Deco-rebel-hipster.jpg', 2),
-( 8, 'Deco Vibe Hipster', 'En snygg hipster trosa från serien Deco från Freya. Fronten i mjuk trikå som följs upp av spets i bak. Matchas gärna med bh från samma linje.', 139, 'Blush', 'img/Deco-vibe-blush-short-back.jpg', 2),
-( 9, 'Lace Kiss Thong', 'En romantisk string i spets.', 99, 'Beige', 'img/Lace-kiss-natural-thong-back.jpg', 2);
-
--- Create a new table called 'Productvariations' in schema 'stellasina'
--- Drop the table if it already exists
-
--- Create the table in the specified schema
-CREATE TABLE Productvariations
-(
-    PVId INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- primary key column
-    Size VARCHAR(50) NOT NULL,
-    ProductId INT NOT NULL,
-
-    constraint FK_ProductID foreign key(ProductId) references Products(ProductsId),
-    constraint FK_size_id foreign key(Size) references sizechart(SizeId)
-);
-
--- Insert rows into table 'Productvariations'
-INSERT INTO Productvariations
-( -- columns to insert data into
- PVId, Size, ProductId
-)
-VALUES
-( 1, '40', 1),
-( 2, '59', 1),
-( 3, '28', 1),
-( 4, '28', 2),
-( 5, '34', 2),
-( 6, '40', 2),
-( 7, '16', 3),
-( 8, '22', 3),
-( 9, '23', 3),
-( 10, '39', 4),
-( 11, '46', 4),
-( 12, '51', 4),
-( 13, '16', 5),
-( 14, '21', 5),
-( 15, '28', 5),
-( 16, '35', 6),
-( 17, '47', 6),
-( 18, '34', 6),
-( 19, '61', 7),
-( 20, '62', 7),
-( 21, '63', 7),
-( 22, '61', 8),
-( 23, '62', 8),
-( 24, '63', 8),
-( 25, '61', 9),
-( 26, '62', 9),
-( 27, '63', 9);
-
-CREATE TABLE images
-(   ImageId INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- primary key column
-    ProductsId INT NOT NULL,
-    Image VARCHAR(550) NOT NULL,
-
-    constraint FK_prodimgId foreign key(ProductsId) references Products(ProductsId)
-  );
-
-
-INSERT INTO images
-( -- columns to insert data into
- ImageId, ProductsId, Image
-)
-VALUES
-( 1, 1, 'img/Deco-vibe-black-back.jpg'),
-( 2, 1, 'img/Deco-vibe-black-back-closed.jpg'),
-( 3, 2, 'img/Deco-vibe-blush-back.jpg'),
-( 4, 2, 'img/Deco-vibe-blush-back-closed.jpg'),
-( 5, 3, 'img/ciaobella-back.jpg'),
-( 6, 4, 'img/Deco-rebel-back.jpg'),
-( 7, 5, 'img/Full-bloom-back.jpg'),
-( 8, 6, 'img/Rebecca-red-back.jpg');
 
 CREATE TABLE sizechart 
 (
@@ -190,6 +90,108 @@ VALUES
 (61, 'S'),
 (62, 'M'),
 (63, 'L');
+
+
+-- Create the table in the specified schema
+CREATE TABLE Products
+(
+    ProductsId INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- primary key column
+    ProductName VARCHAR(50) NOT NULL,
+    Description VARCHAR(500) NOT NULL,
+    Price  INT NOT NULL,
+    Color VARCHAR(50) NOT NULL,
+    Img  VARCHAR(500) NOT NULL,
+    CategoryId INT NOT NULL,
+
+    constraint FK_catID foreign key(CategoryId) references categorys(CategoryId)
+);
+
+-- Insert rows into table 'Products'
+INSERT INTO Products
+( -- columns to insert data into
+ ProductsId, ProductName, Description, Price, Color, Img, CategoryId
+)
+VALUES
+( 1, 'Deco Vibe', 'Deco Vibe erbjuder ett fullständigt stöd och är dessutom en snygg bh. Med plunge-effekten får du ett diskret lyft och en perfekt rundning.', 599, 'Black', 'img/Deco-Vibe-black-front.jpg', 1),
+( 2, 'Deco Vibe', 'Deco Vibe erbjuder ett fullständigt stöd och är dessutom en snygg bh. Med plunge-effekten får du ett diskret lyft och en perfekt rundning.', 599, 'Blush', 'img/Deco-vibe-blush-front.jpg',  1),
+( 3, 'Ciao Bella', 'En drömmig balkonett bh med en bas i rosa täckt av svart spets.', 349, 'Black', 'img/Ciaobella-front.jpg', 1 ),
+( 4, 'Deco Rebel', 'En gepardmönstrad bh med vaddering och den skönaste plunge-effekten på marknaden. Brösten får ett skönt stöd och en vacker rundning.', 559, 'Gepard', 'img/Deco-rebel-front.jpg', 1),
+( 5, 'Full Bloom', 'En lätt drömmig bh från märket B´temptd med öppen detalj mellan brösten.', 239, 'Beige', 'img/Full-bloom-front.jpg', 1),
+( 6, 'Rebecca', 'En fullsupport bh i ett superskönt material som är speciellt anpassad för att andas.', 659, 'White', 'img/Rebecca-white-front.jpg', 1),
+( 7, 'Deco Rebel Hipster', 'En snygg hipster trosa från serien Deco från Freya. I härligt mjuk trikå som låter huden andas. Matcha gärna med bh:n från samma kollektion.', 129, 'Gepard', 'img/Deco-rebel-hipster.jpg', 2),
+( 8, 'Deco Vibe Hipster', 'En snygg hipster trosa från serien Deco från Freya. Fronten i mjuk trikå som följs upp av spets i bak. Matchas gärna med bh från samma linje.', 139, 'Blush', 'img/Deco-vibe-blush-short-back.jpg', 2),
+( 9, 'Lace Kiss Thong', 'En romantisk string i spets.', 99, 'Beige', 'img/Lace-kiss-natural-thong-back.jpg', 2);
+
+-- Create a new table called 'Productvariations' in schema 'stellasina'
+-- Drop the table if it already exists
+
+-- Create the table in the specified schema
+CREATE TABLE Productvariations
+(
+    PVId INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- primary key column
+    Size INT NOT NULL,
+    ProductId INT NOT NULL,
+
+    constraint FK_ProductID foreign key(ProductId) references Products(ProductsId),
+    constraint FK_size_id foreign key(Size) references sizechart(SizeId)
+);
+
+-- Insert rows into table 'Productvariations'
+INSERT INTO Productvariations
+( -- columns to insert data into
+ PVId, Size, ProductId
+)
+VALUES
+( 1, '40', 1),
+( 2, '59', 1),
+( 3, '28', 1),
+( 4, '28', 2),
+( 5, '34', 2),
+( 6, '40', 2),
+( 7, '16', 3),
+( 8, '22', 3),
+( 9, '23', 3),
+( 10, '39', 4),
+( 11, '46', 4),
+( 12, '51', 4),
+( 13, '16', 5),
+( 14, '21', 5),
+( 15, '28', 5),
+( 16, '35', 6),
+( 17, '47', 6),
+( 18, '34', 6),
+( 19, '61', 7),
+( 20, '62', 7),
+( 21, '63', 7),
+( 22, '61', 8),
+( 23, '62', 8),
+( 24, '63', 8),
+( 25, '61', 9),
+( 26, '62', 9),
+( 27, '63', 9);
+
+CREATE TABLE images
+(   ImageId INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- primary key column
+    ProductsId INT NOT NULL,
+    Image VARCHAR(550) NOT NULL,
+
+    constraint FK_prodimgId foreign key(ProductsId) references Products(ProductsId)
+  );
+
+
+INSERT INTO images
+( -- columns to insert data into
+ ImageId, ProductsId, Image
+)
+VALUES
+( 1, 1, 'img/Deco-vibe-black-back.jpg'),
+( 2, 1, 'img/Deco-vibe-black-back-closed.jpg'),
+( 3, 2, 'img/Deco-vibe-blush-back.jpg'),
+( 4, 2, 'img/Deco-vibe-blush-back-closed.jpg'),
+( 5, 3, 'img/ciaobella-back.jpg'),
+( 6, 4, 'img/Deco-rebel-back.jpg'),
+( 7, 5, 'img/Full-bloom-back.jpg'),
+( 8, 6, 'img/Rebecca-red-back.jpg');
 
 
 -- Create a new table called 'Customers' in schema 'dbo'

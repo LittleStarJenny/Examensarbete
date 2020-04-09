@@ -3,10 +3,12 @@
 $message = '';
 $customer = New Customer;
 $order = New Order;
+// Show customer info
 $customer->Mail = $_SESSION['Mail'];
 $result = $customer->get_customer();
 $row = $result->fetch(); 
 
+// Show latest order for that customer
 $order->CustomersId = $row['CustomersId'];
 $get = $order->get_lastOrderByCustomer();
 $LastOrderID = $get->fetch();
@@ -36,7 +38,7 @@ if($_SESSION['Mail'] != "") { ?>
                     <span>Antal: <?php echo $orderRow['Quantity'];?></span>
                     <span>Pris: <?php echo $orderRow['Price'];?> SEK</span>
                 <?php } ?>
-                <a href="yourorders">Dina beställningar</a>
+                <a href="yourorder">Dina beställningar</a>
             </div>
         </section>       
     </main>

@@ -1,25 +1,25 @@
 <?php
-include_once 'adminheader.php';
 $product = New Product;
 
+// Create productvariation
 if(isset($_POST['saveVariation'])) {
 
     $Size = filter_input(INPUT_POST, 'sizeChart', FILTER_SANITIZE_MAGIC_QUOTES);
     $Title = filter_input(INPUT_POST, 'Title', FILTER_SANITIZE_MAGIC_QUOTES);
     $checkboxes = isset($_POST['sizeChart']) ? $_POST['sizeChart'] : array();
 
+    // Create variation foreach selected checkbox
     foreach ($checkboxes as $select) { 
         $product->Size = $select;
         $product->ProductId = $Title;
-        echo 'you have selected:' .$select .$Title;
+        // echo 'you have selected:' .$select .$Title;
         $product->create_productvariation();
-        // header('location:skapa-produkt/hej');
     }
 }
 
 ?>
 
-
+<?php if($_SESSION['Admin'] != "") { ?>
 <main id="main-admin">
     <?php include_once 'adminsidebar.php'; ?>   
     <section>
@@ -31,6 +31,7 @@ if(isset($_POST['saveVariation'])) {
                 <select class="Category" name="selectCat"> 
 
                     <?php 
+                    // Get dropdown to select category for product
                     $catName = $product->get_categoryForHeader();
                     $category = $catName->fetchAll();
                     foreach ($category as $cat) {
@@ -58,7 +59,7 @@ if(isset($_POST['saveVariation'])) {
             </form>
         </div>
 
-
+        
         <div class="variationWrap">
             <h3>Skapa produktvariation</h3>
             <hr>
@@ -66,6 +67,7 @@ if(isset($_POST['saveVariation'])) {
                 <span class="createproduct">Välj Produkt</span>
                 <select class="ProductName" name="Title"> 
                     <?php 
+                    // Dropdown with Productname to choose for variation
                     $result = $product->get_all_products();
                     $title = $result->fetchAll();
                     foreach ($title as $row) {
@@ -77,6 +79,7 @@ if(isset($_POST['saveVariation'])) {
                 </select>
 
                 <?php 
+                // Get all possible sizes
                 $getSize = $product->get_sizechart();
                 $Sizes = $getSize->fetchAll();
                 foreach ($Sizes as $Size) { ?>
@@ -89,11 +92,17 @@ if(isset($_POST['saveVariation'])) {
         </div>
     </section>
 </main>
+<?php } else { ?>
+    <main>
+        <span>Du har ingen behörighet att se det här. Logga in först?!</span>
+    </main>
+<?php } ?>
 
 <?php
+// Save product in database and store image in folder
 if(isset($_POST['saveproduct'])) {
 
-    $target_dir = "../img/";
+    $target_dir = "img/";
     $name = $_FILES['image']['name'];
     $temp_name = $_FILES['image']['tmp_name'];
 

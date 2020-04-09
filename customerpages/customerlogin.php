@@ -3,7 +3,6 @@ $customer = New Customer;
 $pdo = connect();
 $message = "";
 $Mail = isset($_POST["Mail"]) ? $_POST["Mail"] : "";
-
 ?>
 
 <main>  
@@ -12,6 +11,7 @@ $Mail = isset($_POST["Mail"]) ? $_POST["Mail"] : "";
         <div class="box-wrapper">
         <form method="POST" action="">
         <?php
+        // Call login function customers 
          if(isset($_POST['login'])) {
             $Mail = $_POST['Mail'];
             $Password = $_POST['Password'];

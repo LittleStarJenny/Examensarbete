@@ -120,6 +120,7 @@ header .my-account {
   width: 50px;
   display: block;
   float: right;
+  cursor: pointer;
 }
 
 .qty-in-cart {

@@ -87,7 +87,7 @@ if(isset($_POST["buy"])) {
             $product->Size = $Sizes['SizeId'];
             $result = $product->get_productvariationForOrder();
             $showpID = $result->fetch();
-            var_dump($showpID);
+            
             $ProductvariationsId = $showpID["PVId"];
             $Quantity =  $values['quantity'];
             $order->ProductvariationsId = $ProductvariationsId;
@@ -165,7 +165,8 @@ if(isset($_POST["buy"])) {
     <section class="checkout">
         <div class="checkout-wrap">
             <div id="wrap">
-
+                <!-- Check if mail matches any post from customer database. If match suggest login, and after login get info by match from mail session. 
+            If no matches present form for register and then insert into database and login in automatic. -->
             <?php if (isset($_POST['check'])) {
                 $Mail = $_POST['Mail'];
                 if (emailExists($pdo, $Mail)) {

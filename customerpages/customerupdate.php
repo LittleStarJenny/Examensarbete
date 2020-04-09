@@ -1,13 +1,13 @@
 <?php 
 
-// session_start();
-// var_dump($_SESSION);
 $message = '';
 $customer = New Customer;
 $customer->Mail = $_SESSION['Mail'];
+// Fetch and present customer info
 $result = $customer->get_customer();
 $row = $result->fetch(); 
 
+// Sanitize input for update info and save to database
 if(isset($_POST['save'])) {
     $CustomersId = filter_input(INPUT_POST, 'CustomersId', FILTER_SANITIZE_MAGIC_QUOTES);
     $Firstname = filter_input(INPUT_POST, 'Firstname', FILTER_SANITIZE_STRING);
@@ -35,7 +35,10 @@ if(isset($_POST['save'])) {
 
 
     if($return) {
-         $message = 'Dina uppgifter är sparade';
+        $message = 'Dina uppgifter är sparade';
+        $customer->Mail = $_SESSION['Mail'];
+        $result = $customer->get_customer();
+        $row = $result->fetch(); 
     } else {
         $message = 'Något gick fel, försök igen';
     }

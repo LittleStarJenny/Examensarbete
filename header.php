@@ -1,6 +1,6 @@
 <?php 
 session_start();
- include_once 'resources/include.php';
+include_once 'resources/include.php';
 
 $productCat = New Product;
 $total = 0;
@@ -8,6 +8,7 @@ $message = '';
 $result = $productCat->get_categoryForHeader(); 
 $category = $result->fetchAll();
 
+// Set different sessions to false if or empty to be able to show different states for example login/logout
 if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] != false) {
   } else {
     $_SESSION['authorized'] = false;
@@ -37,7 +38,7 @@ if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] != false) {
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script type="text/javascript" src="http://localhost/Stellasina/js.js"></script>
+        <script type="text/javascript" src="http://localhost/Stellasina/js/js.js"></script>
         <link rel="stylesheet" type="text/css" href="http://localhost/Stellasina/css/style.css?d=<?php echo time(); ?>">
         <link rel="stylesheet" type="text/css" href="http://localhost/Stellasina/css/admin.css?d=<?php echo time(); ?>">
         <link rel="stylesheet" type="text/css" href="http://localhost/Stellasina/css/customer.css?d=<?php echo time(); ?>">
@@ -49,6 +50,7 @@ if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] != false) {
       <div class="header-logo">
         <a href="http://localhost/Stellasina/"><img src="http://localhost/Stellasina/img/logo.png"></a>
       </div>
+      
       <?php if($_SESSION['authorized'] != true) { ?> 
         <a href="http://localhost/Stellasina/login" class="login-logout"><i class="far fa-user"></i> Logga in</a>
       <?php } else if(isset ($_SESSION['authorized']) && $_SESSION['authorized'] === true) { ?> 

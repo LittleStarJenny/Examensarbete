@@ -2,17 +2,18 @@
 $title = '';
 include_once 'resources/include.php';
 
-
 $request = $_SERVER['REQUEST_URI'];
-// include_once 'header.php';
 
 $route = new Router($request);
 
-if(strpos($request,  'login-admin') | strpos($request,  'start') | strpos($request,  'kunder') | strpos($request,  'skapa-admin') | strpos($request,  'skapa-produkt') | strpos($request,  'orders') !== false) {
+//Set different header if any of this url exist otherwise show regular header
+if(strpos($request,  'login-admin') | strpos($request,  'home') | strpos($request,  'kunder') | strpos($request,  'skapa-admin') | strpos($request,  'skapa-produkt') | strpos($request,  'orders') !== false) {
     include_once 'admin/adminheader.php';
 } else {
     include_once 'header.php';
 }
+
+// Shop pages 
 
 $route->get('', '/start');
 
@@ -24,25 +25,25 @@ $route->get('orderconfirmation', '/shop/orderconfirmation');
 
 $route->get('category' , '/shop/category-page');
 
-$route->get('tillverknings-policy', 'tillverknings-policy.php');
+$route->get('tillverknings-policy', '/shop/tillverknings-policy.php');
 
 // Customer pages
 
 $route->get('customerstart', '/customerpages/customerstart');
 
-$route->get('yourorders', '/customerpages/customerorders');
+$route->get('yourorder', '/customerpages/customerorders');
 
 $route->get('update', '/customerpages/customerupdate');
 
 $route->get('login', '/customerpages/customerlogin');
 
-$route->get('logout', '/logout');
+$route->get('logout', '/customerpages/logout');
 
 // Admin pages
 
 $route->get('login-admin', '/admin/adminlogin');
 
-$route->get('start', '/admin/adminpanel');
+$route->get('home', '/admin/adminpanel');
 
 $route->get('kunder', '/admin/changecustomerinfo');
 

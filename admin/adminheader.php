@@ -1,7 +1,12 @@
 <?php 
 session_start();
+ include_once 'resources/include.php';
 
-// include_once 'resources/include.php';
+ if(isset ($_SESSION['Admin']) && $_SESSION['Admin'] != "") {
+} else {
+  $_SESSION['Admin'] = "";
+}
+
 $productCat = New Product;
 $message = '';
 
@@ -13,7 +18,7 @@ $category = $result->fetchAll();
 <html>
     <head>
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script type="text/javascript" src="js.js"></script>
+        <script type="text/javascript" src="http://localhost/Stellasina/js/js.js"></script>
         <link rel="stylesheet" type="text/css" href="http://localhost/Stellasina/css/style.css?d=<?php echo time(); ?>">
         <link rel="stylesheet" type="text/css" href="http://localhost/Stellasina/css/admin.css?d=<?php echo time(); ?>">
         <link rel="stylesheet" type="text/css" href="http://localhost/Stellasina/css/customer.css?d=<?php echo time(); ?>">
@@ -37,15 +42,6 @@ $category = $result->fetchAll();
         <?php if(isset ($_SESSION['Admin']) && $_SESSION['Admin'] != "") { ?> 
             <a href="http://localhost/Stellasina/admin/adminlogout.php" class="login-logout"><i class="far fa-user"></i> Logga ut</a>                                  
         <?php } ?>
-<!--     
-        <nav class="main-nav">
-            <ul>
-                <li><a href="http://localhost/Stellasina/admin">Butiken</a></li>
-                <?php foreach($category as $row) { ?>
-                <li><a href="http://localhost/Stellasina/category/<?php echo $row['CategoryName']; ?>"><?php echo $row['CategoryName'] ?></a></li>
-                <?php } ?>
-            </ul>
-        </nav> -->
     </header>
     
 

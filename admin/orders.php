@@ -5,7 +5,8 @@ $all = $order->get_all_orders_fromNewest();
 $allOrders = $all->fetchAll();
 ?>
 
-
+<!-- All orders ever created -->
+<?php if($_SESSION['Admin'] != "") { ?>
 <main id="main-admin">
     <div class="orderWrapper">
         <?php foreach($allOrders as $orders) { ?>
@@ -34,3 +35,9 @@ $allOrders = $all->fetchAll();
      <?php   } ?>
     </div>
 </main>
+<?php } else { ?>
+    <main>
+        <span>Du har ingen behörighet att se det här. Logga in först?!</span>
+    </main>
+<?php } ?>
+
